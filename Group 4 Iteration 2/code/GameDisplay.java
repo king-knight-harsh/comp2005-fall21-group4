@@ -6,17 +6,12 @@ import java.util.*;
 
 public class GameDisplay extends JFrame implements ActionListener{
 
-	private JButton[][] buttonArray ;
-	private JButton newGameButton;
-	private JButton treasureLocation;
+	private JPanel[][] panelArray ;
 	
 	private JMenuBar menuBar;
 	
 	private JFrame frame;
-	private JPanel northPanel;
-	private JPanel southPanel;
-	private JPanel eastPanel;
-	private JPanel westPanel;
+	private JButton piece;
 	private JPanel middlePanel;
 	private JLabel informationLabel;
 	
@@ -44,9 +39,11 @@ public class GameDisplay extends JFrame implements ActionListener{
  		this.setSize(1000,1000);
 		this.setTitle("   Focus   ");
 		this.setIconImage(this.getGameIcon().getImage());
+		this.setForeground(Color.cyan);
 		this.setMenuBar();
 		
 		getContentPane().add(this.getMiddlePanel(),BorderLayout.CENTER);
+		this.setButton();
 		this.disableButton();
 		
 		
@@ -63,14 +60,14 @@ public class GameDisplay extends JFrame implements ActionListener{
 		middlePanel.setLayout(new GridLayout(8,8,4,4));
 		middlePanel.setSize(800,800);
 		// Two demensional array of JButton to store xCoordinate and yCoordinate
-		buttonArray = new JButton[8][8];
+		panelArray = new JPanel[8][8];
 
 			//Loop to create the button (numberOfRows * numberOfColumns)
 		for (int row=0; row<8;row++){
 			for(int column=0; column<8;column++) {
-				buttonArray[row][column] = new buttonLayout(row, column);
-				buttonArray[row][column].setBackground(Color.WHITE);
-				middlePanel.add(buttonArray[row][column]);
+				panelArray[row][column] = new panelLayout(row, column);
+				panelArray[row][column].setBackground(Color.WHITE);
+				middlePanel.add(panelArray[row][column]);
 			}
 		}
 			
@@ -78,24 +75,38 @@ public class GameDisplay extends JFrame implements ActionListener{
 		
 	}
 	
+	public void setButton() {
+		for (int row=0; row<8;row++){
+			for(int column=0; column<8;column++) {
+				piece = new JButton();
+				piece.setFocusable(false);				
+				piece.setPreferredSize(new Dimension(80,80));
+				piece.setBackground(Color.red);
+				panelArray[row][column].add(piece, CENTER_ALIGNMENT);
+			}
+		}
+		
+		
+	}
+	
 	public void disableButton() {
 		
-		buttonArray[0][0].setVisible(false);
-		buttonArray[0][1].setVisible(false);		
-		buttonArray[0][6].setVisible(false);
-		buttonArray[0][7].setVisible(false);
+		panelArray[0][0].setVisible(false);
+		panelArray[0][1].setVisible(false);		
+		panelArray[0][6].setVisible(false);
+		panelArray[0][7].setVisible(false);
 		
-		buttonArray[1][0].setVisible(false);
-		buttonArray[1][7].setVisible(false);
+		panelArray[1][0].setVisible(false);
+		panelArray[1][7].setVisible(false);
 		
-		buttonArray[6][0].setVisible(false);
-		buttonArray[6][7].setVisible(false);
+		panelArray[6][0].setVisible(false);
+		panelArray[6][7].setVisible(false);
 		
 		
-		buttonArray[7][0].setVisible(false);
-		buttonArray[7][1].setVisible(false);		
-		buttonArray[7][6].setVisible(false);
-		buttonArray[7][7].setVisible(false);
+		panelArray[7][0].setVisible(false);
+		panelArray[7][1].setVisible(false);		
+		panelArray[7][6].setVisible(false);
+		panelArray[7][7].setVisible(false);
 		
 		
 		
@@ -237,6 +248,13 @@ public class GameDisplay extends JFrame implements ActionListener{
 		if (selected == newGame) {
 			this.dispose();
 			PlayerSelector playerSelectorWindow = new PlayerSelector();
+			playerSelectorWindow.setLayout();
+		}
+		
+		if(selected == saveGame) {
+			this.dispose();
+			SaveAndExit saveAndExit = new SaveAndExit();
+			
 		}
 	}
 	

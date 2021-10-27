@@ -1,6 +1,5 @@
 import javax.swing.*;
 import javax.swing.border.Border;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -16,6 +15,10 @@ public class PlayerSelector extends JFrame{
 	
 	public PlayerSelector() {
 		// TODO Auto-generated constructor stub
+		
+	}
+	
+	public void setLayout() {
 		border = BorderFactory.createLineBorder(Color.BLACK, 5);
 		panel = new JPanel();
 		
@@ -26,6 +29,7 @@ public class PlayerSelector extends JFrame{
 		informationLabel.setBorder(border);
 		
 		panel.add(informationLabel);
+		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		this.add(panel);
 		
 		
