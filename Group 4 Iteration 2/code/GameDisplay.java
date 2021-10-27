@@ -20,11 +20,11 @@ public class GameDisplay extends JFrame implements ActionListener{
 	private JPanel middlePanel;
 	private JLabel informationLabel;
 	
-	private JMenu setting,colourPalette;	
-	private JMenuItem newGame,loadGame,saveGame,exitGame, ruleBook;
+	private JMenu setting,colourPalette, botSetting;	
+	private JMenuItem newGame,loadGame,saveGame,exitGame, ruleBook, setBotDifficulty;
 	private JMenuItem normalMode,colourBlindMode;	
 	
-	private ImageIcon gameIcon, newGameIcon, loadIcon, saveIcon, exitIcon,ruleBookIcon, normalColorPaletteIcon, colorBlindPaletteIcon;
+	private ImageIcon gameIcon, newGameIcon, loadIcon, saveIcon, exitIcon,ruleBookIcon, normalColorPaletteIcon, colorBlindPaletteIcon, botIcon;
 	
 	private String playerNumber;
 	/*
@@ -107,7 +107,7 @@ public class GameDisplay extends JFrame implements ActionListener{
 		
 		setting = new JMenu("Setting");
 		colourPalette = new JMenu("Colour Palette");
-		
+		botSetting = new JMenu("Bot Setting");
 		
 		newGame = new JMenuItem("New Game  ");
 		loadGame =new JMenuItem("Load Game ");
@@ -117,6 +117,8 @@ public class GameDisplay extends JFrame implements ActionListener{
 		
 		normalMode = new JMenuItem("Normal Mode  ");
 		colourBlindMode =new JMenuItem("Colour Blind Mode ");
+		
+		setBotDifficulty = new JMenuItem("Set Bot Difficulty");
 		
 		menuBar.add(setting);
 		setting.add(newGame);
@@ -130,6 +132,8 @@ public class GameDisplay extends JFrame implements ActionListener{
 		colourPalette.add(normalMode);
 		colourPalette.add(colourBlindMode);
 				
+		menuBar.add(botSetting);
+		botSetting.add(setBotDifficulty);
 		
 		newGame.addActionListener(this);
 		loadGame.addActionListener(this);
@@ -137,11 +141,11 @@ public class GameDisplay extends JFrame implements ActionListener{
 		ruleBook.addActionListener(this);
 		exitGame.addActionListener(this);
 		
-		newGame.setMnemonic(KeyEvent.VK_N);
-		loadGame.setMnemonic(KeyEvent.VK_L);
-		saveGame.setMnemonic(KeyEvent.VK_S);
-		ruleBook.setMnemonic(KeyEvent.VK_R);
-		exitGame.setMnemonic(KeyEvent.VK_E);
+		newGame.setMnemonic(KeyEvent.VK_N);  // press N for new game
+		loadGame.setMnemonic(KeyEvent.VK_L); // press L for load game
+		saveGame.setMnemonic(KeyEvent.VK_S); // press S to save game
+		ruleBook.setMnemonic(KeyEvent.VK_R); // press R for rule book
+		exitGame.setMnemonic(KeyEvent.VK_E); // press E to exit the game
 		
 		newGame.setIcon(this.getNewGameIcon());
 		loadGame.setIcon(this.getLoadIcon());
@@ -152,12 +156,14 @@ public class GameDisplay extends JFrame implements ActionListener{
 		normalMode.addActionListener(this);
 		colourBlindMode.addActionListener(this);
 		
-		normalMode.setMnemonic(KeyEvent.VK_1);
-		colourBlindMode.setMnemonic(KeyEvent.VK_2);
+		normalMode.setMnemonic(KeyEvent.VK_1); // Press 1 for normal colour palette
+		colourBlindMode.setMnemonic(KeyEvent.VK_2); //Press 2 for colour blind palette
 		
 		normalMode.setIcon(this.getNormalColorPaletteIcon());
 		colourBlindMode.setIcon(this.getColorBlindPaletteIcon());
 		
+		setBotDifficulty.addActionListener(this);
+		setBotDifficulty.setIcon(this.getBotIcon());
 		
 		this.setJMenuBar(menuBar);
 		
@@ -204,6 +210,11 @@ public class GameDisplay extends JFrame implements ActionListener{
 		return ruleBookIcon;
 	}
 	
+	public ImageIcon getBotIcon() {
+		botIcon = new ImageIcon("images/robot.png");
+		return botIcon;
+	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
@@ -221,6 +232,11 @@ public class GameDisplay extends JFrame implements ActionListener{
 		
 		if (selected==exitGame) {
 			System.exit(0);
+		}
+		
+		if (selected == newGame) {
+			this.dispose();
+			PlayerSelector playerSelectorWindow = new PlayerSelector();
 		}
 	}
 	
