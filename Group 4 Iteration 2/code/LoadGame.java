@@ -17,6 +17,7 @@ public class LoadGame extends JFrame implements ActionListener {
 	private void initialize() {
 				
 		this.setSize(500, 650);
+		this.setLayout(null);
 		this.setDisplayToCenter();
 		this.setTitle("Load Game");
 		this.setIconImage(this.getLoadImageIcon().getImage());
@@ -25,11 +26,11 @@ public class LoadGame extends JFrame implements ActionListener {
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(Color.decode("#337def"));
 		
-		getContentPane().add(this.getInformationLabel());
-		getContentPane().add(this.getLoadSlotOne());
-		getContentPane().add(this.getLoadSlotTwo());
-		getContentPane().add(this.getLoadSlotThree());
-		getContentPane().add(this.getLoadSlotFour());
+		getContentPane().add(this.setInformationLabel());
+		getContentPane().add(this.setLoadSlotOne());
+		getContentPane().add(this.setLoadSlotTwo());
+		getContentPane().add(this.setLoadSlotThree());
+		getContentPane().add(this.setLoadSlotFour());
 		
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
@@ -37,7 +38,7 @@ public class LoadGame extends JFrame implements ActionListener {
 	
 	}
 	
-	private JLabel getInformationLabel() {
+	private JLabel setInformationLabel() {
 		informationLabel = new JLabel("Load Game");
 		informationLabel.setFont(new Font("TimesRoman", Font.BOLD, 56));
 		informationLabel.setBounds(80,0,560,100);
@@ -50,7 +51,7 @@ public class LoadGame extends JFrame implements ActionListener {
 		this.setLocation(displayDimension.width/2-this.getSize().width/2, displayDimension.height/2-this.getSize().height/2);
 	}
 	
-	private JButton getLoadSlotOne(){
+	private JButton setLoadSlotOne(){
 		slotOne = new JButton("SLOT 1");
 		slotOne.setFont(new Font("TimesRoman", Font.BOLD, 40));
 		slotOne.setBackground(Color.decode("#fcc729"));
@@ -61,7 +62,7 @@ public class LoadGame extends JFrame implements ActionListener {
 		return slotOne;
 	}	
 	
-	private JButton getLoadSlotTwo(){
+	private JButton setLoadSlotTwo(){
 		slotTwo = new JButton("SLOT 2");
 		slotTwo.setFont(new Font("TimesRoman", Font.BOLD, 40));
 		slotTwo.setBackground(Color.decode("#fcc729"));
@@ -71,7 +72,7 @@ public class LoadGame extends JFrame implements ActionListener {
 		slotTwo.setBounds(80, 220, 300, 100);
 		return slotTwo;
 	}
-	private JButton getLoadSlotThree(){
+	private JButton setLoadSlotThree(){
 		slotThree = new JButton("SLOT 3");		
 		slotThree.setFont(new Font("TimesRoman", Font.BOLD, 40));
 		slotThree.setBackground(Color.decode("#fcc729"));
@@ -81,7 +82,7 @@ public class LoadGame extends JFrame implements ActionListener {
 		slotThree.setBounds(80, 340, 300, 100);
 		return slotThree;
 	}
-	private JButton getLoadSlotFour(){
+	private JButton setLoadSlotFour(){
 		slotFour = new JButton("SLOT 4");
 		slotFour.setFont(new Font("TimesRoman", Font.BOLD, 40));
 		slotFour.setBackground(Color.decode("#fcc729"));
