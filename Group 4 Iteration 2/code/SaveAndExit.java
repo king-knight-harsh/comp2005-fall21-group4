@@ -1,16 +1,15 @@
   
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
-import java.util.*;
+
 
 public class SaveAndExit extends JFrame implements ActionListener {
 
-	private JFrame frame;
+	private Dimension displayDimension;
 	private JLabel informationLabel;
 	private JButton saveAndQuitButton, quitButton, backButton; 
+	private ImageIcon saveIcon,optionIcon;
 	
 
 	
@@ -21,12 +20,14 @@ public class SaveAndExit extends JFrame implements ActionListener {
 	
 	private void initialize() {
 		
-		this.setBackground(Color.white);
-		this.setSize(500,500);
+		
+		
+		this.setIconImage(this.getSaveImageIcon().getImage());
+		this.setBounds(500, 250, 600, 300);
 		
 		
 		getContentPane().setLayout(null);
-		getContentPane().setBackground(new Color(255, 255, 255));
+		getContentPane().setBackground(Color.decode("#337def"));
 		
 		getContentPane().add(this.getInformationLabel());
 		getContentPane().add(this.getSaveAndQuitButton());
@@ -34,7 +35,7 @@ public class SaveAndExit extends JFrame implements ActionListener {
 		getContentPane().add(this.getBackButton());
 		
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
 		this.setVisible(true);
 	
@@ -44,10 +45,11 @@ public class SaveAndExit extends JFrame implements ActionListener {
 	
 	
 	private JLabel getInformationLabel() {
-		informationLabel = new JLabel("Do you want to quit");
-		informationLabel.setFont(new Font("Dialog", Font.BOLD, 18));
-		informationLabel.setBounds(0,0,100,100);
-		informationLabel.setForeground(Color.black);
+		informationLabel = new JLabel("Select the appropriate Quit option -");
+		informationLabel.setIcon(this.getOptionIcon());
+		informationLabel.setFont(new Font("TimesRoman", Font.BOLD, 32));
+		informationLabel.setBounds(30,40,560,100);
+		informationLabel.setForeground(Color.decode("#fcc729"));
 		return informationLabel;
 		
 	}
@@ -55,86 +57,66 @@ public class SaveAndExit extends JFrame implements ActionListener {
 	
 	private JButton getSaveAndQuitButton() {
 		saveAndQuitButton = new JButton("Save and Quit");
-		saveAndQuitButton.setFont(new Font("Jokerman", Font.BOLD, 12));
-		saveAndQuitButton.setBackground(Color.white);
+		saveAndQuitButton.setFont(new Font("TimesRoman", Font.BOLD, 16));
+		saveAndQuitButton.setBackground(Color.decode("#fcc729"));
+		saveAndQuitButton.setForeground(Color.decode("#337def"));
 		saveAndQuitButton.addActionListener(this);
+		saveAndQuitButton.setFocusable(false);		
+		saveAndQuitButton.setBounds(60, 160, 130, 40);
 		return saveAndQuitButton;
 		
 	}
 	
 	private JButton getQuitButton() {
 		quitButton = new JButton("Quit without Saving");
-		quitButton.setFont(new Font("Jokerman", Font.BOLD, 12));
-		quitButton.setBackground(Color.white);
+		quitButton.setFont(new Font("TimesRoman", Font.BOLD, 16));
+		quitButton.setBackground(Color.decode("#fcc729"));
+		quitButton.setForeground(Color.decode("#337def"));
 		quitButton.addActionListener(this);
+		quitButton.setFocusable(false);
+		quitButton.setBounds(210,160,170,40);
 		return quitButton;
 		
 	}
 	
 	private JButton getBackButton() {
 		backButton = new JButton("Back");
-		backButton.setFont(new Font("Jokerman", Font.BOLD, 12));
-		backButton.setBackground(Color.white);
+		backButton.setFont(new Font("TimesRoman", Font.BOLD, 16));
+		backButton.setBackground(Color.decode("#fcc729"));
+		backButton.setForeground(Color.decode("#337def"));
 		backButton.addActionListener(this);
+		backButton.setFocusable(false);
+		backButton.setBounds(400, 160, 120, 40);
 		return backButton;
 		
 	}
 	
-	
-	
-	
-//	private void SaveAndQuit() {
-//                JButton btnSaveAndQuit = new JButton("Save and Quit");
-//                btnSaveAndQuit.setFont(new Font("Jokerman", Font.BOLD, 11));
-//                btnSaveAndQuit.setBackground(new Color(255, 255,255));
-//                btnSaveAndQuit.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				System.exit(0);
-//				
-//				
-//			}
-//		});
-//		btnSaveAndQuit.setBounds(50, 160, 150, 40);
-//		
-//		JButton btnQuitNoSave = new JButton("Quit Without Saving");
-//		btnQuitNoSave.setFont(new Font("Jokerman", Font.BOLD, 11));
-//                btnQuitNoSave.setBackground(new Color(255, 255,255));
-//		btnQuitNoSave.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				System.exit(0);
-//				
-//			}
-//		});
-//		btnQuitNoSave.setBounds(220, 160, 150, 40);
-//		
-//		JButton btnCancel = new JButton("Go Back!");
-//		btnCancel.setFont(new Font("Jokerman", Font.BOLD, 11));
-//                btnCancel.setBackground(new Color(255, 255,255));
-//		btnCancel.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				frame.dispose();
-//				
-//			}
-//		});
-//		btnCancel.setBounds(380, 160, 150, 40);
-//		
-//		JLabel lblSure = new JLabel("Are you sure you want to quit?");
-//		lblSure.setFont(new Font("Jokerman", Font.PLAIN, 15));
-//		lblSure.setBounds(150, 75, 500, 40);
-//                
-//		frame.getContentPane().setLayout(null);
-//		frame.getContentPane().add(btnSaveAndQuit);
-//		frame.getContentPane().add(btnQuitNoSave);
-//		frame.getContentPane().add(btnCancel);
-//		frame.getContentPane().add(lblSure);
-//				
-//	
-//	}
+	private ImageIcon getSaveImageIcon() {
+		saveIcon = new ImageIcon("images/saveForQuitDialogBox.png");
+		return saveIcon;
+	}
 
+	private ImageIcon getOptionIcon() {
+		optionIcon = new ImageIcon("images/option.png");
+		
+		return optionIcon;
+	}
+	
+	private void setDisplayToCenter() {
+		displayDimension = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(displayDimension.width/2-this.getSize().width/2, displayDimension.height/2-this.getSize().height/2);
+	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent aevt) {
 		// TODO Auto-generated method stub
+		Object selected = aevt.getSource();
+		if(selected == backButton) {
+			this.dispose();
+		}
+		if(selected == quitButton) {
+			System.exit(0);
+		}
 		
 	}
         

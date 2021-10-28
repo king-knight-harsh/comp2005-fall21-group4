@@ -9,8 +9,7 @@ public class GameDisplay extends JFrame implements ActionListener{
 	private JPanel[][] panelArray ;
 	
 	private JMenuBar menuBar;
-	
-	private JFrame frame;
+
 	private JButton piece;
 	private JPanel middlePanel;
 	private JLabel informationLabel;
@@ -21,7 +20,9 @@ public class GameDisplay extends JFrame implements ActionListener{
 	
 	private ImageIcon gameIcon, newGameIcon, loadIcon, saveIcon, exitIcon,ruleBookIcon, normalColorPaletteIcon, colorBlindPaletteIcon, botIcon;
 	
-	private String playerNumber;
+	
+	private Dimension displayDimension;
+	
 	/*
 	 * Constructor with public visibility
 	 * @param numberOfRow - Integer to store the number of rows in the GridLayout
@@ -36,14 +37,18 @@ public class GameDisplay extends JFrame implements ActionListener{
 	
 	public void setLayout() {
 		
- 		this.setSize(1000,1000);
-		this.setTitle("   Focus   ");
+ 		
+		this.setTitle("Focus");
 		this.setIconImage(this.getGameIcon().getImage());
+		this.setSize(1000,1000);
+		this.setDisplayToCenter();
+		
+		
 		this.setForeground(Color.cyan);
 		this.setMenuBar();
 		
 		getContentPane().add(this.getMiddlePanel(),BorderLayout.CENTER);
-		this.setButton();
+		
 		this.disableButton();
 		
 		
@@ -75,6 +80,7 @@ public class GameDisplay extends JFrame implements ActionListener{
 		
 	}
 	
+	
 	public void setButton() {
 		for (int row=0; row<8;row++){
 			for(int column=0; column<8;column++) {
@@ -89,7 +95,7 @@ public class GameDisplay extends JFrame implements ActionListener{
 		
 	}
 	
-	public void disableButton() {
+	private void disableButton() {
 		
 		panelArray[0][0].setVisible(false);
 		panelArray[0][1].setVisible(false);		
@@ -181,6 +187,11 @@ public class GameDisplay extends JFrame implements ActionListener{
 		
 	}
 	
+	private void setDisplayToCenter() {
+		displayDimension = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(displayDimension.width/2-this.getSize().width/2, displayDimension.height/2-this.getSize().height/2);
+	}
+	
 	public ImageIcon getGameIcon() {
 		gameIcon = new ImageIcon("images/board.png");
 		return gameIcon;
@@ -252,7 +263,7 @@ public class GameDisplay extends JFrame implements ActionListener{
 		}
 		
 		if(selected == saveGame) {
-			this.dispose();
+			//this.dispose();
 			SaveAndExit saveAndExit = new SaveAndExit();
 			
 		}
