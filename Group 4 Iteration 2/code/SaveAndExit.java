@@ -1,4 +1,3 @@
-  
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -23,7 +22,8 @@ public class SaveAndExit extends JFrame implements ActionListener {
 		
 		
 		this.setIconImage(this.getSaveImageIcon().getImage());
-		this.setBounds(500, 250, 600, 300);
+		this.setSize(600,300);
+		this.setDisplayToCenter();
 		
 		
 		getContentPane().setLayout(null);

@@ -264,8 +264,11 @@ public class GameDisplay extends JFrame implements ActionListener{
 		
 		if(selected == saveGame) {
 			//this.dispose();
-			SaveAndExit saveAndExit = new SaveAndExit();
-			
+			SaveAndExit saveAndExit = new SaveAndExit();			
+		}
+		
+		if(selected == loadGame) {
+			LoadGame loadGame = new LoadGame();
 		}
 	}
 	
