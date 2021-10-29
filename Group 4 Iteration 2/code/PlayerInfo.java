@@ -253,25 +253,29 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		Object selected = aevt.getSource();
 		
 		if (selected == submitButtonPlayerOne) {
-			System.out.println(playerOneName.getText());			
+			
+			this.dispose();
+			BotLevel botlevel = new BotLevel(this.numberOfHumans, playerOneName.getText(), null, null, null);
 		}
 		
 		if (selected == submitButtonPlayerTwo) {
-			System.out.println(playerOneName.getText());
-			System.out.println(playerTwoName.getText());		
+			this.dispose();
+			BotLevel botlevel = new BotLevel(this.numberOfHumans, playerOneName.getText(),  playerTwoName.getText(), null, null);
 		}
 		
 		if (selected == submitButtonPlayerThree) {
-			System.out.println(playerOneName.getText());
-			System.out.println(playerTwoName.getText());
-			System.out.println(playerThreeName.getText());		
+			this.dispose();
+			BotLevel botlevel = new BotLevel(this.numberOfHumans, playerOneName.getText(), playerTwoName.getText(), playerThreeName.getText(), null);
 		}
 		
 		if (selected == submitButtonPlayerFour) {
 			System.out.println(playerOneName.getText());
 			System.out.println(playerTwoName.getText());
 			System.out.println(playerThreeName.getText());	
-			System.out.println(playerFourName.getText());			
+			System.out.println(playerFourName.getText());
+			this.dispose();
+			
+			BotLevel botlevel = new BotLevel(this.numberOfHumans, playerOneName.getText(), playerTwoName.getText(), playerThreeName.getText(), playerFourName.getText());
 		}
 		
 		

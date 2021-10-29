@@ -135,7 +135,7 @@ public class GameDisplay extends JFrame implements ActionListener{
 		normalMode = new JMenuItem("Normal Mode  ");
 		colourBlindMode =new JMenuItem("Colour Blind Mode ");
 		
-		setBotDifficulty = new JMenuItem("Set Bot Difficulty");
+		//setBotDifficulty = new JMenuItem("Set Bot Difficulty");
 		
 		menuBar.add(setting);
 		setting.add(newGame);
@@ -149,8 +149,8 @@ public class GameDisplay extends JFrame implements ActionListener{
 		colourPalette.add(normalMode);
 		colourPalette.add(colourBlindMode);
 				
-		menuBar.add(botSetting);
-		botSetting.add(setBotDifficulty);
+		//menuBar.add(botSetting);
+		//botSetting.add(setBotDifficulty);
 		
 		newGame.addActionListener(this);
 		loadGame.addActionListener(this);
@@ -179,8 +179,8 @@ public class GameDisplay extends JFrame implements ActionListener{
 		normalMode.setIcon(this.getNormalColorPaletteIcon());
 		colourBlindMode.setIcon(this.getColorBlindPaletteIcon());
 		
-		setBotDifficulty.addActionListener(this);
-		setBotDifficulty.setIcon(this.getBotIcon());
+		//setBotDifficulty.addActionListener(this);
+		//setBotDifficulty.setIcon(this.getBotIcon());
 		
 		this.setJMenuBar(menuBar);
 		
