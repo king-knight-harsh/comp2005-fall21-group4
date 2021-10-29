@@ -6,20 +6,15 @@ import java.util.*;
 
 public class GameDisplay extends JFrame implements ActionListener{
 
-	private JPanel[][] panelArray ;
-	
+	private JPanel[][] panelArray ;	
 	private JMenuBar menuBar;
-
 	private JButton piece;
 	private JPanel middlePanel;
-	private JLabel informationLabel;
-	
-	private JMenu setting,colourPalette, botSetting;	
-	private JMenuItem newGame,loadGame,saveGame,exitGame, ruleBook, setBotDifficulty;
-	private JMenuItem normalMode,colourBlindMode;	
-	
-	private ImageIcon gameIcon, newGameIcon, loadIcon, saveIcon, exitIcon,ruleBookIcon, normalColorPaletteIcon, colorBlindPaletteIcon, botIcon;
-	
+	private JLabel informationLabel;	
+	private JMenu setting,colourPalette;	
+	private JMenuItem newGame,loadGame,saveGame,exitGame, ruleBook;
+	private JMenuItem normalMode,colourBlindMode;		
+	private ImageIcon gameIcon, newGameIcon, loadIcon, saveIcon, exitIcon,ruleBookIcon, normalColorPaletteIcon, colorBlindPaletteIcon, botIcon, welcomeIcon;	
 	
 	private Dimension displayDimension;
 	
@@ -31,6 +26,8 @@ public class GameDisplay extends JFrame implements ActionListener{
 	public GameDisplay(){
 		
 		this.setLayout();//Initiating the initial view of the game
+		JOptionPane.showMessageDialog(null,"CLICK ON SETTINGS TO BEGIN ","WELCOME TO GAME ",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
+		
 		
 	}	
 	
@@ -123,8 +120,7 @@ public class GameDisplay extends JFrame implements ActionListener{
 		
 		
 		setting = new JMenu("Setting");
-		colourPalette = new JMenu("Colour Palette");
-		botSetting = new JMenu("Bot Setting");
+		colourPalette = new JMenu("Colour Palette");	
 		
 		newGame = new JMenuItem("New Game  ");
 		loadGame =new JMenuItem("Load Game ");
@@ -134,8 +130,6 @@ public class GameDisplay extends JFrame implements ActionListener{
 		
 		normalMode = new JMenuItem("Normal Mode  ");
 		colourBlindMode =new JMenuItem("Colour Blind Mode ");
-		
-		//setBotDifficulty = new JMenuItem("Set Bot Difficulty");
 		
 		menuBar.add(setting);
 		setting.add(newGame);
@@ -148,9 +142,7 @@ public class GameDisplay extends JFrame implements ActionListener{
 		menuBar.add(colourPalette);
 		colourPalette.add(normalMode);
 		colourPalette.add(colourBlindMode);
-				
-		//menuBar.add(botSetting);
-		//botSetting.add(setBotDifficulty);
+			
 		
 		newGame.addActionListener(this);
 		loadGame.addActionListener(this);
@@ -205,6 +197,11 @@ public class GameDisplay extends JFrame implements ActionListener{
 	public ImageIcon getLoadIcon() {
 		loadIcon = new ImageIcon("images/load.png");
 		return loadIcon;
+	}
+	
+	public ImageIcon getWelcomeIcon() {
+		welcomeIcon = new ImageIcon("images/namaste.png");
+		return welcomeIcon;
 	}
 	
 	public ImageIcon getSaveIcon() {
