@@ -11,6 +11,7 @@ public class BotLevel extends JFrame implements ActionListener {
 	private JButton easyLevelButton, hardLevelButton;	
 	private String playerOneName, playerTwoName, playerThreeName, playerFourName;
 	private ImageIcon BotIcon;
+	private Boolean botDifficultyLevel;
 	
 	
 	BotLevel(int numberOfHumanPlayers, String player1,String player2,String player3,String player4){
@@ -92,10 +93,12 @@ public class BotLevel extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		Object selected = aevt.getSource();
 		if (selected == this.easyLevelButton) {
+			this.botDifficultyLevel=false;
 			this.dispose();			
 		}
 		
 		if(selected == this.hardLevelButton) {
+			this.botDifficultyLevel=true;
 			this.dispose();			
 		}
 	}
