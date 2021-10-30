@@ -24,6 +24,7 @@ public class SaveAndExit extends JFrame implements ActionListener {
 		this.setIconImage(this.getSaveImageIcon().getImage());
 		this.setLayout(null);
 		this.setSize(600,300);
+		this.setTitle("SAVE GAME");
 		this.setDisplayToCenter();
 		
 		
@@ -117,6 +118,11 @@ public class SaveAndExit extends JFrame implements ActionListener {
 		}
 		if(selected == quitButton) {
 			System.exit(0);
+		}
+		
+		if(selected == saveAndQuitButton) {
+			this.dispose();
+			LoadGame savegame = new LoadGame();
 		}
 		
 	}

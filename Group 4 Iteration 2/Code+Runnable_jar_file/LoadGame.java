@@ -19,7 +19,7 @@ public class LoadGame extends JFrame implements ActionListener {
 		this.setSize(500, 650);
 		this.setLayout(null);
 		this.setDisplayToCenter();
-		this.setTitle("Load Game");
+		this.setTitle("STORAGE");
 		this.setIconImage(this.getLoadImageIcon().getImage());
 		
 		
@@ -39,9 +39,9 @@ public class LoadGame extends JFrame implements ActionListener {
 	}
 	
 	private JLabel setInformationLabel() {
-		informationLabel = new JLabel("Load Game");
+		informationLabel = new JLabel("SELECT SLOT");
 		informationLabel.setFont(new Font("TimesRoman", Font.BOLD, 56));
-		informationLabel.setBounds(80,0,560,100);
+		informationLabel.setBounds(40,0,560,100);
 		informationLabel.setForeground(Color.decode("#fcc729"));
 		return informationLabel;
 	}
