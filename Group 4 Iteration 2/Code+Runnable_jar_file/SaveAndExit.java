@@ -94,12 +94,12 @@ public class SaveAndExit extends JFrame implements ActionListener {
 	}
 	
 	private ImageIcon getSaveImageIcon() {
-		saveIcon = new ImageIcon("images/saveForQuitDialogBox.png");
+		saveIcon = new ImageIcon(getClass().getResource("images/saveForQuitDialogBox.png"));
 		return saveIcon;
 	}
 
 	private ImageIcon getOptionIcon() {
-		optionIcon = new ImageIcon("images/option.png");
+		optionIcon = new ImageIcon(getClass().getResource("images/option.png"));
 		
 		return optionIcon;
 	}

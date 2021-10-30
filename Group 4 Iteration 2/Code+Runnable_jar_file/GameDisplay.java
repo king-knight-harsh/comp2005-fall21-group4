@@ -185,52 +185,52 @@ public class GameDisplay extends JFrame implements ActionListener{
 	}
 	
 	public ImageIcon getGameIcon() {
-		gameIcon = new ImageIcon("images/board.png");
+		gameIcon = new ImageIcon(getClass().getResource(("images/board.png")));
 		return gameIcon;
 	}
 	
 	public ImageIcon getNewGameIcon() {
-		newGameIcon = new ImageIcon("images/new.png");
+		newGameIcon = new ImageIcon(getClass().getResource(("images/new.png")));
 		return newGameIcon;
 	}
 	
 	public ImageIcon getLoadIcon() {
-		loadIcon = new ImageIcon("images/load.png");
+		loadIcon = new ImageIcon(getClass().getResource("images/load.png"));
 		return loadIcon;
 	}
 	
 	public ImageIcon getWelcomeIcon() {
-		welcomeIcon = new ImageIcon("images/namaste.png");
+		welcomeIcon = new ImageIcon(getClass().getResource("images/namaste.png"));
 		return welcomeIcon;
 	}
 	
 	public ImageIcon getSaveIcon() {
-		saveIcon = new ImageIcon("images/save.png");
+		saveIcon = new ImageIcon(getClass().getResource("images/save.png"));
 		return saveIcon;
 	}
 	
 	public ImageIcon getExitIcon() {
-		exitIcon = new ImageIcon("images/exit.png");
+		exitIcon = new ImageIcon(getClass().getResource("images/exit.png"));
 		return exitIcon;
 	}
 	
 	public ImageIcon getNormalColorPaletteIcon() {
-		normalColorPaletteIcon = new ImageIcon("images/normalPalette.png");
+		normalColorPaletteIcon = new ImageIcon(getClass().getResource("images/normalPalette.png"));
 		return normalColorPaletteIcon;
 	}
 	
 	public ImageIcon getColorBlindPaletteIcon() {
-		colorBlindPaletteIcon = new ImageIcon("images/colorBlindPalette.png");
+		colorBlindPaletteIcon = new ImageIcon(getClass().getResource("images/colorBlindPalette.png"));
 		return colorBlindPaletteIcon;
 	}
 	
 	public ImageIcon getRuleBookIcon() {
-		ruleBookIcon = new ImageIcon("images/book.png");
+		ruleBookIcon = new ImageIcon(getClass().getResource("images/book.png"));
 		return ruleBookIcon;
 	}
 	
 	public ImageIcon getBotIcon() {
-		botIcon = new ImageIcon("images/robot.png");
+		botIcon = new ImageIcon(getClass().getResource("images/robot.png"));
 		return botIcon;
 	}
 	

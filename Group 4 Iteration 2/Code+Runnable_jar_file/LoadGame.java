@@ -95,7 +95,7 @@ public class LoadGame extends JFrame implements ActionListener {
 	
 
 	private ImageIcon getLoadImageIcon() {
-		loadImageIcon = new ImageIcon("images/load.png");
+		loadImageIcon = new ImageIcon(getClass().getResource("images/load.png"));
 		return loadImageIcon;
 	}
 

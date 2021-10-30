@@ -238,7 +238,7 @@ public class PlayerInfo extends JFrame implements ActionListener{
 	}
 	
 	private ImageIcon getPlayerIcon() {
-		playerIcon = new ImageIcon("images/user.png");
+		playerIcon = new ImageIcon(getClass().getResource("images/user.png"));
 		return playerIcon;
 		
 	}

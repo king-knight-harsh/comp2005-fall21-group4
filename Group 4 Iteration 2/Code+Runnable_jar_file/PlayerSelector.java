@@ -108,7 +108,7 @@ public class PlayerSelector extends JFrame implements ActionListener{
 	}
 
 	private ImageIcon getNewIcon() {
-		newIcon = new ImageIcon("images/new.png");
+		newIcon = new ImageIcon(getClass().getResource("images/new.png"));
 		return newIcon;
 	}
 

@@ -63,7 +63,7 @@ public class BotLevel extends JFrame implements ActionListener {
 
 	
 	private ImageIcon getBotIcon() {
-		ImageIcon botIcon = new ImageIcon("images/robot.png");
+		ImageIcon botIcon = new ImageIcon(getClass().getResource("images/robot.png"));
 		return botIcon;
 	}
 	
