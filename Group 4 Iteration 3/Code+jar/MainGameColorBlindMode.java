@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.util.Random;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -23,6 +24,8 @@ public class MainGameColorBlindMode extends GameDisplay{
 	private JLabel playerOneInfo,playerTwoInfo,playerThreeInfo,playerFourInfo; 
 	private JLabel playerOneCaptured,playerTwoCaptured,playerThreeCaptured,playerFourCaptured;  
 	private JPanel eastPanel;
+	
+	private Random randomTurn;
 	
 	private JButton playerOnePiece, playerTwoPiece, playerFourPiece, playerThreePiece;
 	
@@ -64,12 +67,36 @@ public class MainGameColorBlindMode extends GameDisplay{
 	
 	public JPanel getInfoPanel() {
 		infoPanel = new JPanel();
-		informationLabel = new  JLabel("PLAYER TURN : 1");		
+		informationLabel = new  JLabel();		
 		informationLabel.setFont(new Font("TimesRoman", Font.BOLD, 24));
 		informationLabel.setForeground(Color.black);
-		
+		this.getFirstTurn();
 		infoPanel.add(this.informationLabel);
 		return infoPanel;
+	}
+	
+	private void getFirstTurn() {
+		randomTurn = new Random();
+		int firstTurn = randomTurn.nextInt(4);
+		firstTurn+=1;
+		if (firstTurn == 1){
+			this.setInformationLabel("TURN : PLAYER 1");
+		}
+		else if(firstTurn == 2){
+			this.setInformationLabel("TURN : PLAYER 2");
+		}
+		else if(firstTurn == 3){
+			this.setInformationLabel("TURN : PLAYER 3");
+		}
+		
+		else if(firstTurn == 4){
+			this.setInformationLabel("TURN : PLAYER 4");
+		}		
+	}
+	
+	private void setInformationLabel(String text) {
+		this.informationLabel.setText(text);
+		
 	}
 	
 	

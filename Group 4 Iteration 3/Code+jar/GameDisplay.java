@@ -45,7 +45,7 @@ public class GameDisplay extends JFrame implements ActionListener{
  		
 		this.setTitle("Focus");
 		this.setIconImage(this.getGameIcon().getImage());
-		this.setSize(1000,1000);
+		this.setSize(800,800);
 		this.setDisplayToCenter();
 		
 		
@@ -61,7 +61,7 @@ public class GameDisplay extends JFrame implements ActionListener{
 		
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
+		
 		this.setVisible(true);
 	
 	}

@@ -23,10 +23,10 @@ public class panelLayout extends JPanel {
 	
 	//simple getter method to return xCoordinate and yCoordinate
 	public int getXcoordinate()	{return xCoordinate;}
-	public int getyCoordinate()  {return yCoordinate;}
+	public int getYCoordinate()  {return yCoordinate;}
 	//simple setter method to set xCoordinate and yCoordinate
 	public void setXcordinate(int value) {xCoordinate = value;}
-	public void setyCoordinate(int value) {yCoordinate = value;}
+	public void setYCoordinate(int value) {yCoordinate = value;}
 	
 	
 	
