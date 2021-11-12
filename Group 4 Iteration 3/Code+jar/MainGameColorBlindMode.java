@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -8,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
@@ -379,7 +382,8 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	}
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
-		
+		Object selected3 = aevt.getSource();
+		if (selected3!=ruleBook && selected3!=exitGame && selected3!=newGame && selected3!=saveGame && selected3!=loadGame ) {
         if (selected != null) {
             Object selected2 = aevt.getSource();
             
@@ -445,6 +449,40 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
             	}
             }
         }
+}
+		
+		else {
+			
+		  if(selected3==super.ruleBook) {
+ 			try {
+ 				File ruleBookPdf = new File("src/ruleBook.pdf");
+ 				Desktop.getDesktop().open(ruleBookPdf);
+ 			} catch (IOException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+ 		}
+ 		
+         else if (selected3==super.exitGame) {
+ 			System.exit(0);
+ 		}
+ 		
+         else if (selected3== super.newGame) {
+ 			this.dispose();
+ 			PlayerSelector playerSelectorWindow = new PlayerSelector();
+ 			playerSelectorWindow.setLayout();
+ 		}
+ 		
+         else if(selected3 == super.saveGame) {
+ 			//this.dispose();
+ 			SaveAndExit saveAndExit = new SaveAndExit();			
+ 		}
+ 		
+         else if(selected3 == super.loadGame) {
+ 			LoadGame loadGame = new LoadGame();
+ 			}
+		}
+ 	
 	}
 		
 		

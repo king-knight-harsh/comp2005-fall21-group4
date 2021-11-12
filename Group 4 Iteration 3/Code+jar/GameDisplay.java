@@ -13,7 +13,7 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 	private JPanel middlePanel, topPanel;
 	private JLabel informationLabel;	
 	private JMenu action,colourPalette;	
-	private JMenuItem newGame,loadGame,saveGame,exitGame, ruleBook;
+	public JMenuItem newGame,loadGame,saveGame,exitGame, ruleBook;
 	private JMenuItem normalMode,colourBlindMode;		
 	private ImageIcon gameIcon, newGameIcon, loadIcon, saveIcon, exitIcon,ruleBookIcon, normalColorPaletteIcon, colorBlindPaletteIcon, botIcon, welcomeIcon;
 	private JPanel infoPanel, playerOnePanel,playerTwoPanel,playerThreePanel, playerFourPanel;
@@ -22,15 +22,12 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 	private JPanel eastPanel;	
 	private Dimension displayDimension;
 	
-	/*
-	 * Constructor with public visibility
-	 * @param numberOfRow - Integer to store the number of rows in the GridLayout
-	 * @param numberOfColumn - Integer to store the number of columns in the GridLayout
-	 */
+
 	public GameDisplay(){
 		
 		this.setLayout();//Initiating the initial view of the game
 		this.getPopUp();
+		
 		
 		
 	}	
@@ -49,16 +46,13 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		this.setDisplayToCenter();
 		
 		
-		
-		this.setForeground(Color.cyan);
 		this.setMenuBar();
 		
 		getContentPane().add(this.getMiddlePanel(),BorderLayout.CENTER);
-		getContentPane().setBackground(Color.black);
 		
 		this.disableButton();
 		
-		
+		 
 		
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,6 +61,8 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		this.setVisible(true);
 	
 	}
+	
+	
 	
 	
 	protected JButton[][] getPanelArray(){

@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -8,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
@@ -372,71 +375,111 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
 		
-        if (selected != null) {
-            Object selected2 = aevt.getSource();
-           
-            if (panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]!=panelArray[7][7]) {
-            	 
-	            int firstButtonXCoordinate = ((panelLayout) selected).getXCoordinate();
-	            int firstButtonYCoordinate = ((panelLayout) selected).getYCoordinate();
-	            if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]!=panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]) {
-	            	int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
-	                int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
-	                Color nameOfTheColor = panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground();                
-	                ((panelLayout)panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece();                
-	                panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor);  
-	                panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.white);
-	                selected = null;
-	                
-	                if(currentTurn==4) {
-	                	currentTurn=1;
-	                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
-	                }
-	                else {
-	                	currentTurn++;
-	                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
-	                }
+		
+		Object selected3 = aevt.getSource();
+		if (selected3!=ruleBook && selected3!=exitGame && selected3!=newGame && selected3!=saveGame && selected3!=loadGame ) {
+			if (selected != null) {
+	            Object selected2 = aevt.getSource();
+	           
+	            if (panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]!=panelArray[7][7] ) {
+	            	 
+		            int firstButtonXCoordinate = ((panelLayout) selected).getXCoordinate();
+		            int firstButtonYCoordinate = ((panelLayout) selected).getYCoordinate();
+		            if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]!=panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]) {
+		            	int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
+		                int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
+		                Color nameOfTheColor = panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground();                
+		                ((panelLayout)panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece();                
+		                panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor);  
+		                panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.white);
+		                selected = null;
+		                
+		                if(currentTurn==4) {
+		                	currentTurn=1;
+		                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
+		                }
+		                else {
+		                	currentTurn++;
+		                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
+		                }
+		            	
+		            }
+	            }
+	            else {
+	            	selected=null;
+	            }
+	            
+	        }
+	        
+	        
+	        
+	        
+	        else{
+	            selected = aevt.getSource();
+	            if (this.currentTurn ==1 ) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.blue) {
+	            		selected=null;
+	            	}
+	            	
 	            	
 	            }
-            }
-            else {
-            	selected=null;
-            }
-            
-        }
+	            else if (this.currentTurn==2) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.red) {
+	            		selected=null;
+	            	}
+	            }
+	            else if (this.currentTurn ==3 ) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.green) {
+	            		selected=null;
+	            	}
+	            }
+	            else if (this.currentTurn==4) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.yellow) {
+	            		selected=null;
+	            	}
+	            }
+	            
+	           
+	            
+	            
+	        }
+}
+		
+		else {
+			
+		  if(selected3==super.ruleBook) {
+ 			try {
+ 				File ruleBookPdf = new File("src/ruleBook.pdf");
+ 				Desktop.getDesktop().open(ruleBookPdf);
+ 			} catch (IOException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+ 		}
+ 		
+         else if (selected3==super.exitGame) {
+ 			System.exit(0);
+ 		}
+ 		
+         else if (selected3== super.newGame) {
+ 			this.dispose();
+ 			PlayerSelector playerSelectorWindow = new PlayerSelector();
+ 			playerSelectorWindow.setLayout();
+ 		}
+ 		
+         else if(selected3 == super.saveGame) {
+ 			//this.dispose();
+ 			SaveAndExit saveAndExit = new SaveAndExit();			
+ 		}
+ 		
+         else if(selected3 == super.loadGame) {
+ 			LoadGame loadGame = new LoadGame();
+ 			}
+		}
+ 	}
         
         
-        
-        
-        else{
-            selected = aevt.getSource();
-            if (this.currentTurn ==1) {
-            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.blue) {
-            		selected=null;
-            	}
-            	
-            	
-            }
-            else if (this.currentTurn==2) {
-            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.red) {
-            		selected=null;
-            	}
-            }
-            else if (this.currentTurn ==3) {
-            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.green) {
-            		selected=null;
-            	}
-            }
-            else if (this.currentTurn==4) {
-            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.yellow) {
-            		selected=null;
-            	}
-            }
-            
-            
-        }
-        
-	}
+	
 		
 		
 		
