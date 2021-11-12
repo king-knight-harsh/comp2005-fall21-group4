@@ -254,25 +254,46 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		
 		if (selected == submitButtonPlayerOne) {
 			
-			this.dispose();
-			BotLevel botlevel = new BotLevel(this.numberOfHumans, playerOneName.getText(), null, null, null);
+			if(playerOneName.getText().isEmpty()!=true) {
+				this.dispose();
+				BotLevel botlevel = new BotLevel(this.numberOfHumans, playerOneName.getText(), null, null, null);
+			}
+			
+			else {
+            		JOptionPane.showMessageDialog(null,"PLEASE ENTER A NAME IN THE FIELD","REQUIRED FIELD* ",JOptionPane.PLAIN_MESSAGE);
+            	}
+			
 		}
 		
 		if (selected == submitButtonPlayerTwo) {
-			this.dispose();
-			BotLevel botlevel = new BotLevel(this.numberOfHumans, playerOneName.getText(),  playerTwoName.getText(), null, null);
+			if(playerOneName.getText().isEmpty()!=true && playerTwoName.getText().isEmpty()!=true) {
+				this.dispose();
+				BotLevel botlevel = new BotLevel(this.numberOfHumans, playerOneName.getText(),  playerTwoName.getText(), null, null);
+			}
+			else {
+				JOptionPane.showMessageDialog(null,"PLEASE ENTER A NAME IN THE FIELD","REQUIRED FIELD* ",JOptionPane.PLAIN_MESSAGE);
+			}
 		}
 		
 		if (selected == submitButtonPlayerThree) {
-			this.dispose();
-			BotLevel botlevel = new BotLevel(this.numberOfHumans, playerOneName.getText(), playerTwoName.getText(), playerThreeName.getText(), null);
+			if(playerOneName.getText().isEmpty()!=true && playerTwoName.getText().isEmpty()!=true && playerThreeName.getText().isEmpty()!=true) {
+				this.dispose();
+				BotLevel botlevel = new BotLevel(this.numberOfHumans, playerOneName.getText(), playerTwoName.getText(), playerThreeName.getText(), null);
+			}
+			else {
+				JOptionPane.showMessageDialog(null,"PLEASE ENTER A NAME IN THE FIELD","REQUIRED FIELD* ",JOptionPane.PLAIN_MESSAGE);
+			}
 		}
 		
 		if (selected == submitButtonPlayerFour) {
+			if(playerOneName.getText().isEmpty()!=true && playerTwoName.getText().isEmpty()!=true && playerThreeName.getText().isEmpty()!=true && playerFourName.getText().isEmpty()!=true) {
 			int botDifficultyLevel =0;
 			this.dispose();
 			ColorSelect colorSelect = new ColorSelect(this.numberOfHumans, playerOneName.getText(), playerTwoName.getText(), playerThreeName.getText(),playerFourName.getText(), botDifficultyLevel);
-			
+			}
+			else {
+				JOptionPane.showMessageDialog(null,"PLEASE ENTER A NAME IN THE FIELD","REQUIRED FIELD* ",JOptionPane.PLAIN_MESSAGE);
+			}
 		}
 		
 		

@@ -1,14 +1,18 @@
 //Imported component
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
-public class panelLayout extends JPanel {
+public class panelLayout extends JButton {
 
 	
 	// Location in the grid
 	private int xCoordinate;
 	private int yCoordinate;
+	private ArrayList<String> stackOfPieces;
+	
 	
 	
 	
@@ -17,12 +21,19 @@ public class panelLayout extends JPanel {
 		super();
 		this.xCoordinate = xCordinate;
 		this.yCoordinate = yCoordinate;
+		stackOfPieces = new ArrayList<>();
 		
 		
 	}
 	
+	
+	public ArrayList<String> getStackForPiece() {
+		return this.stackOfPieces;
+	}
+	
+	
 	//simple getter method to return xCoordinate and yCoordinate
-	public int getXcoordinate()	{return xCoordinate;}
+	public int getXCoordinate()	{return xCoordinate;}
 	public int getYCoordinate()  {return yCoordinate;}
 	//simple setter method to set xCoordinate and yCoordinate
 	public void setXcordinate(int value) {xCoordinate = value;}

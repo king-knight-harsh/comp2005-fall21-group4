@@ -5,9 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class GameDisplay extends JFrame implements ActionListener{
+public class GameDisplay extends JFrame implements ActionListener,MouseMotionListener,MouseListener{
 
-	public JPanel[][] panelArray ;	
+	public JButton[][] panelArray ;	
 	private JMenuBar menuBar;
 	private JButton piece;
 	private JPanel middlePanel, topPanel;
@@ -49,11 +49,12 @@ public class GameDisplay extends JFrame implements ActionListener{
 		this.setDisplayToCenter();
 		
 		
+		
 		this.setForeground(Color.cyan);
 		this.setMenuBar();
 		
 		getContentPane().add(this.getMiddlePanel(),BorderLayout.CENTER);
-		
+		getContentPane().setBackground(Color.black);
 		
 		this.disableButton();
 		
@@ -61,13 +62,14 @@ public class GameDisplay extends JFrame implements ActionListener{
 		
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setResizable(false);
 		
 		this.setVisible(true);
 	
 	}
 	
 	
-	protected JPanel[][] getPanelArray(){
+	protected JButton[][] getPanelArray(){
 		return panelArray;
 	}
 	
@@ -77,14 +79,18 @@ public class GameDisplay extends JFrame implements ActionListener{
 		middlePanel.setLayout(new GridLayout(8,8,4,4));
 		middlePanel.setSize(600,600);
 		// Two demensional array of JButton to store xCoordinate and yCoordinate
-		panelArray = new JPanel[8][8];
+		panelArray = new JButton[8][8];
 
 			//Loop to create the button (numberOfRows * numberOfColumns)
 		for (int row=0; row<8;row++){
 			for(int column=0; column<8;column++) {
 				panelArray[row][column] = new panelLayout(row, column);
 				panelArray[row][column].setBackground(Color.WHITE);
+				panelArray[row][column].addActionListener(this);
+				panelArray[row][column].addMouseListener(this);
+				panelArray[row][column].addMouseMotionListener(this);
 				middlePanel.add(panelArray[row][column]);
+				
 			}
 		}
 		
@@ -280,6 +286,48 @@ public class GameDisplay extends JFrame implements ActionListener{
 		if(selected == loadGame) {
 			LoadGame loadGame = new LoadGame();
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 
