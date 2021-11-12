@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -16,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class MainGameNormalMode extends GameDisplay implements MouseListener,MouseMotionListener{
+public class MainGameNormalMode extends GameDisplay implements ActionListener, MouseListener,MouseMotionListener{
 	
 	private JLabel informationLabel;
 	private int numberOfHumanPlayers;	
@@ -30,6 +32,7 @@ public class MainGameNormalMode extends GameDisplay implements MouseListener,Mou
 	private JPanel eastPanel;
 	
 	private Random randomTurn;
+	private int moveCounter;
 	
 	private JButton redPiece, yellowPiece, greenPiece, bluePiece;
 	
@@ -281,7 +284,17 @@ public class MainGameNormalMode extends GameDisplay implements MouseListener,Mou
 	}
 	
 	
-	
+	private void moveThePiece(Object selected, Color color, int oldXCoordinate, int oldYCoordinate) {
+		System.out.println("inside the mve mthd");
+		moveCounter =1;
+		if (((panelLayout) selected).getXCoordinate()!=oldXCoordinate && ((panelLayout) selected).getYCoordinate()!=oldYCoordinate) {
+			System.out.println("inside the if");
+			panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(color);
+			
+		}
+		
+		
+	}
 	
 	
 	
@@ -289,9 +302,28 @@ public class MainGameNormalMode extends GameDisplay implements MouseListener,Mou
 	public void getPopUp() {
 		//To close the pop for the game
 	}
+	
+	@Override
+	public void actionPerformed(ActionEvent aevt) {
+		Object selected = aevt.getSource();		
+		moveCounter=0;
+		while(moveCounter<=0) {
+			System.out.println("inside loop");
+			int xCoordinate = ((panelLayout) selected).getXCoordinate();
+			int yCoordinate = ((panelLayout) selected).getYCoordinate();
+			Color nameOfTheColor = panelArray[xCoordinate][yCoordinate].getBackground();
+			panelArray[xCoordinate][yCoordinate].setBackground(Color.white);
+			this.moveThePiece(selected,nameOfTheColor,xCoordinate, yCoordinate);
+		}
+		
+		
+		
+		
+	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(MouseEvent mevt) {
+		
 		// TODO Auto-generated method stub
 		
 	}

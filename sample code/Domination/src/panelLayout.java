@@ -3,7 +3,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
-public class panelLayout extends JPanel {
+public class panelLayout extends JButton {
 
 	
 	// Location in the grid
@@ -22,7 +22,7 @@ public class panelLayout extends JPanel {
 	}
 	
 	//simple getter method to return xCoordinate and yCoordinate
-	public int getXcoordinate()	{return xCoordinate;}
+	public int getXCoordinate()	{return xCoordinate;}
 	public int getYCoordinate()  {return yCoordinate;}
 	//simple setter method to set xCoordinate and yCoordinate
 	public void setXcordinate(int value) {xCoordinate = value;}
