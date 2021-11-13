@@ -1,0 +1,2 @@
+Right now there is now way to visually show the stack representation in the code, but stack is fully functional. At the moment there is no reserve stack so if the stack size
+become bigger than 5 it will be captured irrespective of the color or number of the pieces.
