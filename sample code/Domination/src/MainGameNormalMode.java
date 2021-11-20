@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
@@ -37,11 +38,13 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	private int currentTurn;
 	
 	private Random randomTurn;
-	private int moveCounter;
+	
 	private Object selected =null;
 	private JButton redPiece, yellowPiece, greenPiece, bluePiece;
-	
+	private String pieceColor;
 	private JButton deSelectButton;
+	
+	private int playerOneCaptureCounter=0,playerTwoCaptureCounter=0,playerThreeCaptureCounter=0,playerFourCaptureCounter=0;
 	
 	
 	
@@ -155,7 +158,52 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		deSelectButton.addActionListener(this);
 		return deSelectButton; 
 	}
+	
 
+	private JLabel getPlayerOneCaptureCounter() {
+		playerOneCaptured = new JLabel("CAPTURED : " + this.playerOneCaptureCounter);
+		playerOneCaptured.setFont(new Font("TimesRoman", Font.BOLD, 16));
+		playerOneCaptured.setForeground(Color.black);
+		return playerOneCaptured;
+	}
+	
+	private void setPlayerOneCaptureCounter(String text) {
+		this.playerOneCaptured.setText(text + Integer.toString(this.playerOneCaptureCounter));
+	}
+	
+	private JLabel getPlayerTwoCaptureCounter() {
+		playerTwoCaptured = new JLabel("CAPTURED : " + this.playerTwoCaptureCounter);
+		playerTwoCaptured.setFont(new Font("TimesRoman", Font.BOLD, 16));
+		playerTwoCaptured.setForeground(Color.black);
+		return playerTwoCaptured;
+	}
+	
+	private void setPlayerTwoCaptureCounter(String text) {
+		this.playerTwoCaptured.setText(text + Integer.toString(this.playerTwoCaptureCounter));
+	}
+	
+	private JLabel getPlayerThreeCaptureCounter() {
+		playerThreeCaptured = new JLabel("CAPTURED : " + this.playerThreeCaptureCounter);
+		playerThreeCaptured.setFont(new Font("TimesRoman", Font.BOLD, 16));
+		playerThreeCaptured.setForeground(Color.black);
+		return playerThreeCaptured;
+	}
+	
+	private void setPlayerThreeCaptureCounter(String text) {
+		this.playerThreeCaptured.setText(text + Integer.toString(this.playerThreeCaptureCounter));
+	}
+	
+	private JLabel getPlayerFourCaptureCounter() {
+		playerFourCaptured = new JLabel("CAPTURED : " + this.playerFourCaptureCounter);
+		playerFourCaptured.setFont(new Font("TimesRoman", Font.BOLD, 16));
+		playerFourCaptured.setForeground(Color.black);
+		return playerFourCaptured;
+	}
+	
+	private void setPlayerFourCaptureCounter(String text) {
+		this.playerFourCaptured.setText(text + Integer.toString(this.playerFourCaptureCounter));
+	}
+	
 	public JPanel getPlayerOnePanel() {
 		playerOnePanel =new JPanel();
 		playerOnePanel.setLayout(new BoxLayout(playerOnePanel, BoxLayout.Y_AXIS));
@@ -169,12 +217,10 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		playerOneInfo.setForeground(Color.black);
 		playerOneInfo.setVisible(true);
 		
-		playerOneCaptured = new JLabel("Captured : 0");
-		playerOneCaptured.setFont(new Font("TimesRoman", Font.BOLD, 16));
-		playerOneCaptured.setForeground(Color.black);
+		
 		
 		playerOnePanel.add(playerOneInfo);
-		playerOnePanel.add(playerOneCaptured);
+		playerOnePanel.add(this.getPlayerOneCaptureCounter());
 		playerOnePanel.setBorder(BorderFactory.createLineBorder(Color.blue, 3));
 		
 		return playerOnePanel;
@@ -189,12 +235,9 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		playerTwoInfo.setFont(new Font("TimesRoman", Font.BOLD, 16));
 		playerTwoInfo.setForeground(Color.black);
 		
-		playerTwoCaptured = new JLabel("Captured : 0");
-		playerTwoCaptured.setFont(new Font("TimesRoman", Font.BOLD, 16));
-		playerTwoCaptured.setForeground(Color.black);
 		
 		playerTwoPanel.add(playerTwoInfo);
-		playerTwoPanel.add(playerTwoCaptured);
+		playerTwoPanel.add(this.getPlayerTwoCaptureCounter());
 		playerTwoPanel.setBorder(BorderFactory.createLineBorder(Color.red, 3));
 		
 	
@@ -209,12 +252,11 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		playerThreeInfo.setText(String.valueOf(this.playerThreeName));
 		playerThreeInfo.setFont(new Font("TimesRoman", Font.BOLD, 16));
 		playerThreeInfo.setForeground(Color.black);
-		playerThreeCaptured = new JLabel("Captured : 0");
-		playerThreeCaptured.setFont(new Font("TimesRoman", Font.BOLD, 16));
-		playerThreeCaptured.setForeground(Color.black);
+		
+		
 		
 		playerThreePanel.add(playerThreeInfo);
-		playerThreePanel.add(playerThreeCaptured);
+		playerThreePanel.add(this.getPlayerThreeCaptureCounter());
 		playerThreePanel.setBorder(BorderFactory.createLineBorder(Color.green, 3));
 		
 		return playerThreePanel;
@@ -229,12 +271,9 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		playerFourInfo.setFont(new Font("TimesRoman", Font.BOLD, 16));
 		playerFourInfo.setForeground(Color.black);
 		
-		playerFourCaptured = new JLabel("Captured : 0");
-		playerFourCaptured.setFont(new Font("TimesRoman", Font.BOLD, 16));
-		playerFourCaptured.setForeground(Color.black);
 		
 		playerFourPanel.add(playerFourInfo);
-		playerFourPanel.add(playerFourCaptured);
+		playerFourPanel.add(this.getPlayerFourCaptureCounter());
 		playerFourPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 3));
 		
 		return playerFourPanel;
@@ -293,7 +332,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		super.panelArray[3][7].setBackground(Color.yellow);
 		((panelLayout) super.panelArray[3][0]).getStackForPiece().add("Y");
 		((panelLayout) super.panelArray[3][1]).getStackForPiece().add("Y");
-		((panelLayout) super.panelArray[3][3]).getStackForPiece().add("Y");
+		((panelLayout) super.panelArray[3][2]).getStackForPiece().add("Y");
 		((panelLayout) super.panelArray[3][3]).getStackForPiece().add("Y");
 		((panelLayout) super.panelArray[3][4]).getStackForPiece().add("R");
 		((panelLayout) super.panelArray[3][5]).getStackForPiece().add("Y");
@@ -311,8 +350,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		super.panelArray[4][7].setBackground(Color.green);
 		((panelLayout) super.panelArray[4][0]).getStackForPiece().add("G");
 		((panelLayout) super.panelArray[4][1]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[4][4]).getStackForPiece().add("G");
-		((panelLayout) super.panelArray[4][4]).getStackForPiece().add("B");
+		((panelLayout) super.panelArray[4][2]).getStackForPiece().add("G");
+		((panelLayout) super.panelArray[4][3]).getStackForPiece().add("B");
 		((panelLayout) super.panelArray[4][4]).getStackForPiece().add("G");
 		((panelLayout) super.panelArray[4][5]).getStackForPiece().add("G");
 		((panelLayout) super.panelArray[4][6]).getStackForPiece().add("G");
@@ -328,8 +367,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		super.panelArray[5][7].setBackground(Color.red);
 		((panelLayout) super.panelArray[5][0]).getStackForPiece().add("G");
 		((panelLayout) super.panelArray[5][1]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[5][5]).getStackForPiece().add("G");
-		((panelLayout) super.panelArray[5][5]).getStackForPiece().add("B");
+		((panelLayout) super.panelArray[5][2]).getStackForPiece().add("G");
+		((panelLayout) super.panelArray[5][3]).getStackForPiece().add("B");
 		((panelLayout) super.panelArray[5][4]).getStackForPiece().add("R");
 		((panelLayout) super.panelArray[5][5]).getStackForPiece().add("R");
 		((panelLayout) super.panelArray[5][6]).getStackForPiece().add("R");
@@ -343,8 +382,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		super.panelArray[6][5].setBackground(Color.green);
 		super.panelArray[6][6].setBackground(Color.green);
 		((panelLayout) super.panelArray[6][1]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[6][6]).getStackForPiece().add("G");
-		((panelLayout) super.panelArray[6][6]).getStackForPiece().add("B");
+		((panelLayout) super.panelArray[6][2]).getStackForPiece().add("G");
+		((panelLayout) super.panelArray[6][3]).getStackForPiece().add("B");
 		((panelLayout) super.panelArray[6][4]).getStackForPiece().add("G");
 		((panelLayout) super.panelArray[6][5]).getStackForPiece().add("G");
 		((panelLayout) super.panelArray[6][6]).getStackForPiece().add("G");
@@ -358,10 +397,80 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		((panelLayout) super.panelArray[7][2]).getStackForPiece().add("G");
 		((panelLayout) super.panelArray[7][3]).getStackForPiece().add("B");
 		((panelLayout) super.panelArray[7][4]).getStackForPiece().add("R");
-		((panelLayout) super.panelArray[7][5]).getStackForPiece().add("R");
+		((panelLayout) super.panelArray[7][5]).getStackForPiece().add("R");	
+		
+	}
+	
+	private boolean checkValidMove(Object selected2, int lengthOfTheStack) {
+		// Calculating the distance for the xCoordinate
+		int xCordinateDistance = ((panelLayout) selected2).getXCoordinate() - ((panelLayout) selected).getXCoordinate();
+		// Calculating the distance for the yCoordinate
+		int yCordinateDistance = ((panelLayout) selected2).getYCoordinate() - ((panelLayout) selected).getYCoordinate();
+		// Absolute distance as the sum of xCoordinate and yCoordinate.
+		int distanceBetweenBtn = Math.abs(xCordinateDistance) + Math.abs(yCordinateDistance); 
+		
+		if(distanceBetweenBtn<=lengthOfTheStack){
+			return true;
+			
+		}
+		else {
+			JOptionPane.showMessageDialog(null,"Please do a valid move","Invalid Move ",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
+			selected=null;
+			return false;
+		}
 		
 		
-		
+	}
+	
+	
+	private void checkCapturedPiece(Object selected) {
+		int stackLength =((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
+		if (stackLength>=6) {
+				if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackLength-1)=="B") {
+					int counter=0;
+					while(counter<(stackLength-5)) {
+						((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
+						this.playerOneCaptureCounter+=1;
+						counter++;
+					}
+					
+					
+				}
+				else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackLength-1)=="R") {
+					int counter=0;
+					while(counter<(stackLength-5)) {
+						((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
+						this.playerTwoCaptureCounter+=1;
+						counter++;
+					}
+					
+				
+				}
+				else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackLength-1)=="G") {
+					int counter=0;
+					while(counter<(stackLength-5)) {
+						((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
+						this.playerThreeCaptureCounter+=1;
+						counter++;
+					}
+					
+					
+				}
+				else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackLength-1)=="Y") {
+					int counter=0;
+					while(counter<(stackLength-5)) {
+						((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
+						this.playerFourCaptureCounter+=1;
+						counter++;
+					}
+					
+				}
+				
+				this.setPlayerOneCaptureCounter("CAPTURED : ");
+				this.setPlayerTwoCaptureCounter("CAPTURED : ");
+				this.setPlayerThreeCaptureCounter("CAPTURED : ");
+				this.setPlayerFourCaptureCounter("CAPTURED : ");
+			}
 		
 	}
 	
@@ -388,24 +497,57 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		            
 		            
 		            if (panelArray[firstButtonXCoordinate][firstButtonYCoordinate]!=panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]) {
-		            	int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
-		                int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
-		                Color nameOfTheColor = panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground();		                
-		                ((panelLayout)panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece();                
-		                panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor);  
-		                panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.white);
-		                
-		                selected = null;
-		                
-		                if(currentTurn==4) {
-		                	currentTurn=1;
-		                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
-		                }
-		                else {
-		                	currentTurn++;
-		                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
-		                }
 		            	
+		            	
+		            	if(this.checkValidMove(selected2,((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size())==true) {
+		            		
+				            	int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
+				                int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
+				                Color nameOfTheColor = panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground();	
+				                
+				                for(int stackColor=0;stackColor<=((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();stackColor++) {
+				                	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
+					                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor); 
+				                }
+				                		                
+				                 
+				                
+				                int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
+				                if(stackSize==0) {
+				                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
+				                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.white);
+				                }
+				                else {
+					                if (((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="B"){
+					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
+					                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.blue);
+					                }
+					                else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="R"){
+					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
+					                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.red);
+					                }
+					                else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="G"){
+					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
+					                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.green);
+					                }
+					                else if (((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="Y"){
+					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
+					                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.yellow);
+					                }
+				                }
+				                
+				                this.checkCapturedPiece(selected2);
+				                selected = null;
+				                
+				                if(currentTurn==4) {
+				                	currentTurn=1;
+				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
+				                }
+				                else {
+				                	currentTurn++;
+				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
+				                }
+			            	}		            	
 		            }
 	            }
 	            else {
@@ -451,13 +593,12 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		else {
 			
 		  if(selected3==super.ruleBook) {
- 			try {
- 				File ruleBookPdf = new File("src/ruleBook.pdf");
- 				Desktop.getDesktop().open(ruleBookPdf);
- 			} catch (IOException e) {
- 				// TODO Auto-generated catch block
- 				e.printStackTrace();
- 			}
+			  try {
+					Desktop.getDesktop().open(new java.io.File("ruleBook.pdf"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
  		}
  		
          else if (selected3==super.exitGame) {

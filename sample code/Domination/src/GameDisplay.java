@@ -256,8 +256,7 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		
 		if(selected==ruleBook) {
 			try {
-				File ruleBookPdf = new File("src/ruleBook.pdf");
-				Desktop.getDesktop().open(ruleBookPdf);
+				Desktop.getDesktop().open(new java.io.File("ruleBook.pdf"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
