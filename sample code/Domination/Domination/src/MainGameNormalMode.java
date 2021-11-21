@@ -752,7 +752,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	            		selected=null;
 	            	}
 	            }
-	            	this.setHighlight();
+	            	setHighlight();
 	        }
 }
 		
