@@ -422,6 +422,16 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		
 	}
 	
+	private int getDistanceBetweenMove(Object selected2, int lengthOfTheStack) {
+		// Calculating the distance for the xCoordinate
+				int xCordinateDistance = ((panelLayout) selected2).getXCoordinate() - ((panelLayout) selected).getXCoordinate();
+				// Calculating the distance for the yCoordinate
+				int yCordinateDistance = ((panelLayout) selected2).getYCoordinate() - ((panelLayout) selected).getYCoordinate();
+				// Absolute distance as the sum of xCoordinate and yCoordinate.
+				int distanceBetweenBtn = Math.abs(xCordinateDistance) + Math.abs(yCordinateDistance); 
+				
+				return distanceBetweenBtn;
+	}
 	
 	private void checkCapturedPiece(Object selected) {
 		int stackLength =((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
@@ -503,16 +513,108 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		            		
 				            	int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
 				                int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
-				                Color nameOfTheColor = panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground();	
+				                Color nameOfTheColor = panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground();
 				                
-				                for(int stackColor=0;stackColor<=((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();stackColor++) {
-				                	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
-					                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor); 
+				                int moveDistance = this.getDistanceBetweenMove(selected2,((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size());
+				                
+				                if (moveDistance==1){
+				                	for(int stackColor=0;stackColor<moveDistance;stackColor++) {
+				                		int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size()-1;
+					                	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(stackSize);		            	
+						                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+						                
+					                }
 				                }
-				                		                
+				                else if (moveDistance==2){
+				                	int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
+				                	if(stackSize == 2) {
+				                		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
+						                	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
+							                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+							                
+						                }
+				                	}
+				                	else if(stackSize == 3) {
+				                		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
+						                	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(1);		            	
+							                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+							                
+						                }
+				                	}
+				                	else if(stackSize == 4) {
+				                		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
+						                	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(2);		            	
+							                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+							                
+						                }
+				                	}
+				                	else if(stackSize == 5) {
+				                		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
+						                	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(3);		            	
+							                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+							                
+						                }
+				                	}
+				                	
+				                	
+				                }
+				                else if (moveDistance==3){
+				                	int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
+				                	if(stackSize == 3) {
+				                		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
+						                	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
+							                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+							                
+						                }
+				                	}
+				                	else if(stackSize == 4) {
+				                		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
+						                	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(1);		            	
+							                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+							                
+						                }
+				                	}
+				                	else if(stackSize == 5) {
+				                		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
+						                	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(2);		            	
+							                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+							                
+						                }
+				                	}
+				                }
+				                else if (moveDistance==4){
+				                	int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
+				                	if(stackSize == 4) {
+				                		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
+						                	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
+							                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+							                
+						                }
+				                	}
+				                	else if(stackSize == 5) {
+				                		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
+						                	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(1);		            	
+							                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+							                
+						                }
+				                	}
+				                }
+				                else if (moveDistance==5){
+				                	for(int stackColor=0;stackColor<moveDistance;stackColor++) {
+				                		int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size()-1;
+					                	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
+						                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+						                
+					                }
+				                }
+				                
+				                
+				                System.out.println(((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece());
+				                System.out.println(((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece());		                
 				                 
 				                
 				                int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
+				                System.out.println("stack size :"+ stackSize);
 				                if(stackSize==0) {
 				                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
 				                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.white);
