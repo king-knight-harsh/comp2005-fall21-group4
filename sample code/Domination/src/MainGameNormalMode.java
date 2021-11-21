@@ -36,6 +36,10 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	private JPanel eastPanel;
 	
 	private int currentTurn;
+	private int firstButtonXCoordinate;
+    private int firstButtonYCoordinate;
+	
+	private Color nameOfTheColor;
 	
 	private Random randomTurn;
 	
@@ -483,7 +487,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 			}
 		
 	}
-	
+
 	public void moveOnePiece(Object selected, Object selected2) {
 		int firstButtonXCoordinate = ((panelLayout) selected).getXCoordinate();
         int firstButtonYCoordinate = ((panelLayout) selected).getYCoordinate();
@@ -598,6 +602,36 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
         }
 	}
 	
+	private void setHighlight(){
+		if (selected == null) {
+			return;
+		}
+		else {
+			firstButtonXCoordinate = ((panelLayout) selected).getXCoordinate();
+            firstButtonYCoordinate = ((panelLayout) selected).getYCoordinate();
+			nameOfTheColor = panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground();
+			panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.black);
+		}
+	}
+	private void removeHighlight(){
+		if (selected == null) {
+			return;
+		}
+		else {
+			if (this.currentTurn ==1 ) {
+            	panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.blue);
+            }
+            else if (this.currentTurn==2) {
+            	panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.red);
+            }
+            else if (this.currentTurn ==3 ) {
+            	panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.green);
+            }
+            else {
+            	panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.yellow);
+            	}
+            }
+		}
 	
 	
 	public void getPopUp() {
@@ -612,11 +646,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 			if (selected != null) {
 	            Object selected2 = aevt.getSource();
 	           
-	            if (panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]!=panelArray[7][7] ) {
-	            	 
-		            int firstButtonXCoordinate = ((panelLayout) selected).getXCoordinate();
-		            int firstButtonYCoordinate = ((panelLayout) selected).getYCoordinate();
-		            
+	            if (panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]!=panelArray[7][7] ) {	            
 		            
 		            if (panelArray[firstButtonXCoordinate][firstButtonYCoordinate]!=panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]) {
 		            	
@@ -625,7 +655,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		            		
 				            	int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
 				                int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
-				                Color nameOfTheColor = panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground();
+				                
 				                
 				                int moveDistance = this.getDistanceBetweenMove(selected2,((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size());
 				                
@@ -691,6 +721,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		            }
 	            }
 	            else {
+	            	this.removeHighlight();
 	            	selected=null;
 	            }
 	            
@@ -705,8 +736,6 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.blue) {
 	            		selected=null;
 	            	}
-	            	
-	            	
 	            }
 	            else if (this.currentTurn==2) {
 	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.red) {
@@ -723,10 +752,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	            		selected=null;
 	            	}
 	            }
-	            
-	           
-	            
-	            
+	            	this.setHighlight();
 	        }
 }
 		
