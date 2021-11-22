@@ -13,7 +13,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -610,7 +609,19 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 			firstButtonXCoordinate = ((panelLayout) selected).getXCoordinate();
             firstButtonYCoordinate = ((panelLayout) selected).getYCoordinate();
 			nameOfTheColor = panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground();
-			panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.black);
+			if (nameOfTheColor.equals(Color.red)) {
+				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#FF4500"));
+			}
+			else if (nameOfTheColor.equals(Color.blue)) {
+				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#0096FF"));
+			}
+			else if (nameOfTheColor.equals(Color.YELLOW)) {
+				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#FFFFA1"));
+			}
+			else if (nameOfTheColor.equals(Color.green)) {
+				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#90EE90"));
+			}
+			
 		}
 	}
 	private void removeHighlight(){
