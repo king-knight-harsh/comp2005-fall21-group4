@@ -644,6 +644,34 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
             }
 		}
 	
+	private void setStackText(int firstButtonXCoordinate, int firstButtonYCoordinate,int secondButtonXCoordinate ,int secondButtonYCoordinate ) {
+		String textFirstButton = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().toString();
+    	String textSecondButton = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
+    	
+    	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setText(textFirstButton);
+    	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setFocusable(false);
+    	
+    	if(panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground()==Color.red || panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground()==Color.blue) {
+    		panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setForeground(Color.white);
+    	}
+    	else {
+    		panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setForeground(Color.black);
+    	}
+    					               
+    	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setFont(new Font("Arial", Font.BOLD, 10));
+    	
+    	
+    	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setText(textSecondButton);
+    	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setFocusable(false);
+    	if(panelArray[secondButtonXCoordinate][secondButtonYCoordinate].getBackground()==Color.red || panelArray[secondButtonXCoordinate][secondButtonYCoordinate].getBackground()==Color.blue) {
+    		panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setForeground(Color.white);
+    	}
+    	else {
+    		panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setForeground(Color.black);
+    	}
+        panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setFont(new Font("Arial", Font.BOLD, 10));	
+	}
+	
 	
 	public void getPopUp() {
 		//To close the pop for the game
@@ -693,40 +721,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				                	this.moveFivePiece(selected, selected2);
 				                	
 				                }
-				                String textFirstButton = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().toString();
-			                	String textSecondButton = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
-//			                	if (((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().isEmpty()!=true) {
-//			                		String fistButtonTopColor =((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().get(((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size());
-//			                		System.out.println(fistButtonTopColor);
-//			                	}
-//			                	if(((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().isEmpty()!=true)
-//			                	{
-//			                		String SecondButtonTopColor = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().get(((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().size()-1);
-//			                		System.out.println(SecondButtonTopColor);
-//			                	}
-			                	
-			                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setText(textFirstButton);
-			                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setFocusable(false);
-			                	
-			                	if(panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground()==Color.red || panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground()==Color.blue) {
-			                		panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setForeground(Color.white);
-			                	}
-			                	else {
-			                		panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setForeground(Color.black);
-			                	}
-			                					               
-			                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setFont(new Font("Arial", Font.BOLD, 10));
-			                	
-			                	
-			                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setText(textSecondButton);
-			                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setFocusable(false);
-			                	if(panelArray[secondButtonXCoordinate][secondButtonYCoordinate].getBackground()==Color.red || panelArray[secondButtonXCoordinate][secondButtonYCoordinate].getBackground()==Color.blue) {
-			                		panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setForeground(Color.white);
-			                	}
-			                	else {
-			                		panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setForeground(Color.black);
-			                	}
-				                panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setFont(new Font("Arial", Font.BOLD, 10));		                
+				                	                
 				                 				                
 				                int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
 				                System.out.println("stack size :"+ stackSize);
@@ -759,7 +754,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 					                }
 				                }
 				                
-				                
+				                this.setStackText(firstButtonXCoordinate, firstButtonYCoordinate, secondButtonXCoordinate, secondButtonYCoordinate);
 				                selected = null;
 				                
 				                if(currentTurn==4) {
