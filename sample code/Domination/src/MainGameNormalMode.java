@@ -610,7 +610,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
             firstButtonYCoordinate = ((panelLayout) selected).getYCoordinate();
 			nameOfTheColor = panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground();
 			if (nameOfTheColor.equals(Color.red)) {
-				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#FF4500"));
+				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#FA8072"));
 			}
 			else if (nameOfTheColor.equals(Color.blue)) {
 				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#0096FF"));
@@ -672,52 +672,94 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				                
 				                if (moveDistance==1){
 				                	this.moveOnePiece(selected, selected2);
+				                	String textFirstButton = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().toString();
+				                	 String textSecondButton = ((panelLayout)super.panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]).getStackForPiece().toString();
+				                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setText(textFirstButton);
+				                	 panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setText(textFirstButton);
 				                }
 				                else if (moveDistance==2){
-				                	this.moveTwoPiece(selected, selected2);
+				                	this.moveTwoPiece(selected, selected2);				                	
 				                	
 				                }
 				                else if (moveDistance==3){
 				                	this.moveThreePiece(selected, selected2);
+				                	
 				                }
 				                else if (moveDistance==4){
 				                	this.moveFourPiece(selected, selected2);
+				                	
 				                }
 				                else if (moveDistance==5){
 				                	this.moveFivePiece(selected, selected2);
+				                	
 				                }
-				                
-				                
-				                System.out.println(((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece());
-				                System.out.println(((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece());		                
-				                 
-				                
+				                String textFirstButton = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().toString();
+			                	String textSecondButton = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
+//			                	if (((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().isEmpty()!=true) {
+//			                		String fistButtonTopColor =((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().get(((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size());
+//			                		System.out.println(fistButtonTopColor);
+//			                	}
+//			                	if(((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().isEmpty()!=true)
+//			                	{
+//			                		String SecondButtonTopColor = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().get(((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().size()-1);
+//			                		System.out.println(SecondButtonTopColor);
+//			                	}
+			                	
+			                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setText(textFirstButton);
+			                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setFocusable(false);
+			                	
+			                	if(panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground()==Color.red || panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground()==Color.blue) {
+			                		panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setForeground(Color.white);
+			                	}
+			                	else {
+			                		panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setForeground(Color.black);
+			                	}
+			                					               
+			                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setFont(new Font("Arial", Font.BOLD, 10));
+			                	
+			                	
+			                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setText(textSecondButton);
+			                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setFocusable(false);
+			                	if(panelArray[secondButtonXCoordinate][secondButtonYCoordinate].getBackground()==Color.red || panelArray[secondButtonXCoordinate][secondButtonYCoordinate].getBackground()==Color.blue) {
+			                		panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setForeground(Color.white);
+			                	}
+			                	else {
+			                		panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setForeground(Color.black);
+			                	}
+				                panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setFont(new Font("Arial", Font.BOLD, 10));		                
+				                 				                
 				                int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
 				                System.out.println("stack size :"+ stackSize);
 				                if(stackSize==0) {
 				                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
 				                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.white);
+				                	
 				                }
 				                else {
 					                if (((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="B"){
 					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
 					                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.blue);
+					                	
+					                	 
 					                }
 					                else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="R"){
 					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
 					                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.red);
+					                	
 					                }
 					                else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="G"){
 					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
 					                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.green);
+					                	 
 					                }
 					                else if (((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="Y"){
 					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
 					                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.yellow);
+					                	 
 					                }
 				                }
 				                
-				                this.checkCapturedPiece(selected2);
+				                
 				                selected = null;
 				                
 				                if(currentTurn==4) {
