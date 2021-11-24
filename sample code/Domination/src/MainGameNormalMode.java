@@ -495,13 +495,13 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				return distanceBetweenBtn;
 	}
 	
-	private void checkCapturedPiece(Object selected) {
-		int stackLength =((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
+	private void checkCapturedPiece(int buttonXCoordinate, int buttonYCoordinate ) {
+		int stackLength =((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().size();
 		if (stackLength>=6) {
-				if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackLength-1)=="B") {
+				if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="B") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
-						String removedPiece = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
+						String removedPiece = ((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().remove(0);
 						if (removedPiece=="B") {
 							this.playerOneReserveCounter+=1;
 							counter++;
@@ -518,7 +518,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackLength-1)=="R") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
-						String removedPiece = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
+						String removedPiece = ((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().remove(0);
 						if (removedPiece=="R") {
 							this.playerTwoReserveCounter+=1;
 							counter++;
@@ -534,7 +534,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackLength-1)=="G") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
-						String removedPiece = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
+						String removedPiece = ((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().remove(0);
 						if (removedPiece=="G") {
 							this.playerThreeReserveCounter+=1;
 							counter++;
@@ -550,7 +550,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackLength-1)=="Y") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
-						String removedPiece = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
+						String removedPiece = ((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().remove(0);
 						if (removedPiece=="Y") {
 							this.playerFourReserveCounter+=1;
 							counter++;
@@ -734,15 +734,13 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		}
 	
 	private void easyAI() {
-			boolean check = false;
+ 			boolean check = false;
 			int x=0;
 			int y=0;
 			int x2=0;
 			int y2=0;
 			Random randomx;
 			Random randomy;
-			int polar;
-			Random randpolar;
 			while (check == false) {
 				randomx = new Random();
 				x = randomx.nextInt(7);
@@ -796,9 +794,6 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				x2 = x-1;
 				y2 = y;	
 			}
-			
-			
-			
 			else if (x == 0) {
 				x2 = x + 1;
 				y2 = y;
@@ -863,10 +858,9 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	            }
 	            
 			}
-			String textFirstButton = ((panelLayout)super.panelArray[x][y]).getStackForPiece().toString();
-	    	String textSecondButton = ((panelLayout)super.panelArray[x2][y2]).getStackForPiece().toString();
-	    	panelArray[x][y].setText(textFirstButton);
-	    	panelArray[x2][y2].setText(textSecondButton);
+			this.checkCapturedPiece(x2, y2);
+			this.setStackText(x, y, x2, y2);
+			
 			if(currentTurn==4) {
 	        	currentTurn=1;
 	        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
@@ -880,6 +874,340 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				
 			}
 		}
+	private void hardAI() {
+		boolean check = false;
+		int x=0;
+		int y=0;
+		int x2=0;
+		int y2=0;
+		Random randomx;
+		Random randomy;
+		
+		while (check == false) {
+			randomx = new Random();
+			x = randomx.nextInt(7);
+			randomy = new Random();
+			y = randomy.nextInt(7);
+	            if (this.currentTurn==2) {
+	            	check = true;
+	            	if (panelArray[x][y].getBackground()!= Color.red) {
+	            		check = false;
+	            	}
+	            }
+	            else if (this.currentTurn ==3 ) {
+	            	check = true;
+	            	if (panelArray[x][y].getBackground()!= Color.green) {
+	            		check = false;
+	            	}
+	            }
+	            else if (this.currentTurn==4) {
+	            	check = true;
+	            	if (panelArray[x][y].getBackground()!= Color.yellow) {
+	            		check = false;
+	            	}
+	            }
+		}
+	
+		if(((panelLayout) super.panelArray[x][y]).getStackForPiece().size()==1){
+			if (x == 0 && y ==1) {
+				x2 = x + 1;
+				y2 = y;	
+			}
+			else if (x == 0 && y ==5) {
+				x2 = x ;
+				y2 = y-1;	
+			}
+			else if (x == 1 && y ==1) {
+				x2 = x +1;
+				y2 = y;	
+			}
+			else if (x == 1 && y ==6) {
+				x2 = x+1;
+				y2 = y;	
+			}
+			else if (x == 6 && y ==1) {
+				x2 = x -1;
+				y2 = y;	
+			}
+			else if (x == 6 && y ==6) {
+				x2 = x-1;
+				y2 = y;	
+			}
+			else if (x == 0) {
+				x2 = x + 1;
+				y2 = y;
+			}
+			else if (y == 7) {
+				x2 = x;
+				y2 = y-1;				
+			}
+			else if (y == 0) {
+				x2 = x;
+				y2 = y+1;				
+			}
+			else if(x==7) {
+				x2 = x - 1;
+				y2 = y;
+			}
+			else {
+				x2 = x + 1;
+				y2 = y ;
+			}
+			
+		}
+		else if(((panelLayout) super.panelArray[x][y]).getStackForPiece().size()==2){
+			
+			if (x == 0 && y ==1) {
+				x2 = x + 2;
+				y2 = y;	
+			}
+			else if (x == 0 && y ==5) {
+				x2 = x ;
+				y2 = y-2;	
+			}
+			else if (x == 1 && y ==1) {
+				x2 = x +2;
+				y2 = y;	
+			}
+			else if (x == 1 && y ==6) {
+				x2 = x+2;
+				y2 = y;	
+			}
+			else if (x == 6 && y ==1) {
+				x2 = x -2;
+				y2 = y;	
+			}
+			else if (x == 6 && y ==6) {
+				x2 = x-2;
+				y2 = y;	
+			}
+			else if (x == 0) {
+				x2 = x + 2;
+				y2 = y;
+			}
+			else if (y == 7) {
+				x2 = x;
+				y2 = y-2;				
+			}
+			else if (y == 0) {
+				x2 = x;
+				y2 = y+2;				
+			}
+			else if(x==7) {
+				x2 = x - 2;
+				y2 = y;
+			}
+			else {
+				x2 = x + 1;
+				y2 = y + 1;
+			}
+		}
+		else if(((panelLayout) super.panelArray[x][y]).getStackForPiece().size()==3){
+			
+			if (x == 0 && y ==1) {
+				x2 = x + 3;
+				y2 = y;	
+			}
+			else if (x == 0 && y ==5) {
+				x2 = x ;
+				y2 = y-3;	
+			}
+			else if (x == 1 && y ==1) {
+				x2 = x +3;
+				y2 = y;	
+			}
+			else if (x == 1 && y ==6) {
+				x2 = x+3;
+				y2 = y;	
+			}
+			else if (x == 6 && y ==1) {
+				x2 = x -3;
+				y2 = y;	
+			}
+			else if (x == 6 && y ==6) {
+				x2 = x-3;
+				y2 = y;	
+			}
+			else if (x == 0) {
+				x2 = x + 3;
+				y2 = y;
+			}
+			else if (y == 7) {
+				x2 = x;
+				y2 = y-3;				
+			}
+			else if (y == 0) {
+				x2 = x;
+				y2 = y+3;				
+			}
+			else if(x==7) {
+				x2 = x - 3;
+				y2 = y;
+			}
+			else {
+				x2 = x + 2;
+				y2 = y + 1;
+			}
+		}
+		else if(((panelLayout) super.panelArray[x][y]).getStackForPiece().size()==4){
+			if (x == 0 && y ==1) {
+				x2 = x + 4;
+				y2 = y;	
+			}
+			else if (x == 0 && y ==5) {
+				x2 = x ;
+				y2 = y-4;	
+			}
+			else if (x == 1 && y ==1) {
+				x2 = x +4;
+				y2 = y;	
+			}
+			else if (x == 1 && y ==6) {
+				x2 = x+4;
+				y2 = y;	
+			}
+			else if (x == 6 && y ==1) {
+				x2 = x -4;
+				y2 = y;	
+			}
+			else if (x == 6 && y ==6) {
+				x2 = x-4;
+				y2 = y;	
+			}
+			else if (x == 0) {
+				x2 = x + 4;
+				y2 = y;
+			}
+			else if (y == 7) {
+				x2 = x;
+				y2 = y-4;				
+			}
+			else if (y == 0) {
+				x2 = x;
+				y2 = y+4;				
+			}
+			else if(x==7) {
+				x2 = x - 4;
+				y2 = y;
+			}
+			else {
+				x2 = x + 2;
+				y2 = y +2;
+			}
+		}
+		else if(((panelLayout) super.panelArray[x][y]).getStackForPiece().size()==5){
+			if (x == 0 && y ==1) {
+				x2 = x + 5;
+				y2 = y;	
+			}
+			else if (x == 0 && y ==5) {
+				x2 = x ;
+				y2 = y-5;	
+			}
+			else if (x == 1 && y ==1) {
+				x2 = x +5;
+				y2 = y;	
+			}
+			else if (x == 1 && y ==6) {
+				x2 = x+5;
+				y2 = y;	
+			}
+			else if (x == 6 && y ==1) {
+				x2 = x -5;
+				y2 = y;	
+			}
+			else if (x == 6 && y ==6) {
+				x2 = x-5;
+				y2 = y;	
+			}
+			else if (x == 0) {
+				x2 = x + 5;
+				y2 = y;
+			}
+			else if (y == 7) {
+				x2 = x;
+				y2 = y-5;				
+			}
+			else if (y == 0) {
+				x2 = x;
+				y2 = y+5;				
+			}
+			else if(x==7) {
+				x2 = x - 5;
+				y2 = y;
+			}
+			else {
+				x2 = x + 2;
+				y2 = y +3;
+				if (x2>=7) {
+					x2=x-2;
+				}
+				if(y2>=7) {
+					y2=y-3;
+				}
+			}
+		}
+		 int moveDistance = 1;
+			for(int stackColor=0;stackColor<moveDistance;stackColor++) {
+	    		int stackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
+	        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().remove(stackSize);		            	
+	            ((panelLayout)super.panelArray[x2][y2]).getStackForPiece().add(pieceColor);
+	            
+	            
+	            
+	            if(pieceColor=="B") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.blue);
+	            }
+	            else if(pieceColor=="R") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.red);
+	            }
+	            else if(pieceColor=="G") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.green);
+	            }
+	            else if(pieceColor=="Y") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.yellow);
+	            }
+	            
+	            
+	            if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()) {
+	            	((panelLayout)super.panelArray[x][y]).setBackground(Color.white);
+	            }
+	            else if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()==false) {
+	            	int newStackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
+		        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().get(newStackSize);
+		        	if(pieceColor=="B") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.blue);
+		            }
+		            else if(pieceColor=="R") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.red);
+		            }
+		            else if(pieceColor=="G") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.green);
+		            }
+		            else if(pieceColor=="Y") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.yellow);
+		            }
+	            }
+	            
+			}
+    
+		this.checkCapturedPiece(x2, y2);
+		this.setStackText(x, y, x2, y2);
+		
+		if(currentTurn==4) {
+        	currentTurn=1;
+        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
+        }
+        else {
+        	currentTurn++;
+        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
+        }
+		if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 1) {
+			hardAI();
+			
+		}
+	}
+	
 	
 	private void setStackText(int firstButtonXCoordinate, int firstButtonYCoordinate,int secondButtonXCoordinate ,int secondButtonYCoordinate ) {
 		String textFirstButton = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().toString();
@@ -957,7 +1285,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				                	
 				                }
 				                
-				                this.checkCapturedPiece(selected2);                
+				                this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);                
 				                 				                
 				                int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
 				                
@@ -1074,6 +1402,11 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		
 		if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 0) {
 			easyAI();
+			
+		}
+		
+		if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 1) {
+			hardAI();
 			
 		}
  	}
