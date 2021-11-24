@@ -767,44 +767,103 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		            	}
 		            }
 			}
+			
+			System.out.println(x);
+			System.out.println(y);
 			System.out.println("second part");
-			randpolar = new Random();
-			polar = randpolar.nextInt(4);
-			if (polar == 0) {
+			
+			if (x == 0 && y ==1) {
+				x2 = x + 1;
+				y2 = y;	
+			}
+			else if (x == 0 && y ==5) {
+				x2 = x ;
+				y2 = y-1;	
+			}
+			else if (x == 1 && y ==1) {
+				x2 = x +1;
+				y2 = y;	
+			}
+			else if (x == 1 && y ==6) {
+				x2 = x+1;
+				y2 = y;	
+			}
+			else if (x == 6 && y ==1) {
+				x2 = x -1;
+				y2 = y;	
+			}
+			else if (x == 6 && y ==6) {
+				x2 = x-1;
+				y2 = y;	
+			}
+			
+			
+			
+			else if (x == 0) {
 				x2 = x + 1;
 				y2 = y;
-				if (x2 > 7) {
-					x2 = 0;
-				}
 			}
-			else if (polar == 1) {
+			else if (y == 7) {
+				x2 = x;
+				y2 = y-1;				
+			}
+			else if (y == 0) {
+				x2 = x;
+				y2 = y+1;				
+			}
+			else if(x==7) {
 				x2 = x - 1;
 				y2 = y;
-				if (x2 < 0) {
-					x2 = 7;
-				}
 			}
-			else if (polar == 3) {
-				x2 = x;
-				y2 = y + 1;
-				if (y2 > 7) {
-					y2 = 0;
-				}
+			else {
+				x2 = x + 1;
+				y2 = y ;
 			}
-			else if (polar == 3) {
-				x2 = x;
-				y2 = y - 1;
-				if (y2 > 0) {
-					y2 = 7;
-				}
-			}
+
 	        int moveDistance = 1;
 			for(int stackColor=0;stackColor<moveDistance;stackColor++) {
 	    		int stackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
 	        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().remove(stackSize);		            	
 	            ((panelLayout)super.panelArray[x2][y2]).getStackForPiece().add(pieceColor);
+	            
+	            
+	            
+	            if(pieceColor=="B") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.blue);
+	            }
+	            else if(pieceColor=="R") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.red);
+	            }
+	            else if(pieceColor=="G") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.green);
+	            }
+	            else if(pieceColor=="Y") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.yellow);
+	            }
+	            
+	            
+	            if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()) {
+	            	((panelLayout)super.panelArray[x][y]).setBackground(Color.white);
+	            }
+	            else if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()==false) {
+	            	int newStackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
+		        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().get(newStackSize);
+		        	if(pieceColor=="B") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.blue);
+		            }
+		            else if(pieceColor=="R") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.red);
+		            }
+		            else if(pieceColor=="G") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.green);
+		            }
+		            else if(pieceColor=="Y") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.yellow);
+		            }
+	            }
+	            
 			}
-	    	String textFirstButton = ((panelLayout)super.panelArray[x][y]).getStackForPiece().toString();
+			String textFirstButton = ((panelLayout)super.panelArray[x][y]).getStackForPiece().toString();
 	    	String textSecondButton = ((panelLayout)super.panelArray[x2][y2]).getStackForPiece().toString();
 	    	panelArray[x][y].setText(textFirstButton);
 	    	panelArray[x2][y2].setText(textSecondButton);
@@ -818,6 +877,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	        }
 			if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 0) {
 				easyAI();
+				
 			}
 		}
 	
@@ -1014,6 +1074,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		
 		if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 0) {
 			easyAI();
+			
 		}
  	}
         
