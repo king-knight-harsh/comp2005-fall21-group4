@@ -29,10 +29,12 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	private int colorMode;
 	private int botDifficultyLevel;
 	
-	private JPanel topPanel,infoPanel, playerOnePanel,playerTwoPanel,playerThreePanel, playerFourPanel;
+	private JPanel topPanel,infoPanel;
+	private panelLayout playerOnePanel,playerTwoPanel,playerThreePanel, playerFourPanel;
 	private JLabel playerOneInfo,playerTwoInfo,playerThreeInfo,playerFourInfo; 
-	private JLabel playerOneCaptured,playerTwoCaptured,playerThreeCaptured,playerFourCaptured;  
-	private JPanel eastPanel;
+	private JLabel playerOneCaptured,playerTwoCaptured,playerThreeCaptured,playerFourCaptured; 
+	private JLabel playerOneReserved,playerTwoReserved,playerThreeReserved,playerFourReserved;
+
 	
 	private int currentTurn;
 	private int firstButtonXCoordinate;
@@ -48,6 +50,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	private JButton deSelectButton;
 	
 	private int playerOneCaptureCounter=0,playerTwoCaptureCounter=0,playerThreeCaptureCounter=0,playerFourCaptureCounter=0;
+	private int playerOneReserveCounter=0,playerTwoReserveCounter=0,playerThreeReserveCounter=0,playerFourReserveCounter=0;
 	
 	
 	
@@ -90,7 +93,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		getContentPane().add(this.getTopPanel(),BorderLayout.NORTH);
 		getContentPane().add(this.getInfoPanel(),BorderLayout.SOUTH);
 		this.setPiecesOnBoard();
-		System.out.println ("hello");
+		
 	}
 	
 	private String getPlayerOneName() {
@@ -174,6 +177,17 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		this.playerOneCaptured.setText(text + Integer.toString(this.playerOneCaptureCounter));
 	}
 	
+	private JLabel getPlayerOneReserveCounter() {
+		playerOneReserved = new JLabel("RESERVED : " + this.playerOneReserveCounter);
+		playerOneReserved.setFont(new Font("TimesRoman", Font.BOLD, 16));
+		playerOneReserved.setForeground(Color.black);
+		return playerOneReserved;
+	}
+	
+	private void setPlayerOneReserveCounter(String text) {
+		this.playerOneReserved.setText(text + Integer.toString(this.playerOneReserveCounter));
+	}
+	
 	private JLabel getPlayerTwoCaptureCounter() {
 		playerTwoCaptured = new JLabel("CAPTURED : " + this.playerTwoCaptureCounter);
 		playerTwoCaptured.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -183,6 +197,17 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	
 	private void setPlayerTwoCaptureCounter(String text) {
 		this.playerTwoCaptured.setText(text + Integer.toString(this.playerTwoCaptureCounter));
+	}
+	
+	private JLabel getPlayerTwoReserveCounter() {
+		playerTwoReserved = new JLabel("RESERVED : " + this.playerTwoReserveCounter);
+		playerTwoReserved.setFont(new Font("TimesRoman", Font.BOLD, 16));
+		playerTwoReserved.setForeground(Color.black);
+		return playerTwoReserved;
+	}
+	
+	private void setPlayerTwoReserveCounter(String text) {
+		this.playerTwoReserved.setText(text + Integer.toString(this.playerTwoReserveCounter));
 	}
 	
 	private JLabel getPlayerThreeCaptureCounter() {
@@ -196,6 +221,17 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		this.playerThreeCaptured.setText(text + Integer.toString(this.playerThreeCaptureCounter));
 	}
 	
+	private JLabel getPlayerThreeReserveCounter() {
+		playerThreeReserved = new JLabel("RESERVED : " + this.playerThreeReserveCounter);
+		playerThreeReserved.setFont(new Font("TimesRoman", Font.BOLD, 16));
+		playerThreeReserved.setForeground(Color.black);
+		return playerThreeReserved;
+	}
+	
+	private void setPlayerThreeReserveCounter(String text) {
+		this.playerThreeReserved.setText(text + Integer.toString(this.playerThreeReserveCounter));
+	}
+	
 	private JLabel getPlayerFourCaptureCounter() {
 		playerFourCaptured = new JLabel("CAPTURED : " + this.playerFourCaptureCounter);
 		playerFourCaptured.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -207,10 +243,22 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		this.playerFourCaptured.setText(text + Integer.toString(this.playerFourCaptureCounter));
 	}
 	
-	public JPanel getPlayerOnePanel() {
-		playerOnePanel =new JPanel();
+	private JLabel getPlayerFourReserveCounter() {
+		playerFourReserved = new JLabel("RESERVED : " + this.playerFourReserveCounter);
+		playerFourReserved.setFont(new Font("TimesRoman", Font.BOLD, 16));
+		playerFourReserved.setForeground(Color.black);
+		return playerFourReserved;
+	}
+	
+	private void setPlayerFourReserveCounter(String text) {
+		this.playerFourReserved.setText(text + Integer.toString(this.playerFourReserveCounter));
+	}
+	
+	public panelLayout getPlayerOnePanel() {
+		playerOnePanel =new panelLayout(0,0);
 		playerOnePanel.setLayout(new BoxLayout(playerOnePanel, BoxLayout.Y_AXIS));
-		playerOnePanel.setPreferredSize(new Dimension(150,50));
+		playerOnePanel.setPreferredSize(new Dimension(150,70));
+		playerOnePanel.setBackground(Color.white);
 		
 		
 		playerOneInfo = new JLabel();
@@ -224,14 +272,17 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		
 		playerOnePanel.add(playerOneInfo);
 		playerOnePanel.add(this.getPlayerOneCaptureCounter());
+		playerOnePanel.add(this.getPlayerOneReserveCounter());
 		playerOnePanel.setBorder(BorderFactory.createLineBorder(Color.blue, 3));
+		playerOnePanel.addActionListener(this);
 		
 		return playerOnePanel;
 	}
-	public JPanel getPlayerTwoPanel() {
-		playerTwoPanel =new JPanel();
+	public panelLayout getPlayerTwoPanel() {
+		playerTwoPanel =new panelLayout(0,1);
 		playerTwoPanel.setLayout(new BoxLayout(playerTwoPanel, BoxLayout.Y_AXIS));
-		playerTwoPanel.setPreferredSize(new Dimension(150,50));
+		playerTwoPanel.setPreferredSize(new Dimension(150,70));
+		playerTwoPanel.setBackground(Color.white);
 		
 		playerTwoInfo = new JLabel();
 		playerTwoInfo.setText(String.valueOf(this.playerTwoName));
@@ -241,15 +292,17 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		
 		playerTwoPanel.add(playerTwoInfo);
 		playerTwoPanel.add(this.getPlayerTwoCaptureCounter());
+		playerTwoPanel.add(this.getPlayerTwoReserveCounter());
 		playerTwoPanel.setBorder(BorderFactory.createLineBorder(Color.red, 3));
-		
+		playerTwoPanel.addActionListener(this);
 	
 		return playerTwoPanel;
 	}
-	public JPanel getPlayerThreePanel() {
-		playerThreePanel =new JPanel();
+	public panelLayout getPlayerThreePanel() {
+		playerThreePanel =new panelLayout(0,6);
 		playerThreePanel.setLayout(new BoxLayout(playerThreePanel, BoxLayout.Y_AXIS));
-		playerThreePanel.setPreferredSize(new Dimension(150,50));
+		playerThreePanel.setPreferredSize(new Dimension(150,70));
+		playerThreePanel.setBackground(Color.white);
 		
 		playerThreeInfo = new JLabel();
 		playerThreeInfo.setText(String.valueOf(this.playerThreeName));
@@ -260,14 +313,17 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		
 		playerThreePanel.add(playerThreeInfo);
 		playerThreePanel.add(this.getPlayerThreeCaptureCounter());
+		playerThreePanel.add(this.getPlayerThreeReserveCounter());
 		playerThreePanel.setBorder(BorderFactory.createLineBorder(Color.green, 3));
+		playerThreePanel.addActionListener(this);
 		
 		return playerThreePanel;
 	}
-	public JPanel getPlayerFourPanel() {
-		playerFourPanel =new JPanel();
+	public panelLayout getPlayerFourPanel() {
+		playerFourPanel =new panelLayout(0,7);
 		playerFourPanel.setLayout(new BoxLayout(playerFourPanel, BoxLayout.Y_AXIS));
-		playerFourPanel.setPreferredSize(new Dimension(150,50));
+		playerFourPanel.setPreferredSize(new Dimension(150,70));
+		playerFourPanel.setBackground(Color.white);
 		
 		playerFourInfo = new JLabel();
 		playerFourInfo.setText(String.valueOf(this.playerFourName));
@@ -277,7 +333,9 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		
 		playerFourPanel.add(playerFourInfo);
 		playerFourPanel.add(this.getPlayerFourCaptureCounter());
+		playerFourPanel.add(this.getPlayerFourReserveCounter());
 		playerFourPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 3));
+		playerFourPanel.addActionListener(this);
 		
 		return playerFourPanel;
 	}
@@ -418,6 +476,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		}
 		else {
 			JOptionPane.showMessageDialog(null,"Please do a valid move","Invalid Move ",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
+			this.removeHighlight();
 			selected=null;
 			return false;
 		}
@@ -442,9 +501,16 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackLength-1)=="B") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
-						((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
-						this.playerOneCaptureCounter+=1;
-						counter++;
+						String removedPiece = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
+						if (removedPiece=="B") {
+							this.playerOneReserveCounter+=1;
+							counter++;
+						}
+						else {
+							this.playerOneCaptureCounter+=1;
+							counter++;
+						}
+						
 					}
 					
 					
@@ -452,9 +518,15 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackLength-1)=="R") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
-						((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
-						this.playerTwoCaptureCounter+=1;
-						counter++;
+						String removedPiece = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
+						if (removedPiece=="R") {
+							this.playerTwoReserveCounter+=1;
+							counter++;
+						}
+						else {
+							this.playerTwoCaptureCounter+=1;
+							counter++;
+						}
 					}
 					
 				
@@ -462,9 +534,15 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackLength-1)=="G") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
-						((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
-						this.playerThreeCaptureCounter+=1;
-						counter++;
+						String removedPiece = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
+						if (removedPiece=="G") {
+							this.playerThreeReserveCounter+=1;
+							counter++;
+						}
+						else {
+							this.playerThreeCaptureCounter+=1;
+							counter++;
+						}
 					}
 					
 					
@@ -472,9 +550,15 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackLength-1)=="Y") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
-						((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
-						this.playerFourCaptureCounter+=1;
-						counter++;
+						String removedPiece = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().remove(0);
+						if (removedPiece=="Y") {
+							this.playerFourReserveCounter+=1;
+							counter++;
+						}
+						else {
+							this.playerFourCaptureCounter+=1;
+							counter++;
+						}
 					}
 					
 				}
@@ -483,6 +567,11 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				this.setPlayerTwoCaptureCounter("CAPTURED : ");
 				this.setPlayerThreeCaptureCounter("CAPTURED : ");
 				this.setPlayerFourCaptureCounter("CAPTURED : ");
+				
+				this.setPlayerOneReserveCounter("RESERVED : ");
+				this.setPlayerTwoReserveCounter("RESERVED : ");
+				this.setPlayerThreeReserveCounter("RESERVED : ");
+				this.setPlayerFourReserveCounter("RESERVED : ");
 			}
 		
 	}
@@ -643,8 +732,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
             	}
             }
 		}
-		
-		private void easyAI() {
+	
+	private void easyAI() {
 			boolean check = false;
 			int x=0;
 			int y=0;
@@ -715,19 +804,19 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().remove(stackSize);		            	
 	            ((panelLayout)super.panelArray[x2][y2]).getStackForPiece().add(pieceColor);
 			}
-        	String textFirstButton = ((panelLayout)super.panelArray[x][y]).getStackForPiece().toString();
-        	String textSecondButton = ((panelLayout)super.panelArray[x2][y2]).getStackForPiece().toString();
-        	panelArray[x][y].setText(textFirstButton);
-        	panelArray[x2][y2].setText(textSecondButton);
+	    	String textFirstButton = ((panelLayout)super.panelArray[x][y]).getStackForPiece().toString();
+	    	String textSecondButton = ((panelLayout)super.panelArray[x2][y2]).getStackForPiece().toString();
+	    	panelArray[x][y].setText(textFirstButton);
+	    	panelArray[x2][y2].setText(textSecondButton);
 			if(currentTurn==4) {
-            	currentTurn=1;
-            	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
-            }
-            else {
-            	currentTurn++;
-            	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
-            }
-			if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 1) {
+	        	currentTurn=1;
+	        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
+	        }
+	        else {
+	        	currentTurn++;
+	        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
+	        }
+			if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 0) {
 				easyAI();
 			}
 		}
@@ -758,6 +847,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
     		panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setForeground(Color.black);
     	}
         panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setFont(new Font("Arial", Font.BOLD, 10));	
+        
 	}
 	
 	
@@ -788,10 +878,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				                
 				                if (moveDistance==1){
 				                	this.moveOnePiece(selected, selected2);
-				                	String textFirstButton = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().toString();
-				                	 String textSecondButton = ((panelLayout)super.panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]).getStackForPiece().toString();
-				                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setText(textFirstButton);
-				                	 panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setText(textFirstButton);
+				                	
 				                }
 				                else if (moveDistance==2){
 				                	this.moveTwoPiece(selected, selected2);				                	
@@ -809,10 +896,11 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				                	this.moveFivePiece(selected, selected2);
 				                	
 				                }
-				                	                
+				                
+				                this.checkCapturedPiece(selected2);                
 				                 				                
 				                int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
-				                System.out.println("stack size :"+ stackSize);
+				                
 				                if(stackSize==0) {
 				                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
 				                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.white);
@@ -843,6 +931,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				                }
 				                
 				                this.setStackText(firstButtonXCoordinate, firstButtonYCoordinate, secondButtonXCoordinate, secondButtonYCoordinate);
+				               
 				                selected = null;
 				                
 				                if(currentTurn==4) {
@@ -869,22 +958,22 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	        else{
 	            selected = aevt.getSource();
 	            if (this.currentTurn ==1 ) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.blue) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.blue ) {
 	            		selected=null;
 	            	}
 	            }
 	            else if (this.currentTurn==2) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.red) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.red ) {
 	            		selected=null;
 	            	}
 	            }
 	            else if (this.currentTurn ==3 ) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.green) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.green ) {
 	            		selected=null;
 	            	}
 	            }
 	            else if (this.currentTurn==4) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.yellow) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.yellow ) {
 	            		selected=null;
 	            	}
 	            }
@@ -922,7 +1011,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
  			LoadGame loadGame = new LoadGame();
  			}
 		}
-		System.out.println(currentTurn - numberOfHumanPlayers);
+		
 		if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 0) {
 			easyAI();
 		}
