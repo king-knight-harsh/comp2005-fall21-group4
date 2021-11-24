@@ -90,7 +90,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		getContentPane().add(this.getTopPanel(),BorderLayout.NORTH);
 		getContentPane().add(this.getInfoPanel(),BorderLayout.SOUTH);
 		this.setPiecesOnBoard();
-		
+		System.out.println ("hello");
 	}
 	
 	private String getPlayerOneName() {
@@ -643,6 +643,94 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
             	}
             }
 		}
+		
+		private void easyAI() {
+			boolean check = false;
+			int x=0;
+			int y=0;
+			int x2=0;
+			int y2=0;
+			Random randomx;
+			Random randomy;
+			int polar;
+			Random randpolar;
+			while (check == false) {
+				randomx = new Random();
+				x = randomx.nextInt(7);
+				randomy = new Random();
+				y = randomy.nextInt(7);
+		            if (this.currentTurn==2) {
+		            	check = true;
+		            	if (panelArray[x][y].getBackground()!= Color.red) {
+		            		check = false;
+		            	}
+		            }
+		            else if (this.currentTurn ==3 ) {
+		            	check = true;
+		            	if (panelArray[x][y].getBackground()!= Color.green) {
+		            		check = false;
+		            	}
+		            }
+		            else if (this.currentTurn==4) {
+		            	check = true;
+		            	if (panelArray[x][y].getBackground()!= Color.yellow) {
+		            		check = false;
+		            	}
+		            }
+			}
+			System.out.println("second part");
+			randpolar = new Random();
+			polar = randpolar.nextInt(4);
+			if (polar == 0) {
+				x2 = x + 1;
+				y2 = y;
+				if (x2 > 7) {
+					x2 = 0;
+				}
+			}
+			else if (polar == 1) {
+				x2 = x - 1;
+				y2 = y;
+				if (x2 < 0) {
+					x2 = 7;
+				}
+			}
+			else if (polar == 3) {
+				x2 = x;
+				y2 = y + 1;
+				if (y2 > 7) {
+					y2 = 0;
+				}
+			}
+			else if (polar == 3) {
+				x2 = x;
+				y2 = y - 1;
+				if (y2 > 0) {
+					y2 = 7;
+				}
+			}
+	        int moveDistance = 1;
+			for(int stackColor=0;stackColor<moveDistance;stackColor++) {
+	    		int stackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
+	        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().remove(stackSize);		            	
+	            ((panelLayout)super.panelArray[x2][y2]).getStackForPiece().add(pieceColor);
+			}
+        	String textFirstButton = ((panelLayout)super.panelArray[x][y]).getStackForPiece().toString();
+        	String textSecondButton = ((panelLayout)super.panelArray[x2][y2]).getStackForPiece().toString();
+        	panelArray[x][y].setText(textFirstButton);
+        	panelArray[x2][y2].setText(textSecondButton);
+			if(currentTurn==4) {
+            	currentTurn=1;
+            	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
+            }
+            else {
+            	currentTurn++;
+            	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
+            }
+			if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 1) {
+				easyAI();
+			}
+		}
 	
 	private void setStackText(int firstButtonXCoordinate, int firstButtonYCoordinate,int secondButtonXCoordinate ,int secondButtonYCoordinate ) {
 		String textFirstButton = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().toString();
@@ -833,6 +921,10 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
          else if(selected3 == super.loadGame) {
  			LoadGame loadGame = new LoadGame();
  			}
+		}
+		System.out.println(currentTurn - numberOfHumanPlayers);
+		if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 0) {
+			easyAI();
 		}
  	}
         
