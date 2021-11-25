@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
+import java.io.*;
 import java.io.IOException;
 import java.util.*;
 
@@ -32,6 +32,42 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		JOptionPane.showMessageDialog(null,"CLICK ON ACTION'S TO BEGIN ","WELCOME TO GAME ",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
 	}
 	
+	public static void createSaveFile() {   
+
+		try {   
+			FileOutputStream file = new FileOutputStream("/saves/save1.ser");   
+			ObjectOutputStream object = new ObjectOutputStream(file);   
+			
+			object.writeObject(GameDisplay.class);   	
+			object.close();   
+			file.close();   
+	
+		} catch (Exception e) {   
+			System.out.printf("ERROR: FILE FAILED TO SAVE");; 
+			e.printStackTrace();
+		}   
+		return;
+	}
+	
+	public static void loadFile() {
+		GameDisplay NG = null;
+		try {
+		   FileInputStream fileLoad = new FileInputStream("/saves/save1.ser");
+		   ObjectInputStream Load = new ObjectInputStream(fileLoad);
+		   NG = (GameDisplay) Load.readObject();
+		   Load.close();
+		   fileLoad.close();
+		} 
+		catch (IOException i) {
+		   i.printStackTrace();
+		   return;
+		} 
+		catch (ClassNotFoundException c) {
+		   System.out.println("No game in progress");
+		   c.printStackTrace();
+		   return;
+		}
+	}
 	
 	public void setLayout() {
 		
@@ -320,8 +356,5 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		// TODO Auto-generated method stub
 		
 	}
-	
 
-	
-	
 }
