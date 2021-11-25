@@ -76,13 +76,13 @@ class FactorsTester {
 	@Test
 	void testfactors1()
 	{
-		assertThrows(IllegalArgumentException.class, () -> FactorsUtility.factor(-1, 2));
+		assertThrows(IllegalArgumentException.class, () -> FactorsUtility.factor(-1, 1));
 	}
 
 	@Test
 	void testfactors2()
 	{
-		assertThrows(IllegalArgumentException.class, () -> FactorsUtility.factor(1, 0));
+		assertThrows(IllegalArgumentException.class, () -> FactorsUtility.factor(0, 0));
 	}
 	@Test
 	void testfactors3()
