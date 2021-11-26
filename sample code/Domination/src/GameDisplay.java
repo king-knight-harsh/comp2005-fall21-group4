@@ -35,7 +35,7 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 	public static void createSaveFile() {   
 
 		try {   
-			FileOutputStream file = new FileOutputStream("/saves/save1.ser");   
+			FileOutputStream file = new FileOutputStream("save1.ser");   
 			ObjectOutputStream object = new ObjectOutputStream(file);   
 			
 			object.writeObject(GameDisplay.class);   	
@@ -52,7 +52,7 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 	public static void loadFile() {
 		GameDisplay NG = null;
 		try {
-		   FileInputStream fileLoad = new FileInputStream("/saves/save1.ser");
+		   FileInputStream fileLoad = new FileInputStream("save1.ser");
 		   ObjectInputStream Load = new ObjectInputStream(fileLoad);
 		   NG = (GameDisplay) Load.readObject();
 		   Load.close();

@@ -497,7 +497,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	
 	private void checkCapturedPiece(int buttonXCoordinate, int buttonYCoordinate ) {
 		int stackLength =((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().size();
-		if (stackLength>=6) {
+		System.out.println(stackLength);
+		if (stackLength>5) {
 				if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="B") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
@@ -515,7 +516,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 					
 					
 				}
-				else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackLength-1)=="R") {
+				else if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="R") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
 						String removedPiece = ((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().remove(0);
@@ -531,7 +532,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 					
 				
 				}
-				else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackLength-1)=="G") {
+				else if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="G") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
 						String removedPiece = ((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().remove(0);
@@ -547,7 +548,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 					
 					
 				}
-				else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackLength-1)=="Y") {
+				else if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="Y") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
 						String removedPiece = ((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().remove(0);
@@ -1266,26 +1267,26 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				                
 				                if (moveDistance==1){
 				                	this.moveOnePiece(selected, selected2);
-				                	
+				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 				                }
 				                else if (moveDistance==2){
 				                	this.moveTwoPiece(selected, selected2);				                	
-				                	
+				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 				                }
 				                else if (moveDistance==3){
 				                	this.moveThreePiece(selected, selected2);
-				                	
+				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 				                }
 				                else if (moveDistance==4){
 				                	this.moveFourPiece(selected, selected2);
-				                	
+				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 				                }
 				                else if (moveDistance==5){
 				                	this.moveFivePiece(selected, selected2);
-				                	
+				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 				                }
 				                
-				                this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);                
+				                                
 				                 				                
 				                int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
 				                
