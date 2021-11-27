@@ -50,7 +50,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	private JButton deSelectButton;
 	
 	private int playerOneCaptureCounter=0,playerTwoCaptureCounter=0,playerThreeCaptureCounter=0,playerFourCaptureCounter=0;
-	private int playerOneReserveCounter=1,playerTwoReserveCounter=1,playerThreeReserveCounter=1,playerFourReserveCounter=1;
+	private int playerOneReserveCounter=0,playerTwoReserveCounter=0,playerThreeReserveCounter=0,playerFourReserveCounter=0;
 	
 	
 	
@@ -258,7 +258,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		playerOnePanel =new panelLayout(0,0);
 		playerOnePanel.setLayout(new BoxLayout(playerOnePanel, BoxLayout.Y_AXIS));
 		playerOnePanel.setPreferredSize(new Dimension(150,70));
-		playerOnePanel.setBackground(Color.blue);
+		playerOnePanel.setBackground(Color.white);
 		
 		
 		playerOneInfo = new JLabel();
@@ -282,7 +282,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		playerTwoPanel =new panelLayout(0,1);
 		playerTwoPanel.setLayout(new BoxLayout(playerTwoPanel, BoxLayout.Y_AXIS));
 		playerTwoPanel.setPreferredSize(new Dimension(150,70));
-		playerTwoPanel.setBackground(Color.red);
+		playerTwoPanel.setBackground(Color.white);
 		
 		playerTwoInfo = new JLabel();
 		playerTwoInfo.setText(String.valueOf(this.playerTwoName));
@@ -302,7 +302,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		playerThreePanel =new panelLayout(0,6);
 		playerThreePanel.setLayout(new BoxLayout(playerThreePanel, BoxLayout.Y_AXIS));
 		playerThreePanel.setPreferredSize(new Dimension(150,70));
-		playerThreePanel.setBackground(Color.green);
+		playerThreePanel.setBackground(Color.white);
 		
 		playerThreeInfo = new JLabel();
 		playerThreeInfo.setText(String.valueOf(this.playerThreeName));
@@ -323,7 +323,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		playerFourPanel =new panelLayout(0,7);
 		playerFourPanel.setLayout(new BoxLayout(playerFourPanel, BoxLayout.Y_AXIS));
 		playerFourPanel.setPreferredSize(new Dimension(150,70));
-		playerFourPanel.setBackground(Color.yellow);
+		playerFourPanel.setBackground(Color.white);
 		
 		playerFourInfo = new JLabel();
 		playerFourInfo.setText(String.valueOf(this.playerFourName));
@@ -497,7 +497,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	
 	private void checkCapturedPiece(int buttonXCoordinate, int buttonYCoordinate ) {
 		int stackLength =((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().size();
-		
+		System.out.println(stackLength);
 		if (stackLength>5) {
 				if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="B") {
 					int counter=0;
@@ -749,7 +749,9 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		            }
 			}
 			
-			
+			System.out.println(x);
+			System.out.println(y);
+			System.out.println("second part");
 			
 			if (x == 0 && y ==1) {
 				x2 = x + 1;
@@ -1359,137 +1361,19 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		
 		
 		Object selected3 = aevt.getSource();
-		Object selected4 = aevt.getSource();
 		if (selected3!=ruleBook && selected3!=exitGame && selected3!=newGame && selected3!=saveGame && selected3!=loadGame ) {
-			
 			if (selected != null) {
-				
 	            Object selected2 = aevt.getSource();
 	           
 	            if (panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]!=panelArray[7][7] ) {	            
-	            	
+		            
 		            if (panelArray[firstButtonXCoordinate][firstButtonYCoordinate]!=panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]) {
-		            	if (selected == this.playerOnePanel) {
-		            			if (this.playerOneReserveCounter>0) {
-		            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
-		            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
-		            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("B");
-		            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.blue);
-		            				String textStack = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
-		            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(textStack);
-		            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setForeground(Color.white);
-		            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFocusable(false);
-		            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFont(new Font("Arial", Font.BOLD, 10));
-		            				this.playerOneReserveCounter-=1;
-		            				this.setPlayerOneReserveCounter("RESERVED : ");
-		            				if(currentTurn==4) {
-					                	currentTurn=1;
-					                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
-					                }
-					                else {
-					                	currentTurn++;
-					                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
-					                }
-		            				selected = null;
-		            			}
-		            			else {
-		            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
-		            				selected = null;
-		            			}
-		            	}
 		            	
-		            	else if (selected == this.playerTwoPanel) {
-	            			if (this.playerTwoReserveCounter>0) {
-	            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
-	            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("R");
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.red);
-	            				String textStack = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(textStack);
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setForeground(Color.white);
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFocusable(false);
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFont(new Font("Arial", Font.BOLD, 10));
-	            				this.playerTwoReserveCounter-=1;
-	            				this.setPlayerTwoReserveCounter("RESERVED : ");
-	            				if(currentTurn==4) {
-				                	currentTurn=1;
-				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
-				                }
-				                else {
-				                	currentTurn++;
-				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
-				                }
-	            				selected = null;
-	            			}
-	            			else {
-	            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
-	            				selected = null;
-	            			}
-		            	}
 		            	
-		            	else if (selected == this.playerThreePanel) {
-	            			if (this.playerThreeReserveCounter>0) {
-	            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
-	            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("G");
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.green);
-	            				String textStack = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(textStack);
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setForeground(Color.black);
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFocusable(false);
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFont(new Font("Arial", Font.BOLD, 10));
-	            				this.playerThreeReserveCounter-=1;
-	            				this.setPlayerThreeReserveCounter("RESERVED : ");
-	            				
-	            				if(currentTurn==4) {
-				                	currentTurn=1;
-				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
-				                }
-				                else {
-				                	currentTurn++;
-				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
-				                }
-	            				selected = null;
-	            			}
-	            			else {
-	            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
-	            				selected = null;
-	            			}
-		            	}
-		            	
-		            	else if (selected == this.playerFourPanel) {
-	            			if (this.playerFourReserveCounter>0) {
-	            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
-	            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("Y");
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.yellow);
-	            				String textStack = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(textStack);
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setForeground(Color.black);
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFocusable(false);
-	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFont(new Font("Arial", Font.BOLD, 10));
-	            				this.playerFourReserveCounter-=1;
-	            				this.setPlayerFourReserveCounter("RESERVED : ");	            				
-	            				if(currentTurn==4) {
-				                	currentTurn=1;
-				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
-				                }
-				                else {
-				                	currentTurn++;
-				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
-				                }
-	            				selected = null;
-	            			}
-	            			else {
-	            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
-	            				selected = null;
-	            			}
-		            	}
-		            	
-		            	else if(this.checkValidMove(selected2,((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size())==true) {
+		            	if(this.checkValidMove(selected2,((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size())==true) {
 		            		
-		            		int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
-			                int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
+				            	int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
+				                int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
 				                
 				                
 				                int moveDistance = this.getDistanceBetweenMove(selected2,((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size());
@@ -1573,7 +1457,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 					        		}
 				                	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
 				                }
-				               				                
+				                System.out.println("current turn is " + currentTurn);				                
 			            	}		            	
 		            }
 	            }
@@ -1589,39 +1473,26 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	        
 	        else{
 	            selected = aevt.getSource();
-	            if (selected== playerOnePanel && this.currentTurn==1 ) {
-		           }
-		        else if (selected== playerTwoPanel && this.currentTurn==2 ) {
-		           	}
-		        else if (selected== playerThreePanel && this.currentTurn==3) {
-		           	}
-		        else if (selected== playerFourPanel && this.currentTurn==4) {
-		           	}
-	            else if (this.currentTurn ==1 ) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.blue) {
+	            if (this.currentTurn ==1 ) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.blue ) {
 	            		selected=null;
 	            	}
 	            }
 	            else if (this.currentTurn==2) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.red) {
-	            		
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.red ) {
 	            		selected=null;
 	            	}
 	            }
 	            else if (this.currentTurn ==3 ) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.green) {
-	            		
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.green ) {
 	            		selected=null;
 	            	}
 	            }
 	            else if (this.currentTurn==4) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.yellow) {
-	            		
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.yellow ) {
 	            		selected=null;
 	            	}
 	            }
-	           
-	            
 	            	this.setHighlight();
 	        }
 }
@@ -1655,11 +1526,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
          else if(selected3 == super.loadGame) {
  			LoadGame loadGame = new LoadGame();
  			}
-		  
-         
 		}
-		
-		
 		
 		if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 0) {
 			easyAI();

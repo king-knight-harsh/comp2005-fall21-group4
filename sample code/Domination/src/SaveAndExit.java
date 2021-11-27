@@ -122,8 +122,7 @@ public class SaveAndExit extends JFrame implements ActionListener {
 		
 		if(selected == saveAndQuitButton) {
 			this.dispose();
-			//LoadGame savegame = new LoadGame();
-			GameDisplay.createSaveFile();
+			LoadGame savegame = new LoadGame();
 		}
 		
 	}
