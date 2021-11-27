@@ -577,11 +577,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		
 	}
 
-	public void moveOnePiece(Object selected, Object selected2) {
-		int firstButtonXCoordinate = ((panelLayout) selected).getXCoordinate();
-        int firstButtonYCoordinate = ((panelLayout) selected).getYCoordinate();
-        int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
-        int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
+	public void moveOnePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 1;
 		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
     		int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size()-1;
@@ -590,11 +586,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
             
         }
 	}
-	public void moveTwoPiece(Object selected, Object selected2) {
-		int firstButtonXCoordinate = ((panelLayout) selected).getXCoordinate();
-        int firstButtonYCoordinate = ((panelLayout) selected).getYCoordinate();
-        int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
-        int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
+	public void moveTwoPiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 2;
         int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
     	if(stackSize == 2) {
@@ -626,11 +618,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
             }
     	}
 	}
-	public void moveThreePiece(Object selected, Object selected2) {
-		int firstButtonXCoordinate = ((panelLayout) selected).getXCoordinate();
-        int firstButtonYCoordinate = ((panelLayout) selected).getYCoordinate();
-        int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
-        int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
+	public void moveThreePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
+		
         int moveDistance = 3;
         int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
     	if(stackSize == 3) {
@@ -655,11 +644,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
             }
     	}
 	}
-	public void moveFourPiece(Object selected, Object selected2) {
-		int firstButtonXCoordinate = ((panelLayout) selected).getXCoordinate();
-        int firstButtonYCoordinate = ((panelLayout) selected).getYCoordinate();
-        int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
-        int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
+	public void moveFourPiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 4;
         int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
     	if(stackSize == 4) {
@@ -677,11 +662,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
             }
     	}
 	}
-	public void moveFivePiece(Object selected, Object selected2) {
-		int firstButtonXCoordinate = ((panelLayout) selected).getXCoordinate();
-        int firstButtonYCoordinate = ((panelLayout) selected).getYCoordinate();
-        int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
-        int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
+	public void moveFivePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
+		
         int moveDistance = 5;
         for(int stackColor=0;stackColor<moveDistance;stackColor++) {
     		int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size()-1;
@@ -1243,6 +1225,137 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	public void getPopUp() {
 		//To close the pop for the game
 	}
+	
+	public void checkGameWinner(int currentTurn) {
+		
+		this.currentTurn=currentTurn;
+		boolean colorPieceAvailable = false;
+		if (this.currentTurn==1) {			
+			if(playerOneReserveCounter>0) {
+				colorPieceAvailable = true;
+			}
+			else {
+			
+				for (int row=0; row<8;row++){
+					for(int column=0; column<8;column++) {
+						if((Color)super.panelArray[row][column].getBackground() == Color.blue){
+							colorPieceAvailable = true;
+							break;
+						}						
+					}
+					if(colorPieceAvailable == true) {
+						break;
+					}
+				}	
+			}
+			
+			if (colorPieceAvailable==false) {
+				if(this.currentTurn==4) {
+		        	this.currentTurn=1;
+		        	this.setInformationLabel("TURN : PLAYER "+ this.currentTurn);
+		        }
+		        else {
+		        	this.currentTurn++;
+		        	this.setInformationLabel("TURN : PLAYER "+ this.currentTurn);
+		        }
+			}
+			
+		}
+		else if(this.currentTurn==2) {
+			if(playerTwoReserveCounter>0) {
+				colorPieceAvailable = true;
+			}
+			else {
+			
+				for (int row=0; row<8;row++){
+					for(int column=0; column<8;column++) {
+						if((Color)super.panelArray[row][column].getBackground() == Color.red){
+							colorPieceAvailable = true;
+							break;
+						}						
+					}
+					if(colorPieceAvailable == true) {
+						break;
+					}
+				}	
+			}
+			
+			if (colorPieceAvailable==false) {
+				if(this.currentTurn==4) {
+		        	this.currentTurn=1;
+		        	this.setInformationLabel("TURN : PLAYER "+ this.currentTurn);
+		        }
+		        else {
+		        	this.currentTurn++;
+		        	this.setInformationLabel("TURN : PLAYER "+ this.currentTurn);
+		        }
+			}
+		}
+		else if(this.currentTurn==3) {
+			if(playerThreeReserveCounter>0) {
+				colorPieceAvailable = true;
+			}
+			else {
+			
+				for (int row=0; row<8;row++){
+					for(int column=0; column<8;column++) {
+						if((Color)super.panelArray[row][column].getBackground() == Color.green){
+							colorPieceAvailable = true;
+							break;
+						}						
+					}
+					if(colorPieceAvailable == true) {
+						break;
+					}
+				}	
+			}
+			
+			if (colorPieceAvailable==false) {
+				if(this.currentTurn==4) {
+		        	this.currentTurn=1;
+		        	this.setInformationLabel("TURN : PLAYER "+ this.currentTurn);
+		        }
+		        else {
+		        	this.currentTurn++;
+		        	this.setInformationLabel("TURN : PLAYER "+ this.currentTurn);
+		        }
+			}
+		}
+		else if(this.currentTurn==4) {
+			if(playerFourReserveCounter>0) {
+				colorPieceAvailable = true;
+			}
+			else {
+			
+				for (int row=0; row<8;row++){
+					for(int column=0; column<8;column++) {
+						if((Color)super.panelArray[row][column].getBackground() == Color.yellow){
+							colorPieceAvailable = true;
+							break;
+						}						
+					}
+					if(colorPieceAvailable == true) {
+						break;
+					}
+				}	
+			}
+			
+			if (colorPieceAvailable==false) {
+				if(this.currentTurn==4) {
+		        	this.currentTurn=1;
+		        	this.setInformationLabel("TURN : PLAYER "+ this.currentTurn);
+		        }
+		        else {
+		        	this.currentTurn++;
+		        	this.setInformationLabel("TURN : PLAYER "+ this.currentTurn);
+		        }
+			}
+		}
+		selected=null;
+	}
+	
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
 		
@@ -1266,23 +1379,23 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				                int moveDistance = this.getDistanceBetweenMove(selected2,((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size());
 				                
 				                if (moveDistance==1){
-				                	this.moveOnePiece(selected, selected2);
+				                	this.moveOnePiece(firstButtonXCoordinate, firstButtonYCoordinate,secondButtonXCoordinate,secondButtonYCoordinate);
 				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 				                }
 				                else if (moveDistance==2){
-				                	this.moveTwoPiece(selected, selected2);				                	
+				                	this.moveTwoPiece(firstButtonXCoordinate, firstButtonYCoordinate,secondButtonXCoordinate,secondButtonYCoordinate);		                	
 				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 				                }
 				                else if (moveDistance==3){
-				                	this.moveThreePiece(selected, selected2);
+				                	this.moveThreePiece(firstButtonXCoordinate, firstButtonYCoordinate,secondButtonXCoordinate,secondButtonYCoordinate);
 				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 				                }
 				                else if (moveDistance==4){
-				                	this.moveFourPiece(selected, selected2);
+				                	this.moveFourPiece(firstButtonXCoordinate, firstButtonYCoordinate,secondButtonXCoordinate,secondButtonYCoordinate);
 				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 				                }
 				                else if (moveDistance==5){
-				                	this.moveFivePiece(selected, selected2);
+				                	this.moveFivePiece(firstButtonXCoordinate, firstButtonYCoordinate,secondButtonXCoordinate,secondButtonYCoordinate);
 				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 				                }
 				                
@@ -1320,17 +1433,33 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 				                }
 				                
 				                this.setStackText(firstButtonXCoordinate, firstButtonYCoordinate, secondButtonXCoordinate, secondButtonYCoordinate);
-				               
 				                selected = null;
+				                
+				                int firstTurn = currentTurn;
 				                
 				                if(currentTurn==4) {
 				                	currentTurn=1;
-				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
+				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
 				                }
 				                else {
 				                	currentTurn++;
-				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
+				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+				                }				                
+				                
+				                this.checkGameWinner(currentTurn);
+				                this.checkGameWinner(currentTurn);
+				                this.checkGameWinner(currentTurn);
+				                if(currentTurn==firstTurn) {
+				                	for (int row=0; row<8;row++){
+					        			for(int column=0; column<8;column++) {				        	
+					        				panelArray[row][column].setEnabled(false);
+					        			}
+					        		}
+				                	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
 				                }
+				                System.out.println("current turn is " + currentTurn);
+				                
+				                
 			            	}		            	
 		            }
 	            }
