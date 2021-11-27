@@ -258,7 +258,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		playerOnePanel =new panelLayout(0,0);
 		playerOnePanel.setLayout(new BoxLayout(playerOnePanel, BoxLayout.Y_AXIS));
 		playerOnePanel.setPreferredSize(new Dimension(150,70));
-		playerOnePanel.setBackground(Color.blue);
+		playerOnePanel.setBackground(Color.white);
 		
 		
 		playerOneInfo = new JLabel();
@@ -282,7 +282,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		playerTwoPanel =new panelLayout(0,1);
 		playerTwoPanel.setLayout(new BoxLayout(playerTwoPanel, BoxLayout.Y_AXIS));
 		playerTwoPanel.setPreferredSize(new Dimension(150,70));
-		playerTwoPanel.setBackground(Color.red);
+		playerTwoPanel.setBackground(Color.white);
 		
 		playerTwoInfo = new JLabel();
 		playerTwoInfo.setText(String.valueOf(this.playerTwoName));
@@ -302,7 +302,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		playerThreePanel =new panelLayout(0,6);
 		playerThreePanel.setLayout(new BoxLayout(playerThreePanel, BoxLayout.Y_AXIS));
 		playerThreePanel.setPreferredSize(new Dimension(150,70));
-		playerThreePanel.setBackground(Color.green);
+		playerThreePanel.setBackground(Color.white);
 		
 		playerThreeInfo = new JLabel();
 		playerThreeInfo.setText(String.valueOf(this.playerThreeName));
@@ -323,7 +323,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		playerFourPanel =new panelLayout(0,7);
 		playerFourPanel.setLayout(new BoxLayout(playerFourPanel, BoxLayout.Y_AXIS));
 		playerFourPanel.setPreferredSize(new Dimension(150,70));
-		playerFourPanel.setBackground(Color.yellow);
+		playerFourPanel.setBackground(Color.white);
 		
 		playerFourInfo = new JLabel();
 		playerFourInfo.setText(String.valueOf(this.playerFourName));

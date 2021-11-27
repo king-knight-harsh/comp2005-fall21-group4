@@ -38,7 +38,7 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
  		
 		this.setTitle("Focus");
 		this.setIconImage(this.getGameIcon().getImage());
-		this.setSize(800,800);
+		this.setSize(900,900);
 		this.setDisplayToCenter();
 		
 		
