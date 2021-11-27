@@ -1,6 +1,12 @@
 import javax.swing.*;
+
+
+
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class LoadGame extends JFrame implements ActionListener {
 	private JLabel informationLabel;
@@ -98,7 +104,22 @@ public class LoadGame extends JFrame implements ActionListener {
 		loadImageIcon = new ImageIcon(getClass().getResource("images/load.png"));
 		return loadImageIcon;
 	}
-
+	
+	public static void readFromFile() {
+		File txtFile = new File("save/text.txt");
+		try {
+			Scanner sc = new Scanner(txtFile);
+			
+			while(sc.hasNextLine()) {
+				System.out.println(sc.nextLine());
+			}
+			sc.close();
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
 		// TODO Auto-generated method stub
@@ -106,6 +127,7 @@ public class LoadGame extends JFrame implements ActionListener {
 		Object selected = aevt.getSource();
 		if(selected == this.slotOne) {
 			this.dispose();
+			this.readFromFile();
 		}
 		if(selected == this.slotTwo) {
 			this.dispose();

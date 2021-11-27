@@ -21,7 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class MainGameNormalMode extends GameDisplay implements ActionListener, MouseListener,MouseMotionListener{
+public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	
 	private JLabel informationLabel;
 	private int numberOfHumanPlayers;	
@@ -45,7 +45,6 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	private Random randomTurn;
 	
 	private Object selected =null;
-	private JButton redPiece, yellowPiece, greenPiece, bluePiece;
 	private String pieceColor;
 	private JButton deSelectButton;
 	
@@ -1382,13 +1381,28 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 		            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFont(new Font("Arial", Font.BOLD, 10));
 		            				this.playerOneReserveCounter-=1;
 		            				this.setPlayerOneReserveCounter("RESERVED : ");
-		            				if(currentTurn==4) {
+
+					                int firstTurn = currentTurn;
+					                
+					                if(currentTurn==4) {
 					                	currentTurn=1;
 					                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
 					                }
 					                else {
 					                	currentTurn++;
 					                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+					                }				                
+					                
+					                this.checkGameWinner(currentTurn);
+					                this.checkGameWinner(currentTurn);
+					                this.checkGameWinner(currentTurn);
+					                if(currentTurn==firstTurn) {
+					                	for (int row=0; row<8;row++){
+						        			for(int column=0; column<8;column++) {				        	
+						        				panelArray[row][column].setEnabled(false);
+						        			}
+						        		}
+					                	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
 					                }
 		            				selected = null;
 		            			}
@@ -1411,13 +1425,28 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFont(new Font("Arial", Font.BOLD, 10));
 	            				this.playerTwoReserveCounter-=1;
 	            				this.setPlayerTwoReserveCounter("RESERVED : ");
-	            				if(currentTurn==4) {
+
+				                int firstTurn = currentTurn;
+				                
+				                if(currentTurn==4) {
 				                	currentTurn=1;
 				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
 				                }
 				                else {
 				                	currentTurn++;
 				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+				                }				                
+				                
+				                this.checkGameWinner(currentTurn);
+				                this.checkGameWinner(currentTurn);
+				                this.checkGameWinner(currentTurn);
+				                if(currentTurn==firstTurn) {
+				                	for (int row=0; row<8;row++){
+					        			for(int column=0; column<8;column++) {				        	
+					        				panelArray[row][column].setEnabled(false);
+					        			}
+					        		}
+				                	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
 				                }
 	            				selected = null;
 	            			}
@@ -1441,13 +1470,28 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	            				this.playerThreeReserveCounter-=1;
 	            				this.setPlayerThreeReserveCounter("RESERVED : ");
 	            				
-	            				if(currentTurn==4) {
+
+				                int firstTurn = currentTurn;
+				                
+				                if(currentTurn==4) {
 				                	currentTurn=1;
 				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
 				                }
 				                else {
 				                	currentTurn++;
 				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+				                }				                
+				                
+				                this.checkGameWinner(currentTurn);
+				                this.checkGameWinner(currentTurn);
+				                this.checkGameWinner(currentTurn);
+				                if(currentTurn==firstTurn) {
+				                	for (int row=0; row<8;row++){
+					        			for(int column=0; column<8;column++) {				        	
+					        				panelArray[row][column].setEnabled(false);
+					        			}
+					        		}
+				                	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
 				                }
 	            				selected = null;
 	            			}
@@ -1470,13 +1514,28 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFont(new Font("Arial", Font.BOLD, 10));
 	            				this.playerFourReserveCounter-=1;
 	            				this.setPlayerFourReserveCounter("RESERVED : ");	            				
-	            				if(currentTurn==4) {
+
+				                int firstTurn = currentTurn;
+				                
+				                if(currentTurn==4) {
 				                	currentTurn=1;
 				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
 				                }
 				                else {
 				                	currentTurn++;
 				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+				                }				                
+				                
+				                this.checkGameWinner(currentTurn);
+				                this.checkGameWinner(currentTurn);
+				                this.checkGameWinner(currentTurn);
+				                if(currentTurn==firstTurn) {
+				                	for (int row=0; row<8;row++){
+					        			for(int column=0; column<8;column++) {				        	
+					        				panelArray[row][column].setEnabled(false);
+					        			}
+					        		}
+				                	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
 				                }
 	            				selected = null;
 	            			}
@@ -1670,63 +1729,5 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, M
 			hardAI();
 			
 		}
- 	}
-        
-        
-	
-		
-		
-		
-		
-	
-
-	@Override
-	public void mouseClicked(MouseEvent mevt) {
-		
-		// TODO Auto-generated method stub
-		Object newSelection = mevt.getSource();
-		
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent aevt) {
-		// TODO Auto-generated method stub
-		Object selected = aevt.getSource();
-		
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
-	
-	
+ 	}        
 }

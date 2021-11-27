@@ -1,9 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 
-public class SaveAndExit extends JFrame implements ActionListener {
+public class SaveAndExit extends JFrame implements ActionListener,java.io.Serializable {
+	private static final long serialVersionUID =1L;
 
 	private Dimension displayDimension;
 	private JLabel informationLabel;
@@ -108,7 +113,33 @@ public class SaveAndExit extends JFrame implements ActionListener {
 		displayDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(displayDimension.width/2-this.getSize().width/2, displayDimension.height/2-this.getSize().height/2);
 	}
-
+	public static void CreateFile() {
+		File txtFile = new File("save/testTxtFile.txt");
+		
+		try {
+			txtFile.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void WriteToFile() {
+		File txtFile = new File("save/testTxtFile.txt");
+		
+		try {
+			PrintWriter pw = new PrintWriter(txtFile);
+			pw.println("Hello from the other side!");
+			pw.println("I must have called thousand times");
+			pw.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
 		// TODO Auto-generated method stub
@@ -122,7 +153,9 @@ public class SaveAndExit extends JFrame implements ActionListener {
 		
 		if(selected == saveAndQuitButton) {
 			this.dispose();
-			LoadGame savegame = new LoadGame();
+			
+			//LoadGame savegame = new LoadGame();
+			this.WriteToFile();
 		}
 		
 	}

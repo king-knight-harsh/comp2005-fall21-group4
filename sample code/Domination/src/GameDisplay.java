@@ -10,8 +10,8 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 	public JButton[][] panelArray ;	
 	private JMenuBar menuBar;
 	private JButton piece;
-	private JPanel middlePanel, topPanel;
-	private JLabel informationLabel;	
+	private JPanel middlePanel;
+	
 	private JMenu action,colourPalette;	
 	public JMenuItem newGame,loadGame,saveGame,exitGame, ruleBook;
 	private JMenuItem normalMode,colourBlindMode;		
@@ -38,7 +38,7 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
  		
 		this.setTitle("Focus");
 		this.setIconImage(this.getGameIcon().getImage());
-		this.setSize(900,900);
+		this.setSize(800,800);
 		this.setDisplayToCenter();
 		
 		
@@ -135,7 +135,7 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		
 		
 		action = new JMenu("ACTION");
-		colourPalette = new JMenu("Colour Palette");	
+		this.colourPalette = new JMenu("Colour Palette");	
 		
 		newGame = new JMenuItem("New Game  ");
 		loadGame =new JMenuItem("Load Game ");
