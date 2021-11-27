@@ -49,7 +49,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	private JButton deSelectButton;
 	
 	private int playerOneCaptureCounter=0,playerTwoCaptureCounter=0,playerThreeCaptureCounter=0,playerFourCaptureCounter=0;
-	private int playerOneReserveCounter=1,playerTwoReserveCounter=1,playerThreeReserveCounter=1,playerFourReserveCounter=1;
+	private int playerOneReserveCounter=1,playerTwoReserveCounter=0,playerThreeReserveCounter=0,playerFourReserveCounter=0;
 	
 	
 	
@@ -716,18 +716,44 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		}
 	
 	private void easyAI() {
-		
-	if(playerTwoReserveCounter>0 && currentTurn == 2) {
-		
-	}
-	if(playerThreeReserveCounter>0 && currentTurn == 3) {
-		
-	}
-	else if(playerFourReserveCounter>0 && currentTurn == 4) {
-	
-	}
-	else {}
- 			boolean check = false;
+		if(playerTwoReserveCounter>0 && currentTurn == 2) {
+			int x=0;
+			int y=0;
+			Random randomx;
+			Random randomy; 
+			randomx = new Random();
+			x = randomx.nextInt(1);
+			randomy = new Random();
+			y = randomy.nextInt(6);
+			
+			this.playFromReservePlayerTwo(x, y);
+		}
+		if(playerThreeReserveCounter>0 && currentTurn == 3) {
+			int x=0;
+			int y=0;
+			Random randomx;
+			Random randomy; 
+			randomx = new Random();
+			x = randomx.nextInt(1);
+			randomy = new Random();
+			y = randomy.nextInt(6);
+			
+			this.playFromReservePlayerThree(x, y);
+		}
+		else if(playerFourReserveCounter>0 && currentTurn == 4) {
+			int x=0;
+			int y=0;
+			Random randomx;
+			Random randomy; 
+			randomx = new Random();
+			x = randomx.nextInt(1);
+			randomy = new Random();
+			y = randomy.nextInt(6);
+			
+			this.playFromReservePlayerFour(x, y);
+		}
+		else {
+			boolean check = false;
  			boolean colorPieceAvailable = false;
 			int x=0;
 			int y=0;
@@ -920,6 +946,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 				
 			}
 		}
+	 			
+			}
 	private void hardAI() {
 		boolean check = false;
 		int x=0;
@@ -1416,9 +1444,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		}
 		selected=null;
 	}
-	
-	private void playFromReservePlayerOne(int secondButtonXCoordinate, int secondButtonYCoordinate) {
-		
+	private void playFromReservePlayerOne(int secondButtonXCoordinate,int secondButtonYCoordinate) {
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("B");
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.blue);
 		String textStack = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
@@ -1428,54 +1454,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFont(new Font("Arial", Font.BOLD, 10));
 		this.playerOneReserveCounter-=1;
 		this.setPlayerOneReserveCounter("RESERVED : ");
-		this.checkTurn(this.currentTurn);
-	}
-	
-	
-	private void playFromReservePlayerTwo(int secondButtonXCoordinate, int secondButtonYCoordinate){
-		
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("R");
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.red);
-		String textStack = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(textStack);
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setForeground(Color.white);
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFocusable(false);
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFont(new Font("Arial", Font.BOLD, 10));
-		this.playerTwoReserveCounter-=1;
-		this.setPlayerTwoReserveCounter("RESERVED : ");
-		this.checkTurn(this.currentTurn);
-	}
-	
-	private void playFromReservePlayerThree(int secondButtonXCoordinate, int secondButtonYCoordinate) {
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("G");
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.green);
-		String textStack = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(textStack);
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setForeground(Color.black);
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFocusable(false);
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFont(new Font("Arial", Font.BOLD, 10));
-		this.playerThreeReserveCounter-=1;
-		this.setPlayerThreeReserveCounter("RESERVED : ");	            				
-		this.checkTurn(this.currentTurn);
-	}
-	
-	private void playFromRerservePlayerFour(int secondButtonXCoordinate, int secondButtonYCoordinate) {
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("Y");
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.yellow);
-		String textStack = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(textStack);
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setForeground(Color.black);
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFocusable(false);
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFont(new Font("Arial", Font.BOLD, 10));
-		this.playerFourReserveCounter-=1;
-		this.setPlayerFourReserveCounter("RESERVED : ");	            				
-		this.checkTurn(this.currentTurn);
-        
-	}
-	
-	
-	private void checkTurn(int currentTurn) {
-		int firstTurn = currentTurn;
+
+        int firstTurn = currentTurn;
         
         if(currentTurn==4) {
         	currentTurn=1;
@@ -1500,6 +1480,117 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		selected = null;
 	}
 	
+	private void playFromReservePlayerTwo(int secondButtonXCoordinate,int secondButtonYCoordinate) {
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("R");
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.red);
+		String textStack = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(textStack);
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setForeground(Color.white);
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFocusable(false);
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFont(new Font("Arial", Font.BOLD, 10));
+		this.playerTwoReserveCounter-=1;
+		this.setPlayerTwoReserveCounter("RESERVED : ");
+
+        int firstTurn = currentTurn;
+        
+        if(currentTurn==4) {
+        	currentTurn=1;
+        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+        }
+        else {
+        	currentTurn++;
+        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+        }				                
+        
+        this.checkGameWinner(currentTurn);
+        this.checkGameWinner(currentTurn);
+        this.checkGameWinner(currentTurn);
+        if(currentTurn==firstTurn) {
+        	for (int row=0; row<8;row++){
+    			for(int column=0; column<8;column++) {				        	
+    				panelArray[row][column].setEnabled(false);
+    			}
+    		}
+        	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
+        }
+		selected = null;
+	} 
+
+	private void playFromReservePlayerThree(int secondButtonXCoordinate,int secondButtonYCoordinate) {
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("G");
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.green);
+		String textStack = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(textStack);
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setForeground(Color.black);
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFocusable(false);
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFont(new Font("Arial", Font.BOLD, 10));
+		this.playerThreeReserveCounter-=1;
+		this.setPlayerThreeReserveCounter("RESERVED : ");
+		
+
+        int firstTurn = currentTurn;
+        
+        if(currentTurn==4) {
+        	currentTurn=1;
+        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+        }
+        else {
+        	currentTurn++;
+        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+        }				                
+        
+        this.checkGameWinner(currentTurn);
+        this.checkGameWinner(currentTurn);
+        this.checkGameWinner(currentTurn);
+        if(currentTurn==firstTurn) {
+        	for (int row=0; row<8;row++){
+    			for(int column=0; column<8;column++) {				        	
+    				panelArray[row][column].setEnabled(false);
+    			}
+    		}
+        	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
+        }
+		selected = null;
+	}
+
+	private void playFromReservePlayerFour(int secondButtonXCoordinate,int secondButtonYCoordinate) {
+		
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("Y");
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.yellow);
+		String textStack = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(textStack);
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setForeground(Color.black);
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFocusable(false);
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setFont(new Font("Arial", Font.BOLD, 10));
+		this.playerFourReserveCounter-=1;
+		this.setPlayerFourReserveCounter("RESERVED : ");	            				
+
+        int firstTurn = currentTurn;
+        
+        if(currentTurn==4) {
+        	currentTurn=1;
+        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+        }
+        else {
+        	currentTurn++;
+        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+        }				                
+        
+        this.checkGameWinner(currentTurn);
+        this.checkGameWinner(currentTurn);
+        this.checkGameWinner(currentTurn);
+        if(currentTurn==firstTurn) {
+        	for (int row=0; row<8;row++){
+    			for(int column=0; column<8;column++) {				        	
+    				panelArray[row][column].setEnabled(false);
+    			}
+    		}
+        	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
+        }
+		selected = null;
+	}
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
 		
@@ -1520,6 +1611,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
 		            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
 		            				this.playFromReservePlayerOne(secondButtonXCoordinate, secondButtonYCoordinate);
+		            				
 		            			}
 		            			else {
 		            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
@@ -1528,33 +1620,34 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		            	}
 		            	
 		            	else if (selected == this.playerTwoPanel) {
-		            		if (this.playerTwoReserveCounter>0) {
-		            			int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
+	            			if (this.playerTwoReserveCounter>0) {
+	            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
 	            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
 	            				this.playFromReservePlayerTwo(secondButtonXCoordinate, secondButtonYCoordinate);
-		            		}
-		            		else {
-		            			JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
-		            			selected = null;
-		            		}
+	            			}
+	            			else {
+	            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
+	            				selected = null;
+	            			}
 		            	}
+		            	
 		            	else if (selected == this.playerThreePanel) {
-		            		if (this.playerThreeReserveCounter>0) {
-		            			int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
+	            			if (this.playerThreeReserveCounter>0) {
+	            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
 	            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
 	            				this.playFromReservePlayerThree(secondButtonXCoordinate, secondButtonYCoordinate);
-		            		}
-		            		else {
-		            			JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
-		            			selected = null;
-		            		}
+	            			}
+	            			else {
+	            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
+	            				selected = null;
+	            			}
 		            	}
 		            	
 		            	else if (selected == this.playerFourPanel) {
 	            			if (this.playerFourReserveCounter>0) {
 	            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
 	            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
-	            				this.playFromRerservePlayerFour(secondButtonXCoordinate, secondButtonYCoordinate);
+	            				this.playFromReservePlayerFour(secondButtonXCoordinate, secondButtonYCoordinate);
 	            			}
 	            			else {
 	            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
@@ -1625,8 +1718,30 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 				                }
 				                
 				                this.setStackText(firstButtonXCoordinate, firstButtonYCoordinate, secondButtonXCoordinate, secondButtonYCoordinate);
+				                selected = null;
 				                
-				                this.checkTurn(this.currentTurn);
+				                int firstTurn = currentTurn;
+				                
+				                if(currentTurn==4) {
+				                	currentTurn=1;
+				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+				                }
+				                else {
+				                	currentTurn++;
+				                	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+				                }				                
+				                
+				                this.checkGameWinner(currentTurn);
+				                this.checkGameWinner(currentTurn);
+				                this.checkGameWinner(currentTurn);
+				                if(currentTurn==firstTurn) {
+				                	for (int row=0; row<8;row++){
+					        			for(int column=0; column<8;column++) {				        	
+					        				panelArray[row][column].setEnabled(false);
+					        			}
+					        		}
+				                	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
+				                }
 				               				                
 			            	}		            	
 		            }
