@@ -1,3 +1,9 @@
+/*
+ * GUI component which takes information from the user  about the players.
+ * It extends JFrame and implements ActionListener to respond to user Actions.
+ * It also uses Swing.
+ */
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -14,12 +20,14 @@ public class PlayerSelector extends JFrame implements ActionListener{
 	private JButton playerOne, playerTwo, playerThree, playerFour;
 	private ImageIcon newIcon;
 	
-	
+	//Constructor with public visibility.
 	public PlayerSelector() {
 		// TODO Auto-generated constructor stub
 		
 	}
 	
+	
+	//Sets the layout of the PlayerSelector Screen.
 	public void setLayout() {
 		
 	
@@ -43,6 +51,7 @@ public class PlayerSelector extends JFrame implements ActionListener{
 		this.setVisible(true);
 	}
 	
+	//Sets the text and style for the PlayerSelector Screen.
 	private JLabel setInformationLabel() {
 		informationLabel = new JLabel("<html>Select the Number <br>of Human Player:</html>",SwingConstants.CENTER);
 		informationLabel.setBounds(40,30,300,100);
@@ -52,6 +61,8 @@ public class PlayerSelector extends JFrame implements ActionListener{
 		return informationLabel;
 	}
 	
+	
+	//Sets the text and style for the Player one button using JButton.
 	public JButton setPlayerOneButton() {
 		playerOne = new JButton("1");
 		playerOne.setFont(new Font("TimesRoman", Font.BOLD, 32));		
@@ -62,6 +73,8 @@ public class PlayerSelector extends JFrame implements ActionListener{
 		playerOne.addActionListener(this);
 		return playerOne;		
 	}
+	
+	//Sets the text and style for the Player Two button.
 	public JButton setPlayerTwoButton() {
 		playerTwo = new JButton("2");
 		playerTwo.setFont(new Font("TimesRoman", Font.BOLD, 32));		
@@ -72,6 +85,8 @@ public class PlayerSelector extends JFrame implements ActionListener{
 		playerTwo.addActionListener(this);
 		return playerTwo;		
 	}
+	
+	//Sets the text and style for the Player Three button.
 	public JButton setPlayerThreeButton() {
 		playerThree = new JButton("3");
 		playerThree.setFont(new Font("TimesRoman", Font.BOLD, 32));		
@@ -82,6 +97,8 @@ public class PlayerSelector extends JFrame implements ActionListener{
 		playerThree.addActionListener(this);
 		return playerThree;		
 	}
+	
+	//Sets the text and style for the Player Four button.
 	public JButton setPlayerFourButton() {
 		playerFour = new JButton("4");
 		playerFour.setFont(new Font("TimesRoman", Font.BOLD, 32));		
@@ -93,25 +110,33 @@ public class PlayerSelector extends JFrame implements ActionListener{
 		return playerFour;		
 	}
 	
+	//Gets the number of human players entered by the user.
 	public int getNumberofHumanPlayers() {
 		return numberOfHumanPlayers;
 	}
 	
+	
+	//Sets the players other than human players(out of 4) as AI 
 	public int getNumberOfBots(){
 		numberOfBots = 4-numberOfHumanPlayers;
 		return numberOfBots;
 	}
 	
+	
+	//Sets the Display Screen Location to be at the center.
 	private void setDisplayToCenter() {
 		displayDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(displayDimension.width/2-this.getSize().width/2, displayDimension.height/2-this.getSize().height/2);
 	}
 
+	
+	//Gets the new image icon to be displayed.
 	private ImageIcon getNewIcon() {
 		newIcon = new ImageIcon(getClass().getResource("images/new.png"));
 		return newIcon;
 	}
 
+	//ActionListener to handle User Input.
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
 		Object selected = aevt.getSource();

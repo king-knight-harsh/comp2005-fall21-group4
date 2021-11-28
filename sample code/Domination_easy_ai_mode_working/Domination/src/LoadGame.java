@@ -1,7 +1,10 @@
+
+/*
+ * GUI component to load the game that was saved earlier.
+ * extends JFrame and uses Swing.
+ * Implements ActionListener to respond to user action.
+ */
 import javax.swing.*;
-
-
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -14,12 +17,17 @@ public class LoadGame extends JFrame implements ActionListener {
 	private Dimension displayDimension;
 	private ImageIcon loadImageIcon;
 	
+	//Constructor.
 	LoadGame(){
 		this.initialize();
 		
 	}
 	
 	
+	/*
+	 * Sets linitial layout of the screen for the Load Game Menu with
+	 * Four slots of saved games.
+	 */
 	private void initialize() {
 				
 		this.setSize(500, 650);
@@ -44,6 +52,8 @@ public class LoadGame extends JFrame implements ActionListener {
 	
 	}
 	
+	
+	//Sets the font and style for the text on "LOAD GAME" Screen.
 	private JLabel setInformationLabel() {
 		informationLabel = new JLabel("SELECT SLOT");
 		informationLabel.setFont(new Font("TimesRoman", Font.BOLD, 56));
@@ -52,11 +62,15 @@ public class LoadGame extends JFrame implements ActionListener {
 		return informationLabel;
 	}
 	
+	
+	//Sets the ocation of the Display screen to the center.
 	private void setDisplayToCenter() {
 		displayDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(displayDimension.width/2-this.getSize().width/2, displayDimension.height/2-this.getSize().height/2);
 	}
 	
+	
+	//Sets the layout for the Slot One button.
 	private JButton setLoadSlotOne(){
 		slotOne = new JButton("SLOT 1");
 		slotOne.setFont(new Font("TimesRoman", Font.BOLD, 40));
@@ -68,6 +82,7 @@ public class LoadGame extends JFrame implements ActionListener {
 		return slotOne;
 	}	
 	
+	//Sets the layout for the Slot Two button.
 	private JButton setLoadSlotTwo(){
 		slotTwo = new JButton("SLOT 2");
 		slotTwo.setFont(new Font("TimesRoman", Font.BOLD, 40));
@@ -78,6 +93,8 @@ public class LoadGame extends JFrame implements ActionListener {
 		slotTwo.setBounds(80, 220, 300, 100);
 		return slotTwo;
 	}
+	
+	//Sets the layout for the Slot Three button.
 	private JButton setLoadSlotThree(){
 		slotThree = new JButton("SLOT 3");		
 		slotThree.setFont(new Font("TimesRoman", Font.BOLD, 40));
@@ -88,6 +105,8 @@ public class LoadGame extends JFrame implements ActionListener {
 		slotThree.setBounds(80, 340, 300, 100);
 		return slotThree;
 	}
+	
+	//Sets the layout for the Slot Four button.
 	private JButton setLoadSlotFour(){
 		slotFour = new JButton("SLOT 4");
 		slotFour.setFont(new Font("TimesRoman", Font.BOLD, 40));
@@ -100,11 +119,14 @@ public class LoadGame extends JFrame implements ActionListener {
 	}
 	
 
+	//gets the Image Icon for the "LOAD GAME" button.
 	private ImageIcon getLoadImageIcon() {
 		loadImageIcon = new ImageIcon(getClass().getResource("images/load.png"));
 		return loadImageIcon;
 	}
 	
+	
+	//Method that reads the positions of the game pieces from the file.
 	public static void readFromFile() {
 		File txtFile = new File("save/text.txt");
 		try {
@@ -120,6 +142,8 @@ public class LoadGame extends JFrame implements ActionListener {
 		}
 	}
 	
+	
+	//ActionListener to handle User Input.
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
 		// TODO Auto-generated method stub

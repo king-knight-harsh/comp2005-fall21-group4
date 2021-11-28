@@ -26,7 +26,7 @@ public class panelLayout extends JButton {
 		
 	}
 	
-	
+	//Implements Arraylist to store the pieces of a pile.
 	public ArrayList<String> getStackForPiece() {
 		return this.stackOfPieces;
 	}

@@ -1,3 +1,9 @@
+/*
+ * GUI component to enable users to save the game and 
+ * Continue it later. Extends JFrame and implements ActionListener to 
+ * handle User Input,java.io.serializable to store the game,uses Swing.
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -16,12 +22,13 @@ public class SaveAndExit extends JFrame implements ActionListener,java.io.Serial
 	private ImageIcon saveIcon,optionIcon;
 	
 
-	
+	//Constructor with public visibility.
 	public SaveAndExit() {
 		initialize();
 	}
 	
 	
+	//Sets the layout for the Save and Exit Screen.
 	private void initialize() {
 		
 		
@@ -49,7 +56,7 @@ public class SaveAndExit extends JFrame implements ActionListener,java.io.Serial
 	}
 	
 	
-	
+	//Sets the font and style of the text on the Save and Exit Screen.
 	
 	private JLabel getInformationLabel() {
 		informationLabel = new JLabel("Select the appropriate Quit option -");
@@ -62,6 +69,7 @@ public class SaveAndExit extends JFrame implements ActionListener,java.io.Serial
 	}
 	
 	
+	//Sets the font,style and functionabilty to the "Save and Exit" button.
 	private JButton getSaveAndQuitButton() {
 		saveAndQuitButton = new JButton("Save and Quit");
 		saveAndQuitButton.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -74,6 +82,7 @@ public class SaveAndExit extends JFrame implements ActionListener,java.io.Serial
 		
 	}
 	
+	//Sets the font,style and functionabilty to the "Quit" button.
 	private JButton getQuitButton() {
 		quitButton = new JButton("Quit without Saving");
 		quitButton.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -86,6 +95,7 @@ public class SaveAndExit extends JFrame implements ActionListener,java.io.Serial
 		
 	}
 	
+	//Sets the font,style and functionabilty to the "Back" button.
 	private JButton getBackButton() {
 		backButton = new JButton("Back");
 		backButton.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -98,21 +108,26 @@ public class SaveAndExit extends JFrame implements ActionListener,java.io.Serial
 		
 	}
 	
+	//Returns Image Icon for the "Save and Exit" button.
 	private ImageIcon getSaveImageIcon() {
 		saveIcon = new ImageIcon(getClass().getResource("images/saveForQuitDialogBox.png"));
 		return saveIcon;
 	}
 
+	//Returns Image Icon for the Options.
 	private ImageIcon getOptionIcon() {
 		optionIcon = new ImageIcon(getClass().getResource("images/option.png"));
 		
 		return optionIcon;
 	}
 	
+	//Sets the Display screen location to the center.
 	private void setDisplayToCenter() {
 		displayDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(displayDimension.width/2-this.getSize().width/2, displayDimension.height/2-this.getSize().height/2);
 	}
+	
+	//Creates a file to save the game.
 	public static void CreateFile() {
 		File txtFile = new File("save/testTxtFile.txt");
 		
@@ -124,6 +139,7 @@ public class SaveAndExit extends JFrame implements ActionListener,java.io.Serial
 		}
 	}
 	
+	//Adds the location of each piece to the file.
 	public static void WriteToFile() {
 		File txtFile = new File("save/testTxtFile.txt");
 		
@@ -139,7 +155,7 @@ public class SaveAndExit extends JFrame implements ActionListener,java.io.Serial
 	}
 	
 	
-	
+	//ActionListener to handle User Input.
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
 		// TODO Auto-generated method stub

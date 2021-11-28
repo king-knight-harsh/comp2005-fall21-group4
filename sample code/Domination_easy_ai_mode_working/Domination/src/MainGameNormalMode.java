@@ -1,3 +1,10 @@
+/*
+ * GUI Component where the actual logic of playing the game 
+ * is implemented. it extends GameDisplay.
+ * Also implements ActionListener, MouseListener, MouseMotionListener
+ * which handles User Input.
+ */
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -53,6 +60,18 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	
 	
 	
+	/*
+	 * Constructor with public visibility.
+	 * @param numberOfHumanPlayers - Integer that stores the number of human players 
+	 * 			who will play the game.
+	 * @param player1 - String that stores the name of the first player.
+	 * @param player2 - String that stores the name of the second player.
+	 * @param player3 - String that stores the name of the third player.
+	 * @param player4 - String that stores the name of the fourth player.
+	 * @param botDifficultyLevel - Integer that stores the AI Difficulty level(i.e, "EASY" or "HARD") slected by the user.
+	 * @param colorMode - Integer that stores the Colour Mode selected by the User. (i.e, "Normal" or "ColorBlind")
+	 */
+	
 	MainGameNormalMode(int numberOfHumanPlayers, String player1,String player2,String player3,String player4, int botDifficultyLevel, int colorMode){
 		this.numberOfHumanPlayers = numberOfHumanPlayers;
 		
@@ -95,11 +114,13 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		
 	}
 	
+	//This private method returns the name of first player.
 	private String getPlayerOneName() {
 		return this.playerOneName;
 	}
 	
 
+	//Sets the top panel layout.
 	public JPanel getTopPanel() {
 		topPanel =  new JPanel();
 		topPanel.setLayout(new FlowLayout());	
@@ -114,6 +135,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		return topPanel;
 	}
 	
+	//Gets the specifications required to build the info panel.
 	public JPanel getInfoPanel() {
 		infoPanel = new JPanel();
 		infoPanel.setLayout(new FlowLayout());
@@ -127,6 +149,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		return infoPanel;
 	}
 	
+	//Randomly selects a player's turn and keeps passing the turn to the next player.
 	private int getFirstTurn() {
 		randomTurn = new Random();
 		currentTurn = randomTurn.nextInt(4);
@@ -147,11 +170,19 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		return currentTurn;
 	}
 	
+	/*
+	 * Sets the value of the label as the parameter passed.
+	 * @param text - String to store the value that describes the label. 
+	 */
 	private void setInformationLabel(String text) {
 		this.informationLabel.setText(text);
 		
 	}
 	
+	/*
+	 * Sets the dimensions, co-ordinates and other properties for the "Unclick" button.
+	 * Uses ActionListener so that the an action is performed when user clicks the button.
+	 */
 	private JButton getDeSelectButton() {
 		deSelectButton= new panelLayout(7,7);
 		deSelectButton.setText("UNCLICK");
@@ -165,6 +196,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	}
 	
 
+	//Sets the layout for the Captured button which tells how any pieces of other players are captured by Player One.
 	private JLabel getPlayerOneCaptureCounter() {
 		playerOneCaptured = new JLabel("CAPTURED : " + this.playerOneCaptureCounter);
 		playerOneCaptured.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -172,10 +204,15 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		return playerOneCaptured;
 	}
 	
+	/*
+	 * Updates the value of the Captured Pieces by Player One.
+	 * @param text - String to store the number of Reserved pieces for Player One.
+	 */
 	private void setPlayerOneCaptureCounter(String text) {
 		this.playerOneCaptured.setText(text + Integer.toString(this.playerOneCaptureCounter));
 	}
 	
+	//Sets the layout for the Reserved Button which tells how many pieces of player one is reserved.
 	private JLabel getPlayerOneReserveCounter() {
 		playerOneReserved = new JLabel("RESERVED : " + this.playerOneReserveCounter);
 		playerOneReserved.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -183,10 +220,15 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		return playerOneReserved;
 	}
 	
+	/*
+	 * Updates the value of Reserved Pieces.
+	 * @param text - String to store the number of Reserved pieces for Player One.
+	 */
 	private void setPlayerOneReserveCounter(String text) {
 		this.playerOneReserved.setText(text + Integer.toString(this.playerOneReserveCounter));
 	}
 	
+	//Sets the layout for the Captured button which tells how any pieces of other players are captured by Player Two.
 	private JLabel getPlayerTwoCaptureCounter() {
 		playerTwoCaptured = new JLabel("CAPTURED : " + this.playerTwoCaptureCounter);
 		playerTwoCaptured.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -194,10 +236,15 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		return playerTwoCaptured;
 	}
 	
+	/*
+	 * Updates the value of the Captured Pieces by Player One.
+	 * @param text - String to store the number of Captured pieces by Player Two.
+	 */
 	private void setPlayerTwoCaptureCounter(String text) {
 		this.playerTwoCaptured.setText(text + Integer.toString(this.playerTwoCaptureCounter));
 	}
 	
+	//Sets the layout for the Reserved Button which tells how many pieces of player Two is reserved.
 	private JLabel getPlayerTwoReserveCounter() {
 		playerTwoReserved = new JLabel("RESERVED : " + this.playerTwoReserveCounter);
 		playerTwoReserved.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -205,10 +252,15 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		return playerTwoReserved;
 	}
 	
+	/*
+	 * Updates the value of Reserved Pieces.
+	 * @param text - String to store the number of Reserved pieces for Player Two.
+	 */
 	private void setPlayerTwoReserveCounter(String text) {
 		this.playerTwoReserved.setText(text + Integer.toString(this.playerTwoReserveCounter));
 	}
 	
+	//Sets the layout for the Captured button which tells how any pieces of other players are captured by Player Three.
 	private JLabel getPlayerThreeCaptureCounter() {
 		playerThreeCaptured = new JLabel("CAPTURED : " + this.playerThreeCaptureCounter);
 		playerThreeCaptured.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -216,10 +268,15 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		return playerThreeCaptured;
 	}
 	
+	/*
+	 * Updates the value of the Captured Pieces by Player Three.
+	 * @param text - String to store the number of Reserved pieces for Player Three.
+	 */
 	private void setPlayerThreeCaptureCounter(String text) {
 		this.playerThreeCaptured.setText(text + Integer.toString(this.playerThreeCaptureCounter));
 	}
 	
+	//Sets the layout for the Reserved Button which tells how many pieces of player Three is reserved.
 	private JLabel getPlayerThreeReserveCounter() {
 		playerThreeReserved = new JLabel("RESERVED : " + this.playerThreeReserveCounter);
 		playerThreeReserved.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -227,10 +284,15 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		return playerThreeReserved;
 	}
 	
+	/*
+	 * Updates the value of Reserved Pieces.
+	 * @param text - String to store the number of Reserved pieces for Player Three.
+	 */
 	private void setPlayerThreeReserveCounter(String text) {
 		this.playerThreeReserved.setText(text + Integer.toString(this.playerThreeReserveCounter));
 	}
 	
+	//Sets the layout for the Captured button which tells how any pieces of other players are captured by Player Four.
 	private JLabel getPlayerFourCaptureCounter() {
 		playerFourCaptured = new JLabel("CAPTURED : " + this.playerFourCaptureCounter);
 		playerFourCaptured.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -238,10 +300,15 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		return playerFourCaptured;
 	}
 	
+	/*
+	 * Updates the value of the Captured Pieces by Player Four.
+	 * @param text - String to store the number of Reserved pieces for Player Four.
+	 */
 	private void setPlayerFourCaptureCounter(String text) {
 		this.playerFourCaptured.setText(text + Integer.toString(this.playerFourCaptureCounter));
 	}
 	
+	//Sets the layout for the Reserved Button which tells how many pieces of player Four is reserved.
 	private JLabel getPlayerFourReserveCounter() {
 		playerFourReserved = new JLabel("RESERVED : " + this.playerFourReserveCounter);
 		playerFourReserved.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -249,10 +316,15 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		return playerFourReserved;
 	}
 	
+	/*
+	 * Updates the value of Reserved Pieces.
+	 * @param text - String to store the number of Reserved pieces for Player Four.
+	 */
 	private void setPlayerFourReserveCounter(String text) {
 		this.playerFourReserved.setText(text + Integer.toString(this.playerFourReserveCounter));
 	}
 	
+	//Sets the layout for Player one panel.
 	public panelLayout getPlayerOnePanel() {
 		playerOnePanel =new panelLayout(0,0);
 		playerOnePanel.setLayout(new BoxLayout(playerOnePanel, BoxLayout.Y_AXIS));
@@ -277,6 +349,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		
 		return playerOnePanel;
 	}
+	
+	//Sets the layout for Player Two panel.
 	public panelLayout getPlayerTwoPanel() {
 		playerTwoPanel =new panelLayout(0,1);
 		playerTwoPanel.setLayout(new BoxLayout(playerTwoPanel, BoxLayout.Y_AXIS));
@@ -297,6 +371,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	
 		return playerTwoPanel;
 	}
+	
+	//Sets the layout for Player Three panel.
 	public panelLayout getPlayerThreePanel() {
 		playerThreePanel =new panelLayout(0,6);
 		playerThreePanel.setLayout(new BoxLayout(playerThreePanel, BoxLayout.Y_AXIS));
@@ -318,6 +394,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		
 		return playerThreePanel;
 	}
+	
+	//Sets the layout for Player Four panel.
 	public panelLayout getPlayerFourPanel() {
 		playerFourPanel =new panelLayout(0,7);
 		playerFourPanel.setLayout(new BoxLayout(playerFourPanel, BoxLayout.Y_AXIS));
@@ -340,6 +418,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	}
 	
 	
+	//Setup the game board using four different coloured pieces.
 	public void setPiecesOnBoard() {
 		super.panelArray[0][2].setBackground(Color.BLUE);
 		super.panelArray[0][3].setBackground(Color.BLUE);
@@ -461,6 +540,13 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		
 	}
 	
+	
+	/*
+	 * This private method checks if the move made by the player is valid or not,
+	 * if not then opens a dialog box asking the player to make a valid move.
+	 * @param selected2 - Object to store the co-ordinates of the selected piece.
+	 * @param lengthofTheStack - Integer to store the number of pieces in a stack.
+	 */
 	private boolean checkValidMove(Object selected2, int lengthOfTheStack) {
 		// Calculating the distance for the xCoordinate
 		int xCordinateDistance = ((panelLayout) selected2).getXCoordinate() - ((panelLayout) selected).getXCoordinate();
@@ -483,6 +569,13 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		
 	}
 	
+	
+	/*
+	 * This method returns the distance between initial position of the piece
+	 * and the final position of the piece when a mob=ve is played.
+	 * @param selected2 - Object to store the co-ordinates of the selected piece.
+	 * @param lengthoftheStack - Integer to store the number of pieces in a stack.
+	 */
 	private int getDistanceBetweenMove(Object selected2, int lengthOfTheStack) {
 		// Calculating the distance for the xCoordinate
 				int xCordinateDistance = ((panelLayout) selected2).getXCoordinate() - ((panelLayout) selected).getXCoordinate();
@@ -494,6 +587,13 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 				return distanceBetweenBtn;
 	}
 	
+	
+	/*
+	 * Checks if the piece that is captured is of the player or other players,
+	 * then it adds the piece to the reserved pile or captured pile respectively.
+	 * @param buttonXCoordinate - Integer to store the x-coordinate of the selected button.
+	 * @param buttonYCoordinate - Integer to store the y-coordinate of the selected button.
+	 */
 	private void checkCapturedPiece(int buttonXCoordinate, int buttonYCoordinate ) {
 		int stackLength =((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().size();
 		
@@ -576,6 +676,12 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		
 	}
 
+	/*
+	 * Moves the plie to one piece distance with a valid move
+	 * and updates the number of pieces in each pile.
+	 * @param selected - Object to store the co-ordinates of the initial position of the selected piece.
+	 * @param selected2 - object to store the Co-ordinates of the final position of the selected piece.
+	 */
 	public void moveOnePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 1;
 		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
@@ -585,6 +691,13 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
             
         }
 	}
+	
+	/*
+	 * Moves the pile  to two piece distance with a valid move
+	 * and updates the number of pieces in each pile.
+	 * @param selected - Object to store the co-ordinates of the initial position of the selected piece.
+	 * @param selected2 - object to store the Co-ordinates of the final position of the selected piece.
+	 */
 	public void moveTwoPiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 2;
         int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
@@ -617,6 +730,13 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
             }
     	}
 	}
+	
+	/*
+	 * Moves the pile  to three piece distance with a valid move
+	 * and updates the number of pieces in each pile.
+	 * @param selected - Object to store the co-ordinates of the initial position of the selected piece.
+	 * @param selected2 - object to store the Co-ordinates of the final position of the selected piece.
+	 */
 	public void moveThreePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
 		
         int moveDistance = 3;
@@ -643,6 +763,13 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
             }
     	}
 	}
+	
+	/*
+	 * Moves the pile  to four piece distance with a valid move
+	 * and updates the number of pieces in each pile.
+	 * @param selected - Object to store the co-ordinates of the initial position of the selected piece.
+	 * @param selected2 - object to store the Co-ordinates of the final position of the selected piece.
+	 */
 	public void moveFourPiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 4;
         int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
@@ -661,6 +788,13 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
             }
     	}
 	}
+	
+	/*
+	 * Moves the pile  to five piece distance with a valid move
+	 * and updates the number of pieces in each pile.
+	 * @param selected - Object to store the co-ordinates of the initial position of the selected piece.
+	 * @param selected2 - object to store the Co-ordinates of the final position of the selected piece.
+	 */
 	public void moveFivePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
 		
         int moveDistance = 5;
@@ -672,6 +806,9 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
         }
 	}
 	
+	/*
+	 * Highlights the pieces selected by the player during their turn.
+	 */
 	private void setHighlight(){
 		if (selected == null) {
 			return;
@@ -695,6 +832,10 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 			
 		}
 	}
+	
+	/*
+	 * Removes the higlight from the the pieces selected by the player during their turn.
+	 */
 	private void removeHighlight(){
 		if (selected == null) {
 			return;
@@ -715,6 +856,11 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
             }
 		}
 	
+	/*
+	 * Implements the funtioning of the Easy AI Difficulty level . 
+	 * Once the turn of the human players is done, the AI players 
+	 * take their turn. 
+	 */
 	private void easyAI() {
 		if(playerTwoReserveCounter>0 && currentTurn == 2) {
 			int x=0;
@@ -948,6 +1094,10 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		}
 	 			
 			}
+	
+	/*
+	 *Implements the funtioning of the Hard AI Difficulty level . 
+	 */
 	private void hardAI() {
 		boolean check = false;
 		int x=0;
@@ -1282,7 +1432,13 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		}
 	}
 	
-	
+	/*
+	 * Sets the colour and style of the text to display the pieces in a pile on the pieces.
+	 * @param firstButtonXCoordinate - Integer to store x co-ordinate of the first Button selected.
+	 * @param firstButtonYCoordinate - Integer to store y co-ordinate of the first Button selected.
+	 * @param secondButtonXCoordinate - Integer to store x co-ordinate of the second Button selected.
+	 * @param secondButtonYCoordinate - Integer to store y co-ordinate of the second Button selected.
+	 */
 	private void setStackText(int firstButtonXCoordinate, int firstButtonYCoordinate,int secondButtonXCoordinate ,int secondButtonYCoordinate ) {
 		String textFirstButton = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().toString();
     	String textSecondButton = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
@@ -1317,6 +1473,11 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		//To close the pop for the game
 	}
 	
+	
+	/*
+	 * Checks at each turn, if the players have any of their pieces left to make a move.
+	 * @param currentTurn - Integer to store the number corresponding to current turn's player.
+	 */
 	public void checkGameWinner(int currentTurn) {
 		
 		this.currentTurn=currentTurn;
@@ -1444,6 +1605,16 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		}
 		selected=null;
 	}
+	
+	/*
+	 * Enables Player One to use the reserved piece/s again in the game.
+	 * Checks if there are any more possibles moves.If not,declares a winner.
+	 * @param secondButtonXCoordinate - Integer to store the x-co-ordinate of the selected position 
+	 *                                  to move the reserved piece to.
+	 *                                  
+	 * @param secondButtonYCoordinate - Integer to store the y-co-ordinate of the selected position 
+	 *                                  to move the reserved piece to.
+	 */
 	private void playFromReservePlayerOne(int secondButtonXCoordinate,int secondButtonYCoordinate) {
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("B");
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.blue);
@@ -1480,6 +1651,16 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		selected = null;
 	}
 	
+	
+	/*
+	 * Enables Player Two to use the reserved piece/s again in the game. 
+	 * Checks if there are any more possibles moves.If not,declares a winner.
+	 * @param secondButtonXCoordinate - Integer to store the x-co-ordinate of the selected position 
+	 *                                  to move the reserved piece to.
+	 *                                  
+	 * @param secondButtonYCoordinate - Integer to store the y-co-ordinate of the selected position 
+	 *                                  to move the reserved piece to.
+	 */
 	private void playFromReservePlayerTwo(int secondButtonXCoordinate,int secondButtonYCoordinate) {
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("R");
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.red);
@@ -1516,6 +1697,16 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		selected = null;
 	} 
 
+	
+	/*
+	 * Enables Player Three to use the reserved piece/s again in the game. 
+	 * Checks if there are any more possibles moves.If not,declares a winner.
+	 * @param secondButtonXCoordinate - Integer to store the x-co-ordinate of the selected position 
+	 *                                  to move the reserved piece to.
+	 *                                  
+	 * @param secondButtonYCoordinate - Integer to store the y-co-ordinate of the selected position 
+	 *                                  to move the reserved piece to.
+	 */
 	private void playFromReservePlayerThree(int secondButtonXCoordinate,int secondButtonYCoordinate) {
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("G");
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.green);
@@ -1553,6 +1744,16 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		selected = null;
 	}
 
+	
+	/*
+	 * Enables Player Four to use the reserved piece/s again in the game. 
+	 * Checks if there are any more possibles moves.If not,declares a winner.
+	 * @param secondButtonXCoordinate - Integer to store the x-co-ordinate of the selected position 
+	 *                                  to move the reserved piece to.
+	 *                                  
+	 * @param secondButtonYCoordinate - Integer to store the y-co-ordinate of the selected position 
+	 *                                  to move the reserved piece to.
+	 */
 	private void playFromReservePlayerFour(int secondButtonXCoordinate,int secondButtonYCoordinate) {
 		
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("Y");
@@ -1591,6 +1792,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	}
 	
 	
+	//ActionListeners to respond to the UserInput.
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
 		

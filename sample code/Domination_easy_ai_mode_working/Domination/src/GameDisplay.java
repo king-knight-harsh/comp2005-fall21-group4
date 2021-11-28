@@ -1,3 +1,9 @@
+/*The main window of the GUI
+ * Extends JFrame - we can add our own components
+ * Implements ActionListener,MouseMotionListener and MouseListener
+ * in order to handle user Input
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -18,7 +24,8 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 	private ImageIcon gameIcon, newGameIcon, loadIcon, saveIcon, exitIcon,ruleBookIcon, normalColorPaletteIcon, colorBlindPaletteIcon, botIcon, welcomeIcon;	
 	private Dimension displayDimension;
 	
-
+ 
+	//Constructor with public Visibility
 	public GameDisplay(){
 		
 		this.setLayout();//Initiating the initial view of the game
@@ -28,11 +35,12 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		
 	}	
 	
+	//opens a dialog box with information on how to get started with the game.
 	public void getPopUp() {
 		JOptionPane.showMessageDialog(null,"CLICK ON ACTION'S TO BEGIN ","WELCOME TO GAME ",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
 	}
 	
-	
+	//Sets the layout of the game.
 	public void setLayout() {
 		
  		
@@ -65,6 +73,8 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		return panelArray;
 	}
 	
+	
+	//Sets the layout for the middle panel of the JFrame and add components to it.
 	public JPanel getMiddlePanel() {
 		
 		middlePanel =new JPanel();
@@ -92,7 +102,7 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 	
 	
 	
-	
+	//Sets the pieces (buttons) at proper position in the game. 
 	public void setButton() {
 		for (int row=0; row<8;row++){
 			for(int column=0; column<8;column++) {
@@ -107,6 +117,7 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		
 	}
 	
+	//Disables the buttons that are not required.
 	private void disableButton() {
 		
 		panelArray[0][0].setVisible(false);
@@ -130,6 +141,10 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		
 	}
 	
+	/*Creates a Menu Bar and adds Mutliple Menu items with Action Listener to it, so that certain
+	 * Actions are performed upon clicking each Menu item. Also, adds the shortcut keys to access 
+	 * Menu Items Without using the Mouse.
+	 */
 	public void setMenuBar(){
 		menuBar = new JMenuBar();
 		
@@ -189,62 +204,82 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		
 	}
 	
+	//Sets the dimensions correctly so that the GUI is always at the centre.
 	private void setDisplayToCenter() {
 		displayDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(displayDimension.width/2-this.getSize().width/2, displayDimension.height/2-this.getSize().height/2);
 	}
 	
+	//Gets the image for the Board game.
 	public ImageIcon getGameIcon() {
 		gameIcon = new ImageIcon(getClass().getResource(("images/board.png")));
 		return gameIcon;
 	}
 	
+	//Gets the image to be placed as an icon in front "New Game" Menu Item.
 	public ImageIcon getNewGameIcon() {
 		newGameIcon = new ImageIcon(getClass().getResource(("images/new.png")));
 		return newGameIcon;
 	}
 	
+	//Gets the image to be placed as an icon in front of the "Load Game" Menu Item.
 	public ImageIcon getLoadIcon() {
 		loadIcon = new ImageIcon(getClass().getResource("images/load.png"));
 		return loadIcon;
 	}
 	
+	
+	//Gets the image to be placed as an icon in the Dialog-box.
 	public ImageIcon getWelcomeIcon() {
 		welcomeIcon = new ImageIcon(getClass().getResource("images/namaste.png"));
 		return welcomeIcon;
 	}
 	
+	//Gets the image to be placed as an icon in front of the "Save Game" Menu item.
 	public ImageIcon getSaveIcon() {
 		saveIcon = new ImageIcon(getClass().getResource("images/save.png"));
 		return saveIcon;
 	}
 	
+	
+	//Gets the image to be placed as an icon in front of the "Exit" Menu item.
 	public ImageIcon getExitIcon() {
 		exitIcon = new ImageIcon(getClass().getResource("images/exit.png"));
 		return exitIcon;
 	}
 	
+	/*Gets the image to be placed as an icon on the dialogbox that 
+	 * Asks the user if they want Normal Mode or ColorBlind Mode
+	 */
 	public ImageIcon getNormalColorPaletteIcon() {
 		normalColorPaletteIcon = new ImageIcon(getClass().getResource("images/normalPalette.png"));
 		return normalColorPaletteIcon;
 	}
 	
+	/*Gets the image to be placed as an icon on the selecting
+	 * Colour Mode Dialog Box.
+	 */
 	public ImageIcon getColorBlindPaletteIcon() {
 		colorBlindPaletteIcon = new ImageIcon(getClass().getResource("images/colorBlindPalette.png"));
 		return colorBlindPaletteIcon;
 	}
 	
+	//Gets the image to be placed as an icon in front of the "Rulebook" Menu Item.
 	public ImageIcon getRuleBookIcon() {
 		ruleBookIcon = new ImageIcon(getClass().getResource("images/book.png"));
 		return ruleBookIcon;
 	}
 	
+	/*Gets the image to be placed as  an icon
+	 * on the selecting AI difficulty level dialog-box.
+	 */
 	public ImageIcon getBotIcon() {
 		botIcon = new ImageIcon(getClass().getResource("images/robot.png"));
 		return botIcon;
 	}
 	
-
+    
+	//ActionListener for when the Menu items are clicked.
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
 		// TODO Auto-generated method stub
