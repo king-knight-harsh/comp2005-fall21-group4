@@ -28,7 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class MainGameNormalMode extends GameDisplay implements ActionListener{
+public class MainGameColorBlindModeTwo extends GameDisplay implements ActionListener{
 	
 	private JLabel informationLabel;
 	private int numberOfHumanPlayers;	
@@ -72,7 +72,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	 * @param colorMode - Integer that stores the Colour Mode selected by the User. (i.e, "Normal" or "ColorBlind")
 	 */
 	
-	MainGameNormalMode(int numberOfHumanPlayers, String player1,String player2,String player3,String player4, int botDifficultyLevel, int colorMode){
+	MainGameColorBlindModeTwo(int numberOfHumanPlayers, String player1,String player2,String player3,String player4, int botDifficultyLevel, int colorMode){
 		this.numberOfHumanPlayers = numberOfHumanPlayers;
 		
 		if (player1!=null && player1.isEmpty() ==false) {

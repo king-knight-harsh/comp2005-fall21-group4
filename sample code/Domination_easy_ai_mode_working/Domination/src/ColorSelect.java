@@ -97,7 +97,7 @@ public class ColorSelect extends JFrame implements ActionListener{
 		if(selected == this.colorBlindButton) {
 			this.colorMode = 1;
 			this.dispose();	
-			MainGameColorBlindMode mainGameColorBlindMode= new MainGameColorBlindMode(numberOfHumanPlayers,this.playerOneName,this.playerTwoName,this.playerThreeName,this.playerFourName, this.botDifficultyLevel, this.colorMode);
+			//MainGameColorBlindMode mainGameColorBlindMode= new MainGameColorBlindMode(numberOfHumanPlayers,this.playerOneName,this.playerTwoName,this.playerThreeName,this.playerFourName, this.botDifficultyLevel, this.colorMode);
 			 
 		}
 	}
