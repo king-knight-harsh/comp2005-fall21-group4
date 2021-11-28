@@ -631,11 +631,42 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
  	}
         
         
+	public static void createSaveFile() {   
+
+		try {   
+			FileOutputStream saveFile = new FileOutputStream("/save1.ser");   
+			ObjectOutputStream object = new ObjectOutputStream(saveFile);   
+			
+			object.writeObject(this.class);   	
+			object.close();   
+			saveFile.close();   
 	
-		
-		
-		
-		
+		} catch (Exception e) {   
+			System.out.printf("ERROR: FILE FAILED TO SAVE");; 
+			e.printStackTrace();
+		}   
+		return;
+	}
+	
+	public static void loadFile() {
+		GameDisplay NG = null;
+		try {
+		   FileInputStream fileLoad = new FileInputStream("/save1.ser");
+		   ObjectInputStream Load = new ObjectInputStream(fileLoad);
+		   NG = (this) Load.readObject();
+		   Load.close();
+		   fileLoad.close();
+		}
+		catch (IOException i) {
+		   i.printStackTrace();
+		   return;
+		}
+		catch (ClassNotFoundException c) {
+		   System.out.println("No game in progress");
+		   c.printStackTrace();
+		   return;
+		}
+	}
 	
 
 	@Override

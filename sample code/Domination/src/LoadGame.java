@@ -127,7 +127,7 @@ public class LoadGame extends JFrame implements ActionListener {
 		Object selected = aevt.getSource();
 		if(selected == this.slotOne) {
 			this.dispose();
-			this.readFromFile();
+			MainGameNormalMode.readFromFile();
 		}
 		if(selected == this.slotTwo) {
 			this.dispose();

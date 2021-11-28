@@ -113,30 +113,7 @@ public class SaveAndExit extends JFrame implements ActionListener,java.io.Serial
 		displayDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(displayDimension.width/2-this.getSize().width/2, displayDimension.height/2-this.getSize().height/2);
 	}
-	public static void CreateFile() {
-		File txtFile = new File("save/testTxtFile.txt");
-		
-		try {
-			txtFile.createNewFile();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
-	public static void WriteToFile() {
-		File txtFile = new File("save/testTxtFile.txt");
-		
-		try {
-			PrintWriter pw = new PrintWriter(txtFile);
-			pw.println("Hello from the other side!");
-			pw.println("I must have called thousand times");
-			pw.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	
 	
@@ -154,8 +131,7 @@ public class SaveAndExit extends JFrame implements ActionListener,java.io.Serial
 		if(selected == saveAndQuitButton) {
 			this.dispose();
 			
-			//LoadGame savegame = new LoadGame();
-			this.WriteToFile();
+			MainGameNormalMode.WriteToFile();
 		}
 		
 	}

@@ -1351,6 +1351,42 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		selected=null;
 	}
 	
+		public static void createSaveFile() {   
+
+		try {   
+			FileOutputStream saveFile = new FileOutputStream("/save1.ser");   
+			ObjectOutputStream object = new ObjectOutputStream(saveFile);   
+			
+			object.writeObject(this.class);   	
+			object.close();   
+			saveFile.close();   
+	
+		} catch (Exception e) {   
+			System.out.printf("ERROR: FILE FAILED TO SAVE");; 
+			e.printStackTrace();
+		}   
+		return;
+	}
+	
+	public static void loadFile() {
+		GameDisplay NG = null;
+		try {
+		   FileInputStream fileLoad = new FileInputStream("/save1.ser");
+		   ObjectInputStream Load = new ObjectInputStream(fileLoad);
+		   NG = (this) Load.readObject();
+		   Load.close();
+		   fileLoad.close();
+		}
+		catch (IOException i) {
+		   i.printStackTrace();
+		   return;
+		}
+		catch (ClassNotFoundException c) {
+		   System.out.println("No saved game");
+		   c.printStackTrace();
+		   return;
+		}
+	}
 	
 	
 	@Override
@@ -1708,11 +1744,11 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
  		
          else if(selected3 == super.saveGame) {
  			//this.dispose();
- 			SaveAndExit saveAndExit = new SaveAndExit();			
+            createSaveFile();
  		}
  		
          else if(selected3 == super.loadGame) {
- 			LoadGame loadGame = new LoadGame();
+ 			loadFile();
  			}
 		  
          
