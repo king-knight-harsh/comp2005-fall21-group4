@@ -10,12 +10,12 @@ public class SaveGame extends JFrame implements ActionListener,java.io.Serializa
 
 	private Dimension displayDimension;
 	private JLabel informationLabel;
-	private JButton saveAndQuitButton, quitButton, noButton; 
+	private JButton saveButton, noButton; 
 	private ImageIcon saveIcon,optionIcon;
 	
 
 	
-	public SaveAndExit() {
+	public SaveGame() {
 		initialize();
 	}
 	
@@ -31,9 +31,8 @@ public class SaveGame extends JFrame implements ActionListener,java.io.Serializa
 		getContentPane().setBackground(Color.decode("#337def"));
 		
 		getContentPane().add(this.getInformationLabel());
-		getContentPane().add(this.getSaveAndQuitButton());
-		getContentPane().add(this.getQuitButton());
-		getContentPane().add(this.getnoButton());
+		getContentPane().add(this.setYesButton());
+		getContentPane().add(this.setNoButton());
 		
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
@@ -43,8 +42,7 @@ public class SaveGame extends JFrame implements ActionListener,java.io.Serializa
 	
 
 	private JLabel getInformationLabel() {
-		informationLabel = new JLabel("Are you sure you want to save 
-		the currently saved game? The last saved game will be overwritten.");
+		informationLabel = new JLabel("Are you sure you want to save the currently saved game? The last saved game will be overwritten.");
 		informationLabel.setIcon(this.getOptionIcon());
 		informationLabel.setFont(new Font("TimesRoman", Font.BOLD, 56));
 		informationLabel.setBounds(30,40,560,100);

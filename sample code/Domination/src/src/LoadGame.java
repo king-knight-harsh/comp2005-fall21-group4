@@ -42,8 +42,7 @@ public class LoadGame extends JFrame implements ActionListener {
 	}
 	
 	private JLabel setInformationLabel() {
-		informationLabel = new JLabel("Are you sure you want to load 
-		the last saved game? Any unsaved progress will be deleted.");
+		informationLabel = new JLabel("Are you sure you want to load the last saved game? Any unsaved progress will be deleted.");
 		informationLabel.setFont(new Font("TimesRoman", Font.BOLD, 56));
 		informationLabel.setBounds(30,40,560,100);
 		informationLabel.setForeground(Color.decode("#fcc729"));

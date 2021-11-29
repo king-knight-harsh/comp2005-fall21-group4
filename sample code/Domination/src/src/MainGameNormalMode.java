@@ -1357,8 +1357,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 			ObjectOutputStream object = new ObjectOutputStream(saveFile);   
 			
 			object.writeObject(this.class);   	
-			object.close();   
-			saveFile.close();   
+			object.close();
+			saveFile.close();
 	
 		} catch (Exception e) {   
 			System.out.printf("ERROR: FILE FAILED TO SAVE");

@@ -271,7 +271,7 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		
 		if(selected == saveGame) {
 			//this.dispose();
-			SaveAndExit saveGame = new SaveGame();			
+			SaveGame saveGame = new SaveGame();			
 		}
 		
 		if(selected == loadGame) {
