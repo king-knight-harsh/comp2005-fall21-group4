@@ -7,7 +7,7 @@ public class ColorSelect extends JFrame implements ActionListener{
 	private JLabel informationLabel;
 	private int numberOfHumanPlayers;
 	private Dimension displayDimension;
-	private JButton normalModeButton, colorBlindButton;	
+	private JButton normalModeButton, colorBlindButtonOne, colorBlindButtonTwo;	
 	private String playerOneName, playerTwoName, playerThreeName, playerFourName;
 	private ImageIcon ColorModeIcon;
 	private int colorMode;
@@ -26,7 +26,7 @@ public class ColorSelect extends JFrame implements ActionListener{
 	private void setLayout() {	
 		
 		
-		this.setSize(520,300);
+		this.setSize(650,400);
 		this.setLayout(null);
 		this.setDisplayToCenter();
 		this.setIconImage(this.getColorModeIcon().getImage());
@@ -35,7 +35,8 @@ public class ColorSelect extends JFrame implements ActionListener{
 		getContentPane().setBackground(Color.decode("#337def"));
 		getContentPane().add(this.setInformationLabel());
 		getContentPane().add(this.setNormalColorModeButton());
-		getContentPane().add(this.setColorBlindModeButton());
+		getContentPane().add(this.setColorBlindModeButtonOne());
+		getContentPane().add(this.setColorBlindModeButtonTwo());
 				
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
@@ -45,7 +46,7 @@ public class ColorSelect extends JFrame implements ActionListener{
 	
 	private JLabel setInformationLabel() {
 		informationLabel = new JLabel("COLOUR PALETTE",SwingConstants.CENTER);
-		informationLabel.setBounds(55,30,400,100);
+		informationLabel.setBounds(130,30,400,100);
 		informationLabel.setFont(new Font("TimesRoman", Font.BOLD, 32));
 		informationLabel.setForeground(Color.decode("#fcc729"));
 		informationLabel.setBorder(BorderFactory.createLineBorder(Color.decode("#fcc729"), 4));
@@ -66,23 +67,37 @@ public class ColorSelect extends JFrame implements ActionListener{
 	public JButton setNormalColorModeButton() {
 		normalModeButton = new JButton("NORMAL MODE");
 		normalModeButton.setFont(new Font("TimesRoman", Font.BOLD, 24));		
-		normalModeButton.setBounds(20, 180, 230, 50);
+		normalModeButton.setBounds(20, 180, 300, 50);
 		normalModeButton.setBackground(Color.decode("#fcc729"));
 		normalModeButton.setForeground(Color.decode("#337def"));
 		normalModeButton.setFocusable(false);
 		normalModeButton.addActionListener(this);
 		return normalModeButton;		
 	}
-	public JButton setColorBlindModeButton() {
-		colorBlindButton = new JButton("COLOR BLIND");
-		colorBlindButton.setFont(new Font("TimesRoman", Font.BOLD, 24));		
-		colorBlindButton.setBounds(260, 180, 230, 50);
-		colorBlindButton.setBackground(Color.decode("#fcc729"));
-		colorBlindButton.setForeground(Color.decode("#337def"));
-		colorBlindButton.setFocusable(false);
-		colorBlindButton.addActionListener(this);
-		return colorBlindButton;
+	public JButton setColorBlindModeButtonOne() {
+		colorBlindButtonOne = new JButton("RED-GREEN BLIND");
+		colorBlindButtonOne.setFont(new Font("TimesRoman", Font.BOLD, 24));		
+		colorBlindButtonOne.setBounds(330, 180, 300, 50);
+		colorBlindButtonOne.setBackground(Color.decode("#fcc729"));
+		colorBlindButtonOne.setForeground(Color.decode("#337def"));
+		colorBlindButtonOne.setFocusable(false);
+		colorBlindButtonOne.addActionListener(this);
+		return colorBlindButtonOne;
 	}
+	
+	
+	public JButton setColorBlindModeButtonTwo() {
+		colorBlindButtonTwo = new JButton("BLUE-YELLOW BLIND");
+		colorBlindButtonTwo.setFont(new Font("TimesRoman", Font.BOLD, 24));		
+		colorBlindButtonTwo.setBounds(180, 240, 300, 50);
+		colorBlindButtonTwo.setBackground(Color.decode("#fcc729"));
+		colorBlindButtonTwo.setForeground(Color.decode("#337def"));
+		colorBlindButtonTwo.setFocusable(false);
+		colorBlindButtonTwo.addActionListener(this);
+		return colorBlindButtonTwo;
+	}
+	
+	
 
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
@@ -94,10 +109,17 @@ public class ColorSelect extends JFrame implements ActionListener{
 			MainGameNormalMode mainGameNormalMode= new MainGameNormalMode(numberOfHumanPlayers,this.playerOneName,this.playerTwoName,this.playerThreeName,this.playerFourName, this.botDifficultyLevel, this.colorMode);
 		}
 		
-		if(selected == this.colorBlindButton) {
+		if(selected == this.colorBlindButtonOne) {
 			this.colorMode = 1;
 			this.dispose();	
-			//MainGameColorBlindMode mainGameColorBlindMode= new MainGameColorBlindMode(numberOfHumanPlayers,this.playerOneName,this.playerTwoName,this.playerThreeName,this.playerFourName, this.botDifficultyLevel, this.colorMode);
+			MainGameColorBlindModeOne mainGameColorBlindModeOne= new MainGameColorBlindModeOne(numberOfHumanPlayers,this.playerOneName,this.playerTwoName,this.playerThreeName,this.playerFourName, this.botDifficultyLevel, this.colorMode);
+			 
+		}
+		
+		if(selected == this.colorBlindButtonTwo) {
+			this.colorMode = 2;
+			this.dispose();	
+			MainGameColorBlindModeTwo mainGameColorBlindModeOne= new MainGameColorBlindModeTwo(numberOfHumanPlayers,this.playerOneName,this.playerTwoName,this.playerThreeName,this.playerFourName, this.botDifficultyLevel, this.colorMode);
 			 
 		}
 	}

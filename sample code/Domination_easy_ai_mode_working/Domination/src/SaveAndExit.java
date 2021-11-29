@@ -69,7 +69,7 @@ public class SaveAndExit extends JFrame implements ActionListener,java.io.Serial
 	}
 	
 	
-	//Sets the font,style and functionabilty to the "Save and Exit" button.
+	//Sets the font,style and functionality to the "Save and Exit" button.
 	private JButton getSaveAndQuitButton() {
 		saveAndQuitButton = new JButton("Save and Quit");
 		saveAndQuitButton.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -82,7 +82,7 @@ public class SaveAndExit extends JFrame implements ActionListener,java.io.Serial
 		
 	}
 	
-	//Sets the font,style and functionabilty to the "Quit" button.
+	//Sets the font,style and functionality to the "Quit" button.
 	private JButton getQuitButton() {
 		quitButton = new JButton("Quit without Saving");
 		quitButton.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -95,7 +95,7 @@ public class SaveAndExit extends JFrame implements ActionListener,java.io.Serial
 		
 	}
 	
-	//Sets the font,style and functionabilty to the "Back" button.
+	//Sets the font,style and functionality to the "Back" button.
 	private JButton getBackButton() {
 		backButton = new JButton("Back");
 		backButton.setFont(new Font("TimesRoman", Font.BOLD, 16));

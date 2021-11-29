@@ -56,7 +56,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	private JButton deSelectButton;
 	
 	private int playerOneCaptureCounter=0,playerTwoCaptureCounter=0,playerThreeCaptureCounter=0,playerFourCaptureCounter=0;
-	private int playerOneReserveCounter=1,playerTwoReserveCounter=1,playerThreeReserveCounter=0,playerFourReserveCounter=0;
+	private int playerOneReserveCounter=1,playerTwoReserveCounter=1,playerThreeReserveCounter=1,playerFourReserveCounter=0;
 	
 	
 	
@@ -474,6 +474,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		((panelLayout) super.panelArray[3][2]).getStackForPiece().add("Y");
 		((panelLayout) super.panelArray[3][3]).getStackForPiece().add("Y");
 		((panelLayout) super.panelArray[3][4]).getStackForPiece().add("R");
+		((panelLayout) super.panelArray[3][4]).getStackForPiece().add("R");
+		((panelLayout) super.panelArray[3][4]).getStackForPiece().add("R");
 		((panelLayout) super.panelArray[3][5]).getStackForPiece().add("Y");
 		((panelLayout) super.panelArray[3][6]).getStackForPiece().add("R");
 		((panelLayout) super.panelArray[3][7]).getStackForPiece().add("Y");
@@ -538,6 +540,24 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		((panelLayout) super.panelArray[7][4]).getStackForPiece().add("R");
 		((panelLayout) super.panelArray[7][5]).getStackForPiece().add("R");	
 		
+		
+		for (int row=0; row<8;row++) {
+			for(int column=0; column<8;column++) {
+				String textStack = ((panelLayout)super.panelArray[row][column]).getStackForPiece().toString();
+				if (((panelLayout)super.panelArray[row][column]).getBackground()==Color.blue || ((panelLayout)super.panelArray[row][column]).getBackground()==Color.red) {
+					((panelLayout)super.panelArray[row][column]).setText(textStack);
+					((panelLayout)super.panelArray[row][column]).setForeground(Color.white);
+					((panelLayout)super.panelArray[row][column]).setFocusable(false);
+					((panelLayout)super.panelArray[row][column]).setFont(new Font("Arial", Font.BOLD, 12));
+				}
+				else {
+				((panelLayout)super.panelArray[row][column]).setText(textStack);
+				((panelLayout)super.panelArray[row][column]).setForeground(Color.black);
+				((panelLayout)super.panelArray[row][column]).setFocusable(false);
+				((panelLayout)super.panelArray[row][column]).setFont(new Font("Arial", Font.BOLD, 12));
+				}
+			}
+		}
 	}
 	
 	
@@ -685,7 +705,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	public void moveOnePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 1;
 		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
-    		int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size()-1;
+    		int stackSize = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size()-1;
         	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(stackSize);		            	
             ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
             
@@ -700,7 +720,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	 */
 	public void moveTwoPiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 2;
-        int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
+        int stackSize = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size()-1;
     	if(stackSize == 2) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
@@ -740,7 +760,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	public void moveThreePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
 		
         int moveDistance = 3;
-        int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
+        int stackSize = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size()-1;
     	if(stackSize == 3) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
@@ -772,7 +792,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	 */
 	public void moveFourPiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 4;
-        int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
+        int stackSize = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size()-1;
     	if(stackSize == 4) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
@@ -799,7 +819,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		
         int moveDistance = 5;
         for(int stackColor=0;stackColor<moveDistance;stackColor++) {
-    		int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size()-1;
+        	int stackSize = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size()-1;
         	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
             ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
             
@@ -857,7 +877,50 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		}
 	
 	/*
-	 * Implements the funtioning of the Easy AI Difficulty level . 
+	 * Method to implement the color change logic for the pieces
+	 * @param x - Integer x-coordinate of the first selected piece
+	 * @param y - Integer y-coordinate of the first selected piece
+	 * @param x2 - Integer x-coordinate of the second selected piece
+	 * @param y2 - Integer y-coordinate of the second selected piece
+	 */
+	private void botColorChangeLogic(int x, int y, int x2, int y2) {
+		if(pieceColor=="B") {
+        	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.blue);
+        }
+        else if(pieceColor=="R") {
+        	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.red);
+        }
+        else if(pieceColor=="G") {
+        	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.green);
+        }
+        else if(pieceColor=="Y") {
+        	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.yellow);
+        }
+        
+        
+        if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()) {
+        	((panelLayout)super.panelArray[x][y]).setBackground(Color.white);
+        }
+        else if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()==false) {
+        	int newStackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
+        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().get(newStackSize);
+        	if(pieceColor=="B") {
+            	((panelLayout)super.panelArray[x][y]).setBackground(Color.blue);
+            }
+            else if(pieceColor=="R") {
+            	((panelLayout)super.panelArray[x][y]).setBackground(Color.red);
+            }
+            else if(pieceColor=="G") {
+            	((panelLayout)super.panelArray[x][y]).setBackground(Color.green);
+            }
+            else if(pieceColor=="Y") {
+            	((panelLayout)super.panelArray[x][y]).setBackground(Color.yellow);
+            }
+        }
+	}
+	
+	/*
+	 * Implements the functioning of the Easy AI Difficulty level . 
 	 * Once the turn of the human players is done, the AI players 
 	 * take their turn. 
 	 */
@@ -868,11 +931,11 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 			Random randomx;
 			Random randomy; 
 			randomx = new Random();
-			x = randomx.nextInt(1);
+			x = randomx.nextInt(7);
 			randomy = new Random();
-			y = randomy.nextInt(6);
-			
+			y = randomy.nextInt(7);			
 			this.playFromReservePlayerTwo(x, y);
+			this.checkCapturedPiece(x, y);
 		}
 		if(playerThreeReserveCounter>0 && currentTurn == 3) {
 			int x=0;
@@ -880,11 +943,11 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 			Random randomx;
 			Random randomy; 
 			randomx = new Random();
-			x = randomx.nextInt(1);
+			x = randomx.nextInt(7);
 			randomy = new Random();
-			y = randomy.nextInt(6);
-			
+			y = randomy.nextInt(7);			
 			this.playFromReservePlayerThree(x, y);
+			this.checkCapturedPiece(x, y);
 		}
 		else if(playerFourReserveCounter>0 && currentTurn == 4) {
 			int x=0;
@@ -892,11 +955,11 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 			Random randomx;
 			Random randomy; 
 			randomx = new Random();
-			x = randomx.nextInt(1);
+			x = randomx.nextInt(7);
 			randomy = new Random();
-			y = randomy.nextInt(6);
-			
+			y = randomy.nextInt(7);			
 			this.playFromReservePlayerFour(x, y);
+			this.checkCapturedPiece(x, y);
 		}
 		else {
 			boolean check = false;
@@ -974,94 +1037,47 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 			
 			
 			
-			if (x == 0 && y ==1) {
-				x2 = x + 1;
-				y2 = y;	
+			if ((x == 0 && y ==1)|| x == 0) {
+				x2=x+1;
+				y2=y;
+				this.moveOnePiece(x, y, x2, y2);
 			}
-			else if (x == 0 && y ==5) {
-				x2 = x ;
-				y2 = y-1;	
+			else if ((x == 0 && y ==5)||(y == 7)) {
+				x2=x+1;
+				y2=y;
+				this.moveOnePiece(x, y, x2, y2);
 			}
-			else if (x == 1 && y ==1) {
-				x2 = x +1;
-				y2 = y;	
+			else if ((x == 1 && y ==1)||(x == 1 && y ==6)) {
+				x2=x+1;
+				y2=y;
+				this.moveOnePiece(x, y, x2, y2);
 			}
-			else if (x == 1 && y ==6) {
-				x2 = x+1;
-				y2 = y;	
-			}
-			else if (x == 6 && y ==1) {
-				x2 = x -1;
-				y2 = y;	
-			}
-			else if (x == 6 && y ==6) {
-				x2 = x-1;
-				y2 = y;	
-			}
-			else if (x == 0) {
-				x2 = x + 1;
-				y2 = y;
-			}
-			else if (y == 7) {
-				x2 = x;
-				y2 = y-1;				
+			else if ((x == 6 && y ==1) || (x == 6 && y ==6) || x==7 ) {
+				x2=x-1;
+				y2=y2;
+				this.moveOnePiece(x, y, x2, y2);
 			}
 			else if (y == 0) {
 				x2 = x;
-				y2 = y+1;				
-			}
-			else if(x==7) {
-				x2 = x - 1;
-				y2 = y;
+				y2 = y+1;
+				this.moveOnePiece(x, y, x2, y2);
 			}
 			else {
-				x2 = x + 1;
-				y2 = y ;
+				Random randomNumber = new Random();
+				int number=randomNumber.nextInt(1);
+				if(number==0) {
+					x2=x+1;
+					y2=y;
+					this.moveOnePiece(x, y, x2, y2);
+				}
+				else {
+					x2=x;
+					y2=y+1;
+					this.moveOnePiece(x, y, x2, y2);
+				}
 			}
 
-	        int moveDistance = 1;
-			
-	    	int stackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
-	        pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().remove(stackSize);		            	
-	        ((panelLayout)super.panelArray[x2][y2]).getStackForPiece().add(pieceColor);
-	            
-	            
-	            
-	            if(pieceColor=="B") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.blue);
-	            }
-	            else if(pieceColor=="R") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.red);
-	            }
-	            else if(pieceColor=="G") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.green);
-	            }
-	            else if(pieceColor=="Y") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.yellow);
-	            }
-	            
-	            
-	            if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()) {
-	            	((panelLayout)super.panelArray[x][y]).setBackground(Color.white);
-	            }
-	            else if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()==false) {
-	            	int newStackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
-		        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().get(newStackSize);
-		        	if(pieceColor=="B") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.blue);
-		            }
-		            else if(pieceColor=="R") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.red);
-		            }
-		            else if(pieceColor=="G") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.green);
-		            }
-		            else if(pieceColor=="Y") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.yellow);
-		            }
-	            }
-	            
-			
+			this.botColorChangeLogic(x, y, x2, y2);
 			this.checkCapturedPiece(x2, y2);
 			this.setStackText(x, y, x2, y2);
 			
@@ -1087,335 +1103,254 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
         		}
             	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
             }
-			if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 0) {
-				easyAI();
-				
-			}
+			
 		}
 	 			
 			}
 	
 	/*
-	 *Implements the funtioning of the Hard AI Difficulty level . 
+	 *Implements the functioning of the Hard AI Difficulty level . 
 	 */
 	private void hardAI() {
+		System.out.println("inside the hard ai");
 		boolean check = false;
+		int moveSize=0;
 		int x=0;
 		int y=0;
 		int x2=0;
 		int y2=0;
-		Random randomx;
-		Random randomy;
 		
-		while (check == false) {
-			randomx = new Random();
-			x = randomx.nextInt(7);
-			randomy = new Random();
-			y = randomy.nextInt(7);
-	            if (this.currentTurn==2) {
-	            	check = true;
-	            	if (panelArray[x][y].getBackground()!= Color.red) {
-	            		check = false;
-	            	}
-	            }
-	            else if (this.currentTurn ==3 ) {
-	            	check = true;
-	            	if (panelArray[x][y].getBackground()!= Color.green) {
-	            		check = false;
-	            	}
-	            }
-	            else if (this.currentTurn==4) {
-	            	check = true;
-	            	if (panelArray[x][y].getBackground()!= Color.yellow) {
-	            		check = false;
-	            	}
-	            }
-		}
-	
-		if(((panelLayout) super.panelArray[x][y]).getStackForPiece().size()==1){
-			if (x == 0 && y ==1) {
-				x2 = x + 1;
-				y2 = y;	
-			}
-			else if (x == 0 && y ==5) {
-				x2 = x ;
-				y2 = y-1;	
-			}
-			else if (x == 1 && y ==1) {
-				x2 = x +1;
-				y2 = y;	
-			}
-			else if (x == 1 && y ==6) {
-				x2 = x+1;
-				y2 = y;	
-			}
-			else if (x == 6 && y ==1) {
-				x2 = x -1;
-				y2 = y;	
-			}
-			else if (x == 6 && y ==6) {
-				x2 = x-1;
-				y2 = y;	
-			}
-			else if (x == 0) {
-				x2 = x + 1;
-				y2 = y;
-			}
-			else if (y == 7) {
-				x2 = x;
-				y2 = y-1;				
-			}
-			else if (y == 0) {
-				x2 = x;
-				y2 = y+1;				
-			}
-			else if(x==7) {
-				x2 = x - 1;
-				y2 = y;
-			}
-			else {
-				x2 = x + 1;
-				y2 = y ;
-			}
+		
+		if (currentTurn == 2) {
+			
+				int currentStackSize=0;
+        		for (int row=0; row<8;row++){
+					for(int column=0; column<8;column++) {
+						if((Color)super.panelArray[row][column].getBackground() == Color.red && ((panelLayout)super.panelArray[row][column]).getStackForPiece().size()>currentStackSize){
+							moveSize = ((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
+							x=row;
+							y=column;
+							currentStackSize=((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
+						}						
+					}
+        		}
 			
 		}
-		else if(((panelLayout) super.panelArray[x][y]).getStackForPiece().size()==2){
+		
+		else if(currentTurn == 3){
 			
-			if (x == 0 && y ==1) {
-				x2 = x + 2;
-				y2 = y;	
-			}
-			else if (x == 0 && y ==5) {
-				x2 = x ;
-				y2 = y-2;	
-			}
-			else if (x == 1 && y ==1) {
-				x2 = x +2;
-				y2 = y;	
-			}
-			else if (x == 1 && y ==6) {
-				x2 = x+2;
-				y2 = y;	
-			}
-			else if (x == 6 && y ==1) {
-				x2 = x -2;
-				y2 = y;	
-			}
-			else if (x == 6 && y ==6) {
-				x2 = x-2;
-				y2 = y;	
-			}
-			else if (x == 0) {
-				x2 = x + 2;
-				y2 = y;
-			}
-			else if (y == 7) {
-				x2 = x;
-				y2 = y-2;				
-			}
-			else if (y == 0) {
-				x2 = x;
-				y2 = y+2;				
-			}
-			else if(x==7) {
-				x2 = x - 2;
-				y2 = y;
-			}
-			else {
-				x2 = x + 1;
-				y2 = y + 1;
-			}
-		}
-		else if(((panelLayout) super.panelArray[x][y]).getStackForPiece().size()==3){
+				int currentStackSize=0;
+        		for (int row=0; row<8;row++){
+					for(int column=0; column<8;column++) {
+						if((Color)super.panelArray[row][column].getBackground() == Color.green && ((panelLayout)super.panelArray[row][column]).getStackForPiece().size()>currentStackSize){	
+							moveSize = ((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
+							x=row;
+							y=column;
+							currentStackSize=((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
+						}						
+					}
+        		}
 			
-			if (x == 0 && y ==1) {
-				x2 = x + 3;
-				y2 = y;	
-			}
-			else if (x == 0 && y ==5) {
-				x2 = x ;
-				y2 = y-3;	
-			}
-			else if (x == 1 && y ==1) {
-				x2 = x +3;
-				y2 = y;	
-			}
-			else if (x == 1 && y ==6) {
-				x2 = x+3;
-				y2 = y;	
-			}
-			else if (x == 6 && y ==1) {
-				x2 = x -3;
-				y2 = y;	
-			}
-			else if (x == 6 && y ==6) {
-				x2 = x-3;
-				y2 = y;	
-			}
-			else if (x == 0) {
-				x2 = x + 3;
-				y2 = y;
-			}
-			else if (y == 7) {
-				x2 = x;
-				y2 = y-3;				
-			}
-			else if (y == 0) {
-				x2 = x;
-				y2 = y+3;				
-			}
-			else if(x==7) {
-				x2 = x - 3;
-				y2 = y;
-			}
-			else {
-				x2 = x + 2;
-				y2 = y + 1;
-			}
 		}
-		else if(((panelLayout) super.panelArray[x][y]).getStackForPiece().size()==4){
-			if (x == 0 && y ==1) {
-				x2 = x + 4;
-				y2 = y;	
-			}
-			else if (x == 0 && y ==5) {
-				x2 = x ;
-				y2 = y-4;	
-			}
-			else if (x == 1 && y ==1) {
-				x2 = x +4;
-				y2 = y;	
-			}
-			else if (x == 1 && y ==6) {
-				x2 = x+4;
-				y2 = y;	
-			}
-			else if (x == 6 && y ==1) {
-				x2 = x -4;
-				y2 = y;	
-			}
-			else if (x == 6 && y ==6) {
-				x2 = x-4;
-				y2 = y;	
-			}
-			else if (x == 0) {
-				x2 = x + 4;
-				y2 = y;
-			}
-			else if (y == 7) {
-				x2 = x;
-				y2 = y-4;				
-			}
-			else if (y == 0) {
-				x2 = x;
-				y2 = y+4;				
-			}
-			else if(x==7) {
-				x2 = x - 4;
-				y2 = y;
-			}
-			else {
-				x2 = x + 2;
-				y2 = y +2;
-			}
+		else if (currentTurn==4){
+			
+				int currentStackSize=0;
+        		for (int row=0; row<8;row++){
+					for(int column=0; column<8;column++) {
+						if((Color)super.panelArray[row][column].getBackground() == Color.yellow && ((panelLayout)super.panelArray[row][column]).getStackForPiece().size()>currentStackSize){
+							moveSize = ((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
+							x=row;
+							y=column;
+							currentStackSize=((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
+						}						
+					}
+        		}
+			
 		}
-		else if(((panelLayout) super.panelArray[x][y]).getStackForPiece().size()==5){
-			if (x == 0 && y ==1) {
-				x2 = x + 5;
-				y2 = y;	
+		
+		
+		System.out.println(x+ " " +y);
+		if (moveSize==1) {
+			if ((x == 0 && y ==1)|| x == 0) {	
+				this.moveOnePiece(x, y, x+1, y);
 			}
-			else if (x == 0 && y ==5) {
-				x2 = x ;
-				y2 = y-5;	
+			else if ((x == 0 && y ==5)||(y == 7)) {
+				this.moveOnePiece(x, y, x, y-1);
 			}
-			else if (x == 1 && y ==1) {
-				x2 = x +5;
-				y2 = y;	
+			else if ((x == 1 && y ==1)||(x == 1 && y ==6)) {
+				this.moveOnePiece(x, y, x+1, y);
 			}
-			else if (x == 1 && y ==6) {
-				x2 = x+5;
-				y2 = y;	
-			}
-			else if (x == 6 && y ==1) {
-				x2 = x -5;
-				y2 = y;	
-			}
-			else if (x == 6 && y ==6) {
-				x2 = x-5;
-				y2 = y;	
-			}
-			else if (x == 0) {
-				x2 = x + 5;
-				y2 = y;
-			}
-			else if (y == 7) {
-				x2 = x;
-				y2 = y-5;				
+			else if ((x == 6 && y ==1) || (x == 6 && y ==6) || x==7 ) {
+				this.moveOnePiece(x, y, x-1, y);
 			}
 			else if (y == 0) {
 				x2 = x;
-				y2 = y+5;				
-			}
-			else if(x==7) {
-				x2 = x - 5;
-				y2 = y;
+				y2 = y+1;
+				this.moveOnePiece(x, y, x, y+1);
 			}
 			else {
-				x2 = x + 2;
-				y2 = y +3;
-				if (x2>=7) {
-					x2=x-2;
+				Random randomNumber = new Random();
+				int number=randomNumber.nextInt(1);
+				if(number==0) {
+					this.moveOnePiece(x, y, x+1, y);
 				}
-				if(y2>=7) {
-					y2=y-3;
+				else {
+					this.moveOnePiece(x, y, x, y+1);
 				}
 			}
 		}
-		 int moveDistance = 1;
-			for(int stackColor=0;stackColor<moveDistance;stackColor++) {
-	    		int stackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
-	        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().remove(stackSize);		            	
-	            ((panelLayout)super.panelArray[x2][y2]).getStackForPiece().add(pieceColor);
-	            
-	            
-	            
-	            if(pieceColor=="B") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.blue);
-	            }
-	            else if(pieceColor=="R") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.red);
-	            }
-	            else if(pieceColor=="G") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.green);
-	            }
-	            else if(pieceColor=="Y") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.yellow);
-	            }
-	            
-	            
-	            if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()) {
-	            	((panelLayout)super.panelArray[x][y]).setBackground(Color.white);
-	            }
-	            else if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()==false) {
-	            	int newStackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
-		        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().get(newStackSize);
-		        	if(pieceColor=="B") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.blue);
-		            }
-		            else if(pieceColor=="R") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.red);
-		            }
-		            else if(pieceColor=="G") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.green);
-		            }
-		            else if(pieceColor=="Y") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.yellow);
-		            }
-	            }
-	            
+		else if(moveSize==2){
+			Random number =new Random();
+			int randomNumber = number.nextInt(4);
+			
+			if (randomNumber==0) {
+				x2=x+1;
+				y2=y+1;
+				this.moveTwoPiece(x, y, x+1, y+1);
 			}
-    
+			
+			else if (randomNumber==1) {
+				x2=x+2;
+				y2=y;
+				this.moveTwoPiece(x, y, x+2, y);
+			}
+			else if (randomNumber==2) {
+				x2=x;
+				y2=y+2;
+				this.moveTwoPiece(x, y, x, y+2);
+			}
+		}
+		else if(moveSize==3) {
+			Random number =new Random();
+			int randomNumber = number.nextInt(4);
+			
+			if (randomNumber==0) {
+				x2=x;
+				y2=y+3;
+				this.moveThreePiece(x, y, x, y+3);
+			}
+			
+			else if (randomNumber==1) {
+				x2=x+3;
+				y2=y;
+				this.moveThreePiece(x, y, x+3, y);
+			}
+			else if (randomNumber==2) {
+				x2=x+2;
+				y2=y+1;
+				this.moveThreePiece(x, y, x+2, y+1);
+			}
+			else if (randomNumber==3) {
+				x2=x+1;
+				y2=y+2;
+				this.moveThreePiece(x, y, x+1, y+2);
+			}
+		}
+		else if(moveSize==4) {
+			Random number =new Random();
+			int randomNumber = number.nextInt(4);
+			
+			if (randomNumber==0) {
+				x2=x;
+				y2=y+4;
+				this.moveFourPiece(x, y, x, y+4);
+			}
+			
+			else if (randomNumber==1) {
+				x2=x+4;
+				y2=y;
+				this.moveFourPiece(x, y, x+4, y);
+				
+			}
+			else if (randomNumber==2) {
+				x2=x+3;
+				y2=y+1;
+				this.moveFourPiece(x, y, x+3, y+1);
+			}
+			else if (randomNumber==3) {
+				x2=x+1;
+				y2=y+3;
+				this.moveFourPiece(x, y, x+1, y+3);
+			}
+			else if (randomNumber==4) {
+				x2=x+2;
+				y2=y+2;
+				this.moveFourPiece(x, y, x+2, y+2);
+			}			
+		}
+		else if(moveSize==5) {
+			Random number =new Random();
+			int randomNumber = number.nextInt(4);
+			
+			if (randomNumber==0) {
+				x2=x;
+				y2=y+5;
+				this.moveFivePiece(x, y, x, y+5);
+			}
+			
+			else if (randomNumber==1) {
+				x2=x+5;
+				y2=y;
+				this.moveFivePiece(x, y, x+5, y);
+				
+			}
+			else if (randomNumber==2) {
+				x2=x+1;
+				y2=y+4;
+				this.moveFivePiece(x, y, x+1, y+4);
+			}
+			else if (randomNumber==3) {
+				x2=x+4;
+				y2=y+1;
+				this.moveFivePiece(x, y, x+4, y+1);
+			}
+			else if (randomNumber==4) {
+				x2=x+2;
+				y2=y+3;
+				this.moveFivePiece(x, y, x+2, y+3);
+			}
+			else if (randomNumber==4) {
+				x2=x+3;
+				y2=y+2;
+				this.moveFivePiece(x, y, x+3, y+2);
+			}
+			
+		}
+		
 		this.checkCapturedPiece(x2, y2);
+		
+		int stackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size();
+        
+        if(stackSize==0) {
+        	panelArray[x2][y2].setBackground(nameOfTheColor); 
+        	panelArray[x][y].setBackground(Color.white);
+        	
+        }
+        else {
+            if (((panelLayout)super.panelArray[x][y]).getStackForPiece().get(stackSize-1)=="B"){
+            	panelArray[x2][y2].setBackground(nameOfTheColor); 
+            	 panelArray[x][y].setBackground(Color.blue);
+            	
+            	 
+            }
+            else if(((panelLayout)super.panelArray[x][y]).getStackForPiece().get(stackSize-1)=="R"){
+            	panelArray[x2][y2].setBackground(nameOfTheColor); 
+            	panelArray[x][y].setBackground(Color.red);
+            	
+            }
+            else if(((panelLayout)super.panelArray[x][y]).getStackForPiece().get(stackSize-1)=="G"){
+            	panelArray[x2][y2].setBackground(nameOfTheColor); 
+            	 panelArray[x][y].setBackground(Color.green);
+            	 
+            }
+            else if (((panelLayout)super.panelArray[x][y]).getStackForPiece().get(stackSize-1)=="Y"){
+            	panelArray[x2][y2].setBackground(nameOfTheColor); 
+            	 panelArray[x][y].setBackground(Color.yellow);
+            	 
+            }
+        }
+    
+		
 		this.setStackText(x, y, x2, y2);
 		
 		if(currentTurn==4) {
@@ -1426,14 +1361,14 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
         	currentTurn++;
         	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
         }
-		if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 1) {
+		if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 2) {
 			hardAI();
 			
 		}
 	}
 	
 	/*
-	 * Sets the colour and style of the text to display the pieces in a pile on the pieces.
+	 * Sets the color and style of the text to display the pieces in a pile on the pieces.
 	 * @param firstButtonXCoordinate - Integer to store x co-ordinate of the first Button selected.
 	 * @param firstButtonYCoordinate - Integer to store y co-ordinate of the first Button selected.
 	 * @param secondButtonXCoordinate - Integer to store x co-ordinate of the second Button selected.
@@ -1766,7 +1701,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		this.playerFourReserveCounter-=1;
 		this.setPlayerFourReserveCounter("RESERVED : ");	            				
 
-        int firstTurn = currentTurn;
+		
+		int firstTurn = currentTurn;
         
         if(currentTurn==4) {
         	currentTurn=1;
@@ -1808,54 +1744,57 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	            if (panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]!=panelArray[7][7] ) {	            
 	            	
 		            if (panelArray[firstButtonXCoordinate][firstButtonYCoordinate]!=panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]) {
-		            	if (selected == this.playerOnePanel) {
-		            			if (this.playerOneReserveCounter>0) {
-		            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
-		            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
-		            				this.playFromReservePlayerOne(secondButtonXCoordinate, secondButtonYCoordinate);
-		            				
-		            			}
-		            			else {
-		            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
-		            				selected = null;
-		            			}
-		            	}
-		            	
-		            	else if (selected == this.playerTwoPanel) {
-	            			if (this.playerTwoReserveCounter>0) {
+		            	if (selected == this.playerOnePanel && selected2!=this.playerTwoPanel && selected2!=this.playerThreePanel && selected2!=this.playerFourPanel) {
+	            			if (this.playerOneReserveCounter>0) {
 	            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
 	            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
-	            				this.playFromReservePlayerTwo(secondButtonXCoordinate, secondButtonYCoordinate);
+	            				this.playFromReservePlayerOne(secondButtonXCoordinate, secondButtonYCoordinate);
+	            				this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
+	            				
 	            			}
 	            			else {
 	            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
 	            				selected = null;
 	            			}
-		            	}
-		            	
-		            	else if (selected == this.playerThreePanel) {
-	            			if (this.playerThreeReserveCounter>0) {
-	            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
-	            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
-	            				this.playFromReservePlayerThree(secondButtonXCoordinate, secondButtonYCoordinate);
-	            			}
-	            			else {
-	            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
-	            				selected = null;
-	            			}
-		            	}
-		            	
-		            	else if (selected == this.playerFourPanel) {
-	            			if (this.playerFourReserveCounter>0) {
-	            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
-	            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
-	            				this.playFromReservePlayerFour(secondButtonXCoordinate, secondButtonYCoordinate);
-	            			}
-	            			else {
-	            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
-	            				selected = null;
-	            			}
-		            	}
+	            	}
+	            	
+	            	else if (selected == this.playerTwoPanel && selected2!=this.playerOnePanel && selected2!=this.playerThreePanel && selected2!=this.playerFourPanel) {
+            			if (this.playerTwoReserveCounter>0) {
+            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
+            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
+            				this.playFromReservePlayerTwo(secondButtonXCoordinate, secondButtonYCoordinate);
+            				this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
+            			}
+            			else {
+            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
+            				selected = null;
+            			}
+	            	}
+	            	
+	            	else if (selected == this.playerThreePanel && selected2!=this.playerTwoPanel && selected2!=this.playerOnePanel && selected2!=this.playerFourPanel) {
+            			if (this.playerThreeReserveCounter>0) {
+            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
+            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
+            				this.playFromReservePlayerThree(secondButtonXCoordinate, secondButtonYCoordinate);
+            				this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
+            			}
+            			else {
+            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
+            				selected = null;
+            			}
+	            	}
+	            	
+	            	else if (selected == this.playerFourPanel && selected2!=this.playerTwoPanel && selected2!=this.playerThreePanel && selected2!=this.playerOnePanel) {
+            			if (this.playerFourReserveCounter>0) {
+            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
+            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
+            				this.playFromReservePlayerFour(secondButtonXCoordinate, secondButtonYCoordinate);
+            			}
+            			else {
+            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
+            				selected = null;
+            			}
+	            	}
 		            	
 		            	else if(this.checkValidMove(selected2,((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size())==true) {
 		            		

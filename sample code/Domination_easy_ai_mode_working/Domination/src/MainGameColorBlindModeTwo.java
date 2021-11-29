@@ -28,6 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+
 public class MainGameColorBlindModeTwo extends GameDisplay implements ActionListener{
 	
 	private JLabel informationLabel;
@@ -54,6 +55,8 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	private Object selected =null;
 	private String pieceColor;
 	private JButton deSelectButton;
+	private Color colorOne,colorTwo,colorThree,colorFour;
+	
 	
 	private int playerOneCaptureCounter=0,playerTwoCaptureCounter=0,playerThreeCaptureCounter=0,playerFourCaptureCounter=0;
 	private int playerOneReserveCounter=1,playerTwoReserveCounter=1,playerThreeReserveCounter=0,playerFourReserveCounter=0;
@@ -69,12 +72,15 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	 * @param player3 - String that stores the name of the third player.
 	 * @param player4 - String that stores the name of the fourth player.
 	 * @param botDifficultyLevel - Integer that stores the AI Difficulty level(i.e, "EASY" or "HARD") slected by the user.
-	 * @param colorMode - Integer that stores the Colour Mode selected by the User. (i.e, "Normal" or "ColorBlind")
+	 * @param colorMode - Integer that stores the Color Mode selected by the User. (i.e, "Normal" or "ColorBlind")
 	 */
 	
 	MainGameColorBlindModeTwo(int numberOfHumanPlayers, String player1,String player2,String player3,String player4, int botDifficultyLevel, int colorMode){
 		this.numberOfHumanPlayers = numberOfHumanPlayers;
-		
+		this.colorOne = new Color(19,165,198);
+		this.colorTwo = new Color(181,95,122);
+		this.colorThree = new Color(254,41,107);
+		this.colorFour = new Color(251,170,189);
 		if (player1!=null && player1.isEmpty() ==false) {
 			this.playerOneName=player1.toUpperCase();
 		}
@@ -180,7 +186,7 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	}
 	
 	/*
-	 * Sets the dimensions, co-ordinates and other properties for the "Unclick" button.
+	 * Sets the dimensions, coordinates and other properties for the "Unclick" button.
 	 * Uses ActionListener so that the an action is performed when user clicks the button.
 	 */
 	private JButton getDeSelectButton() {
@@ -188,8 +194,9 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 		deSelectButton.setText("UNCLICK");
 		deSelectButton.setFont(new Font("TimesRoman", Font.BOLD, 16));
 		deSelectButton.setPreferredSize(new Dimension(150,50));
-		deSelectButton.setBackground(Color.orange);
+		deSelectButton.setBackground(Color.white);
 		deSelectButton.setForeground(Color.BLACK);
+		deSelectButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 		deSelectButton.setFocusable(false);
 		deSelectButton.addActionListener(this);
 		return deSelectButton; 
@@ -344,7 +351,7 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 		playerOnePanel.add(playerOneInfo);
 		playerOnePanel.add(this.getPlayerOneCaptureCounter());
 		playerOnePanel.add(this.getPlayerOneReserveCounter());
-		playerOnePanel.setBorder(BorderFactory.createLineBorder(Color.blue, 3));
+		playerOnePanel.setBorder(BorderFactory.createLineBorder(colorOne, 3));
 		playerOnePanel.addActionListener(this);
 		
 		return playerOnePanel;
@@ -366,7 +373,7 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 		playerTwoPanel.add(playerTwoInfo);
 		playerTwoPanel.add(this.getPlayerTwoCaptureCounter());
 		playerTwoPanel.add(this.getPlayerTwoReserveCounter());
-		playerTwoPanel.setBorder(BorderFactory.createLineBorder(Color.red, 3));
+		playerTwoPanel.setBorder(BorderFactory.createLineBorder(colorTwo, 3));
 		playerTwoPanel.addActionListener(this);
 	
 		return playerTwoPanel;
@@ -389,7 +396,7 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 		playerThreePanel.add(playerThreeInfo);
 		playerThreePanel.add(this.getPlayerThreeCaptureCounter());
 		playerThreePanel.add(this.getPlayerThreeReserveCounter());
-		playerThreePanel.setBorder(BorderFactory.createLineBorder(Color.green, 3));
+		playerThreePanel.setBorder(BorderFactory.createLineBorder(colorThree, 3));
 		playerThreePanel.addActionListener(this);
 		
 		return playerThreePanel;
@@ -411,7 +418,7 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 		playerFourPanel.add(playerFourInfo);
 		playerFourPanel.add(this.getPlayerFourCaptureCounter());
 		playerFourPanel.add(this.getPlayerFourReserveCounter());
-		playerFourPanel.setBorder(BorderFactory.createLineBorder(Color.yellow, 3));
+		playerFourPanel.setBorder(BorderFactory.createLineBorder(colorFour, 3));
 		playerFourPanel.addActionListener(this);
 		
 		return playerFourPanel;
@@ -420,123 +427,134 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	
 	//Setup the game board using four different coloured pieces.
 	public void setPiecesOnBoard() {
-		super.panelArray[0][2].setBackground(Color.BLUE);
-		super.panelArray[0][3].setBackground(Color.BLUE);
-		super.panelArray[0][4].setBackground(Color.red);
-		super.panelArray[0][5].setBackground(Color.yellow);
-		((panelLayout) super.panelArray[0][2]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[0][3]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[0][4]).getStackForPiece().add("R");
-		((panelLayout) super.panelArray[0][5]).getStackForPiece().add("Y");
+		super.panelArray[0][2].setBackground(colorOne);
+		super.panelArray[0][3].setBackground(colorOne);
+		super.panelArray[0][4].setBackground(colorTwo);
+		super.panelArray[0][5].setBackground(colorFour);
+		((panelLayout) super.panelArray[0][2]).getStackForPiece().add("1");
+		((panelLayout) super.panelArray[0][3]).getStackForPiece().add("1");
+		((panelLayout) super.panelArray[0][4]).getStackForPiece().add("2");
+		((panelLayout) super.panelArray[0][5]).getStackForPiece().add("4");
 		
-		super.panelArray[1][1].setBackground(Color.yellow);
-		super.panelArray[1][2].setBackground(Color.yellow);
-		super.panelArray[1][3].setBackground(Color.yellow);
-		super.panelArray[1][4].setBackground(Color.red);
-		super.panelArray[1][5].setBackground(Color.yellow);
-		super.panelArray[1][6].setBackground(Color.red);
-		((panelLayout) super.panelArray[1][1]).getStackForPiece().add("Y");
-		((panelLayout) super.panelArray[1][2]).getStackForPiece().add("Y");
-		((panelLayout) super.panelArray[1][3]).getStackForPiece().add("Y");
-		((panelLayout) super.panelArray[1][4]).getStackForPiece().add("R");
-		((panelLayout) super.panelArray[1][5]).getStackForPiece().add("Y");
-		((panelLayout) super.panelArray[1][6]).getStackForPiece().add("R");
+		super.panelArray[1][1].setBackground(colorFour);
+		super.panelArray[1][2].setBackground(colorFour);
+		super.panelArray[1][3].setBackground(colorFour);
+		super.panelArray[1][4].setBackground(colorTwo);
+		super.panelArray[1][5].setBackground(colorFour);
+		super.panelArray[1][6].setBackground(colorTwo);
+		((panelLayout) super.panelArray[1][1]).getStackForPiece().add("4");
+		((panelLayout) super.panelArray[1][2]).getStackForPiece().add("4");
+		((panelLayout) super.panelArray[1][3]).getStackForPiece().add("4");
+		((panelLayout) super.panelArray[1][4]).getStackForPiece().add("2");
+		((panelLayout) super.panelArray[1][5]).getStackForPiece().add("4");
+		((panelLayout) super.panelArray[1][6]).getStackForPiece().add("2");
 		
-		super.panelArray[2][0].setBackground(Color.BLUE);
-		super.panelArray[2][1].setBackground(Color.BLUE);
-		super.panelArray[2][2].setBackground(Color.BLUE);
-		super.panelArray[2][3].setBackground(Color.BLUE);
-		super.panelArray[2][4].setBackground(Color.red);
-		super.panelArray[2][5].setBackground(Color.yellow);
-		super.panelArray[2][6].setBackground(Color.red);
-		super.panelArray[2][7].setBackground(Color.yellow);
-		((panelLayout) super.panelArray[2][0]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[2][1]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[2][2]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[2][3]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[2][4]).getStackForPiece().add("R");
-		((panelLayout) super.panelArray[2][5]).getStackForPiece().add("Y");
-		((panelLayout) super.panelArray[2][6]).getStackForPiece().add("R");
-		((panelLayout) super.panelArray[2][7]).getStackForPiece().add("Y");
-		
-		
-		
-		super.panelArray[3][0].setBackground(Color.yellow);
-		super.panelArray[3][1].setBackground(Color.yellow);
-		super.panelArray[3][2].setBackground(Color.yellow);
-		super.panelArray[3][3].setBackground(Color.yellow);
-		super.panelArray[3][4].setBackground(Color.red);
-		super.panelArray[3][5].setBackground(Color.yellow);
-		super.panelArray[3][6].setBackground(Color.red);
-		super.panelArray[3][7].setBackground(Color.yellow);
-		((panelLayout) super.panelArray[3][0]).getStackForPiece().add("Y");
-		((panelLayout) super.panelArray[3][1]).getStackForPiece().add("Y");
-		((panelLayout) super.panelArray[3][2]).getStackForPiece().add("Y");
-		((panelLayout) super.panelArray[3][3]).getStackForPiece().add("Y");
-		((panelLayout) super.panelArray[3][4]).getStackForPiece().add("R");
-		((panelLayout) super.panelArray[3][5]).getStackForPiece().add("Y");
-		((panelLayout) super.panelArray[3][6]).getStackForPiece().add("R");
-		((panelLayout) super.panelArray[3][7]).getStackForPiece().add("Y");
-		
-		
-		super.panelArray[4][0].setBackground(Color.green);
-		super.panelArray[4][1].setBackground(Color.BLUE);
-		super.panelArray[4][2].setBackground(Color.green);
-		super.panelArray[4][3].setBackground(Color.BLUE);
-		super.panelArray[4][4].setBackground(Color.green);
-		super.panelArray[4][5].setBackground(Color.green);
-		super.panelArray[4][6].setBackground(Color.green);
-		super.panelArray[4][7].setBackground(Color.green);
-		((panelLayout) super.panelArray[4][0]).getStackForPiece().add("G");
-		((panelLayout) super.panelArray[4][1]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[4][2]).getStackForPiece().add("G");
-		((panelLayout) super.panelArray[4][3]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[4][4]).getStackForPiece().add("G");
-		((panelLayout) super.panelArray[4][5]).getStackForPiece().add("G");
-		((panelLayout) super.panelArray[4][6]).getStackForPiece().add("G");
-		((panelLayout) super.panelArray[4][7]).getStackForPiece().add("G");
-		
-		super.panelArray[5][0].setBackground(Color.green);
-		super.panelArray[5][1].setBackground(Color.BLUE);
-		super.panelArray[5][2].setBackground(Color.green);
-		super.panelArray[5][3].setBackground(Color.BLUE);
-		super.panelArray[5][4].setBackground(Color.red);
-		super.panelArray[5][5].setBackground(Color.red);
-		super.panelArray[5][6].setBackground(Color.red);
-		super.panelArray[5][7].setBackground(Color.red);
-		((panelLayout) super.panelArray[5][0]).getStackForPiece().add("G");
-		((panelLayout) super.panelArray[5][1]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[5][2]).getStackForPiece().add("G");
-		((panelLayout) super.panelArray[5][3]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[5][4]).getStackForPiece().add("R");
-		((panelLayout) super.panelArray[5][5]).getStackForPiece().add("R");
-		((panelLayout) super.panelArray[5][6]).getStackForPiece().add("R");
-		((panelLayout) super.panelArray[5][7]).getStackForPiece().add("R");
-		
-		
-		super.panelArray[6][1].setBackground(Color.BLUE);
-		super.panelArray[6][2].setBackground(Color.green);
-		super.panelArray[6][3].setBackground(Color.BLUE);
-		super.panelArray[6][4].setBackground(Color.green);
-		super.panelArray[6][5].setBackground(Color.green);
-		super.panelArray[6][6].setBackground(Color.green);
-		((panelLayout) super.panelArray[6][1]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[6][2]).getStackForPiece().add("G");
-		((panelLayout) super.panelArray[6][3]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[6][4]).getStackForPiece().add("G");
-		((panelLayout) super.panelArray[6][5]).getStackForPiece().add("G");
-		((panelLayout) super.panelArray[6][6]).getStackForPiece().add("G");
+		super.panelArray[2][0].setBackground(colorOne);
+		super.panelArray[2][1].setBackground(colorOne);
+		super.panelArray[2][2].setBackground(colorOne);
+		super.panelArray[2][3].setBackground(colorOne);
+		super.panelArray[2][4].setBackground(colorTwo);
+		super.panelArray[2][5].setBackground(colorFour);
+		super.panelArray[2][6].setBackground(colorTwo);
+		super.panelArray[2][7].setBackground(colorFour);
+		((panelLayout) super.panelArray[2][0]).getStackForPiece().add("1");
+		((panelLayout) super.panelArray[2][1]).getStackForPiece().add("1");
+		((panelLayout) super.panelArray[2][2]).getStackForPiece().add("1");
+		((panelLayout) super.panelArray[2][3]).getStackForPiece().add("1");
+		((panelLayout) super.panelArray[2][4]).getStackForPiece().add("2");
+		((panelLayout) super.panelArray[2][5]).getStackForPiece().add("4");
+		((panelLayout) super.panelArray[2][6]).getStackForPiece().add("2");
+		((panelLayout) super.panelArray[2][7]).getStackForPiece().add("4");
 		
 		
 		
-		super.panelArray[7][2].setBackground(Color.green);
-		super.panelArray[7][3].setBackground(Color.BLUE);
-		super.panelArray[7][4].setBackground(Color.red);
-		super.panelArray[7][5].setBackground(Color.red);
-		((panelLayout) super.panelArray[7][2]).getStackForPiece().add("G");
-		((panelLayout) super.panelArray[7][3]).getStackForPiece().add("B");
-		((panelLayout) super.panelArray[7][4]).getStackForPiece().add("R");
-		((panelLayout) super.panelArray[7][5]).getStackForPiece().add("R");	
+		super.panelArray[3][0].setBackground(colorFour);
+		super.panelArray[3][1].setBackground(colorFour);
+		super.panelArray[3][2].setBackground(colorFour);
+		super.panelArray[3][3].setBackground(colorFour);
+		super.panelArray[3][4].setBackground(colorTwo);
+		super.panelArray[3][5].setBackground(colorFour);
+		super.panelArray[3][6].setBackground(colorTwo);
+		super.panelArray[3][7].setBackground(colorFour);
+		((panelLayout) super.panelArray[3][0]).getStackForPiece().add("4");
+		((panelLayout) super.panelArray[3][1]).getStackForPiece().add("4");
+		((panelLayout) super.panelArray[3][2]).getStackForPiece().add("4");
+		((panelLayout) super.panelArray[3][3]).getStackForPiece().add("4");
+		((panelLayout) super.panelArray[3][4]).getStackForPiece().add("2");
+		((panelLayout) super.panelArray[3][5]).getStackForPiece().add("4");
+		((panelLayout) super.panelArray[3][6]).getStackForPiece().add("2");
+		((panelLayout) super.panelArray[3][7]).getStackForPiece().add("4");
+		
+		
+		super.panelArray[4][0].setBackground(colorThree);
+		super.panelArray[4][1].setBackground(colorOne);
+		super.panelArray[4][2].setBackground(colorThree);
+		super.panelArray[4][3].setBackground(colorOne);
+		super.panelArray[4][4].setBackground(colorThree);
+		super.panelArray[4][5].setBackground(colorThree);
+		super.panelArray[4][6].setBackground(colorThree);
+		super.panelArray[4][7].setBackground(colorThree);
+		((panelLayout) super.panelArray[4][0]).getStackForPiece().add("3");
+		((panelLayout) super.panelArray[4][1]).getStackForPiece().add("1");
+		((panelLayout) super.panelArray[4][2]).getStackForPiece().add("3");
+		((panelLayout) super.panelArray[4][3]).getStackForPiece().add("1");
+		((panelLayout) super.panelArray[4][4]).getStackForPiece().add("3");
+		((panelLayout) super.panelArray[4][5]).getStackForPiece().add("3");
+		((panelLayout) super.panelArray[4][6]).getStackForPiece().add("3");
+		((panelLayout) super.panelArray[4][7]).getStackForPiece().add("3");
+		
+		super.panelArray[5][0].setBackground(colorThree);
+		super.panelArray[5][1].setBackground(colorOne);
+		super.panelArray[5][2].setBackground(colorThree);
+		super.panelArray[5][3].setBackground(colorOne);
+		super.panelArray[5][4].setBackground(colorTwo);
+		super.panelArray[5][5].setBackground(colorTwo);
+		super.panelArray[5][6].setBackground(colorTwo);
+		super.panelArray[5][7].setBackground(colorTwo);
+		((panelLayout) super.panelArray[5][0]).getStackForPiece().add("3");
+		((panelLayout) super.panelArray[5][1]).getStackForPiece().add("1");
+		((panelLayout) super.panelArray[5][2]).getStackForPiece().add("3");
+		((panelLayout) super.panelArray[5][3]).getStackForPiece().add("1");
+		((panelLayout) super.panelArray[5][4]).getStackForPiece().add("2");
+		((panelLayout) super.panelArray[5][5]).getStackForPiece().add("2");
+		((panelLayout) super.panelArray[5][6]).getStackForPiece().add("2");
+		((panelLayout) super.panelArray[5][7]).getStackForPiece().add("2");
+		
+		
+		super.panelArray[6][1].setBackground(colorOne);
+		super.panelArray[6][2].setBackground(colorThree);
+		super.panelArray[6][3].setBackground(colorOne);
+		super.panelArray[6][4].setBackground(colorThree);
+		super.panelArray[6][5].setBackground(colorThree);
+		super.panelArray[6][6].setBackground(colorThree);
+		((panelLayout) super.panelArray[6][1]).getStackForPiece().add("1");
+		((panelLayout) super.panelArray[6][2]).getStackForPiece().add("3");
+		((panelLayout) super.panelArray[6][3]).getStackForPiece().add("1");
+		((panelLayout) super.panelArray[6][4]).getStackForPiece().add("3");
+		((panelLayout) super.panelArray[6][5]).getStackForPiece().add("3");
+		((panelLayout) super.panelArray[6][6]).getStackForPiece().add("3");
+		
+		
+		
+		super.panelArray[7][2].setBackground(colorThree);
+		super.panelArray[7][3].setBackground(colorOne);
+		super.panelArray[7][4].setBackground(colorTwo);
+		super.panelArray[7][5].setBackground(colorTwo);
+		((panelLayout) super.panelArray[7][2]).getStackForPiece().add("3");
+		((panelLayout) super.panelArray[7][3]).getStackForPiece().add("1");
+		((panelLayout) super.panelArray[7][4]).getStackForPiece().add("2");
+		((panelLayout) super.panelArray[7][5]).getStackForPiece().add("2");	
+		
+		for (int row=0; row<8;row++) {
+			for(int column=0; column<8;column++) {
+				String textStack = ((panelLayout)super.panelArray[row][column]).getStackForPiece().toString();
+				((panelLayout)super.panelArray[row][column]).setText(textStack);
+				((panelLayout)super.panelArray[row][column]).setForeground(Color.white);
+				((panelLayout)super.panelArray[row][column]).setFocusable(false);
+				((panelLayout)super.panelArray[row][column]).setFont(new Font("Arial", Font.BOLD, 12));
+			}
+		}
+		
 		
 	}
 	
@@ -598,11 +616,11 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 		int stackLength =((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().size();
 		
 		if (stackLength>5) {
-				if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="B") {
+				if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="1") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
 						String removedPiece = ((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().remove(0);
-						if (removedPiece=="B") {
+						if (removedPiece=="1") {
 							this.playerOneReserveCounter+=1;
 							counter++;
 						}
@@ -615,11 +633,11 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 					
 					
 				}
-				else if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="R") {
+				else if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="2") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
 						String removedPiece = ((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().remove(0);
-						if (removedPiece=="R") {
+						if (removedPiece=="2") {
 							this.playerTwoReserveCounter+=1;
 							counter++;
 						}
@@ -631,11 +649,11 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 					
 				
 				}
-				else if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="G") {
+				else if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="3") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
 						String removedPiece = ((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().remove(0);
-						if (removedPiece=="G") {
+						if (removedPiece=="3") {
 							this.playerThreeReserveCounter+=1;
 							counter++;
 						}
@@ -647,11 +665,11 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 					
 					
 				}
-				else if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="Y") {
+				else if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="4") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
 						String removedPiece = ((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().remove(0);
-						if (removedPiece=="Y") {
+						if (removedPiece=="4") {
 							this.playerFourReserveCounter+=1;
 							counter++;
 						}
@@ -817,17 +835,17 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 			firstButtonXCoordinate = ((panelLayout) selected).getXCoordinate();
             firstButtonYCoordinate = ((panelLayout) selected).getYCoordinate();
 			nameOfTheColor = panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground();
-			if (nameOfTheColor.equals(Color.red)) {
-				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#FA8072"));
+			if (nameOfTheColor.equals(colorTwo)) {
+				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#FCE3E9"));
 			}
-			else if (nameOfTheColor.equals(Color.blue)) {
-				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#0096FF"));
+			else if (nameOfTheColor.equals(colorOne)) {
+				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#B1D9F0"));
 			}
-			else if (nameOfTheColor.equals(Color.YELLOW)) {
-				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#FFFFA1"));
+			else if (nameOfTheColor.equals(colorFour)) {
+				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#B1D9F0"));
 			}
-			else if (nameOfTheColor.equals(Color.green)) {
-				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#90EE90"));
+			else if (nameOfTheColor.equals(colorThree)) {
+				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#B1D9F0"));
 			}
 			
 		}
@@ -842,22 +860,68 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 		}
 		else {
 			if (this.currentTurn ==1 ) {
-            	panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.blue);
+            	panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(colorOne);
             }
             else if (this.currentTurn==2) {
-            	panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.red);
+            	panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(colorTwo);
             }
             else if (this.currentTurn ==3 ) {
-            	panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.green);
+            	panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(colorThree);
             }
             else {
-            	panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.yellow);
+            	panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(colorFour);
             	}
             }
 		}
 	
+	
 	/*
-	 * Implements the funtioning of the Easy AI Difficulty level . 
+	 * Method to implement the color change logic for the pieces
+	 * @param x - Integer x-coordinate of the first selected piece
+	 * @param y - Integer y-coordinate of the first selected piece
+	 * @param x2 - Integer x-coordinate of the second selected piece
+	 * @param y2 - Integer y-coordinate of the second selected piece
+	 */
+	 
+	private void botColorChangeLogic(int x, int y, int x2, int y2) {
+		if(pieceColor=="B") {
+        	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.blue);
+        }
+        else if(pieceColor=="R") {
+        	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.red);
+        }
+        else if(pieceColor=="G") {
+        	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.green);
+        }
+        else if(pieceColor=="Y") {
+        	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.yellow);
+        }
+        
+        
+        if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()) {
+        	((panelLayout)super.panelArray[x][y]).setBackground(Color.white);
+        }
+        else if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()==false) {
+        	int newStackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
+        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().get(newStackSize);
+        	if(pieceColor=="B") {
+            	((panelLayout)super.panelArray[x][y]).setBackground(Color.blue);
+            }
+            else if(pieceColor=="R") {
+            	((panelLayout)super.panelArray[x][y]).setBackground(Color.red);
+            }
+            else if(pieceColor=="G") {
+            	((panelLayout)super.panelArray[x][y]).setBackground(Color.green);
+            }
+            else if(pieceColor=="Y") {
+            	((panelLayout)super.panelArray[x][y]).setBackground(Color.yellow);
+            }
+        }
+	}
+	
+	
+	/*
+	 * Implements the functioning of the Easy AI Difficulty level . 
 	 * Once the turn of the human players is done, the AI players 
 	 * take their turn. 
 	 */
@@ -868,11 +932,11 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 			Random randomx;
 			Random randomy; 
 			randomx = new Random();
-			x = randomx.nextInt(1);
+			x = randomx.nextInt(7);
 			randomy = new Random();
-			y = randomy.nextInt(6);
-			
+			y = randomy.nextInt(7);			
 			this.playFromReservePlayerTwo(x, y);
+			this.checkCapturedPiece(x, y);
 		}
 		if(playerThreeReserveCounter>0 && currentTurn == 3) {
 			int x=0;
@@ -880,11 +944,11 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 			Random randomx;
 			Random randomy; 
 			randomx = new Random();
-			x = randomx.nextInt(1);
+			x = randomx.nextInt(7);
 			randomy = new Random();
-			y = randomy.nextInt(6);
-			
+			y = randomy.nextInt(7);			
 			this.playFromReservePlayerThree(x, y);
+			this.checkCapturedPiece(x, y);
 		}
 		else if(playerFourReserveCounter>0 && currentTurn == 4) {
 			int x=0;
@@ -892,11 +956,11 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 			Random randomx;
 			Random randomy; 
 			randomx = new Random();
-			x = randomx.nextInt(1);
+			x = randomx.nextInt(7);
 			randomy = new Random();
-			y = randomy.nextInt(6);
-			
+			y = randomy.nextInt(7);			
 			this.playFromReservePlayerFour(x, y);
+			this.checkCapturedPiece(x, y);
 		}
 		else {
 			boolean check = false;
@@ -974,94 +1038,47 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 			
 			
 			
-			if (x == 0 && y ==1) {
-				x2 = x + 1;
-				y2 = y;	
+			if ((x == 0 && y ==1)|| x == 0) {
+				x2=x+1;
+				y2=y;
+				this.moveOnePiece(x, y, x2, y2);
 			}
-			else if (x == 0 && y ==5) {
-				x2 = x ;
-				y2 = y-1;	
+			else if ((x == 0 && y ==5)||(y == 7)) {
+				x2=x+1;
+				y2=y;
+				this.moveOnePiece(x, y, x2, y2);
 			}
-			else if (x == 1 && y ==1) {
-				x2 = x +1;
-				y2 = y;	
+			else if ((x == 1 && y ==1)||(x == 1 && y ==6)) {
+				x2=x+1;
+				y2=y;
+				this.moveOnePiece(x, y, x2, y2);
 			}
-			else if (x == 1 && y ==6) {
-				x2 = x+1;
-				y2 = y;	
-			}
-			else if (x == 6 && y ==1) {
-				x2 = x -1;
-				y2 = y;	
-			}
-			else if (x == 6 && y ==6) {
-				x2 = x-1;
-				y2 = y;	
-			}
-			else if (x == 0) {
-				x2 = x + 1;
-				y2 = y;
-			}
-			else if (y == 7) {
-				x2 = x;
-				y2 = y-1;				
+			else if ((x == 6 && y ==1) || (x == 6 && y ==6) || x==7 ) {
+				x2=x-1;
+				y2=y2;
+				this.moveOnePiece(x, y, x2, y2);
 			}
 			else if (y == 0) {
 				x2 = x;
-				y2 = y+1;				
-			}
-			else if(x==7) {
-				x2 = x - 1;
-				y2 = y;
+				y2 = y+1;
+				this.moveOnePiece(x, y, x2, y2);
 			}
 			else {
-				x2 = x + 1;
-				y2 = y ;
+				Random randomNumber = new Random();
+				int number=randomNumber.nextInt(1);
+				if(number==0) {
+					x2=x+1;
+					y2=y;
+					this.moveOnePiece(x, y, x2, y2);
+				}
+				else {
+					x2=x;
+					y2=y+1;
+					this.moveOnePiece(x, y, x2, y2);
+				}
 			}
 
-	        int moveDistance = 1;
-			
-	    	int stackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
-	        pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().remove(stackSize);		            	
-	        ((panelLayout)super.panelArray[x2][y2]).getStackForPiece().add(pieceColor);
-	            
-	            
-	            
-	            if(pieceColor=="B") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.blue);
-	            }
-	            else if(pieceColor=="R") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.red);
-	            }
-	            else if(pieceColor=="G") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.green);
-	            }
-	            else if(pieceColor=="Y") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.yellow);
-	            }
-	            
-	            
-	            if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()) {
-	            	((panelLayout)super.panelArray[x][y]).setBackground(Color.white);
-	            }
-	            else if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()==false) {
-	            	int newStackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
-		        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().get(newStackSize);
-		        	if(pieceColor=="B") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.blue);
-		            }
-		            else if(pieceColor=="R") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.red);
-		            }
-		            else if(pieceColor=="G") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.green);
-		            }
-		            else if(pieceColor=="Y") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.yellow);
-		            }
-	            }
-	            
-			
+			this.botColorChangeLogic(x, y, x2, y2);
 			this.checkCapturedPiece(x2, y2);
 			this.setStackText(x, y, x2, y2);
 			
@@ -1087,10 +1104,7 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
         		}
             	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
             }
-			if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 0) {
-				easyAI();
-				
-			}
+			
 		}
 	 			
 			}
@@ -1114,19 +1128,19 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 			y = randomy.nextInt(7);
 	            if (this.currentTurn==2) {
 	            	check = true;
-	            	if (panelArray[x][y].getBackground()!= Color.red) {
+	            	if (panelArray[x][y].getBackground()!= colorTwo) {
 	            		check = false;
 	            	}
 	            }
 	            else if (this.currentTurn ==3 ) {
 	            	check = true;
-	            	if (panelArray[x][y].getBackground()!= Color.green) {
+	            	if (panelArray[x][y].getBackground()!= colorThree) {
 	            		check = false;
 	            	}
 	            }
 	            else if (this.currentTurn==4) {
 	            	check = true;
-	            	if (panelArray[x][y].getBackground()!= Color.yellow) {
+	            	if (panelArray[x][y].getBackground()!= colorFour) {
 	            		check = false;
 	            	}
 	            }
@@ -1379,17 +1393,17 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	            
 	            
 	            
-	            if(pieceColor=="B") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.blue);
+	            if(pieceColor=="1") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(colorOne);
 	            }
-	            else if(pieceColor=="R") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.red);
+	            else if(pieceColor=="2") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(colorTwo);
 	            }
-	            else if(pieceColor=="G") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.green);
+	            else if(pieceColor=="3") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(colorThree);
 	            }
-	            else if(pieceColor=="Y") {
-	            	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.yellow);
+	            else if(pieceColor=="4") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(colorFour);
 	            }
 	            
 	            
@@ -1399,17 +1413,17 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	            else if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()==false) {
 	            	int newStackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
 		        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().get(newStackSize);
-		        	if(pieceColor=="B") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.blue);
+		        	if(pieceColor=="1") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(colorOne);
 		            }
-		            else if(pieceColor=="R") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.red);
+		            else if(pieceColor=="2") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(colorTwo);
 		            }
-		            else if(pieceColor=="G") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.green);
+		            else if(pieceColor=="3") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(colorThree);
 		            }
-		            else if(pieceColor=="Y") {
-		            	((panelLayout)super.panelArray[x][y]).setBackground(Color.yellow);
+		            else if(pieceColor=="4") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(colorFour);
 		            }
 	            }
 	            
@@ -1446,7 +1460,7 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
     	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setText(textFirstButton);
     	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setFocusable(false);
     	
-    	if(panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground()==Color.red || panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground()==Color.blue) {
+    	if(panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground()==colorTwo || panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground()==colorOne) {
     		panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setForeground(Color.white);
     	}
     	else {
@@ -1458,7 +1472,7 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
     	
     	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setText(textSecondButton);
     	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setFocusable(false);
-    	if(panelArray[secondButtonXCoordinate][secondButtonYCoordinate].getBackground()==Color.red || panelArray[secondButtonXCoordinate][secondButtonYCoordinate].getBackground()==Color.blue) {
+    	if(panelArray[secondButtonXCoordinate][secondButtonYCoordinate].getBackground()==colorTwo || panelArray[secondButtonXCoordinate][secondButtonYCoordinate].getBackground()==colorOne) {
     		panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setForeground(Color.white);
     	}
     	else {
@@ -1490,7 +1504,7 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 			
 				for (int row=0; row<8;row++){
 					for(int column=0; column<8;column++) {
-						if((Color)super.panelArray[row][column].getBackground() == Color.blue){
+						if((Color)super.panelArray[row][column].getBackground() == colorOne){
 							colorPieceAvailable = true;
 							break;
 						}						
@@ -1521,7 +1535,7 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 			
 				for (int row=0; row<8;row++){
 					for(int column=0; column<8;column++) {
-						if((Color)super.panelArray[row][column].getBackground() == Color.red){
+						if((Color)super.panelArray[row][column].getBackground() == colorTwo){
 							colorPieceAvailable = true;
 							break;
 						}						
@@ -1551,7 +1565,7 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 			
 				for (int row=0; row<8;row++){
 					for(int column=0; column<8;column++) {
-						if((Color)super.panelArray[row][column].getBackground() == Color.green){
+						if((Color)super.panelArray[row][column].getBackground() == colorThree){
 							colorPieceAvailable = true;
 							break;
 						}						
@@ -1581,7 +1595,7 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 			
 				for (int row=0; row<8;row++){
 					for(int column=0; column<8;column++) {
-						if((Color)super.panelArray[row][column].getBackground() == Color.yellow){
+						if((Color)super.panelArray[row][column].getBackground() == colorFour){
 							colorPieceAvailable = true;
 							break;
 						}						
@@ -1616,8 +1630,8 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	 *                                  to move the reserved piece to.
 	 */
 	private void playFromReservePlayerOne(int secondButtonXCoordinate,int secondButtonYCoordinate) {
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("B");
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.blue);
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("1");
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(colorOne);
 		String textStack = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(textStack);
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setForeground(Color.white);
@@ -1662,8 +1676,8 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	 *                                  to move the reserved piece to.
 	 */
 	private void playFromReservePlayerTwo(int secondButtonXCoordinate,int secondButtonYCoordinate) {
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("R");
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.red);
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("2");
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(colorTwo);
 		String textStack = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(textStack);
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setForeground(Color.white);
@@ -1701,15 +1715,15 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	/*
 	 * Enables Player Three to use the reserved piece/s again in the game. 
 	 * Checks if there are any more possibles moves.If not,declares a winner.
-	 * @param secondButtonXCoordinate - Integer to store the x-co-ordinate of the selected position 
+	 * @param secondButtonXCoordinate - Integer to store the x-coordinate of the selected position 
 	 *                                  to move the reserved piece to.
 	 *                                  
-	 * @param secondButtonYCoordinate - Integer to store the y-co-ordinate of the selected position 
+	 * @param secondButtonYCoordinate - Integer to store the y-coordinate of the selected position 
 	 *                                  to move the reserved piece to.
 	 */
 	private void playFromReservePlayerThree(int secondButtonXCoordinate,int secondButtonYCoordinate) {
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("G");
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.green);
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("3");
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(colorThree);
 		String textStack = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(textStack);
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setForeground(Color.black);
@@ -1756,8 +1770,8 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	 */
 	private void playFromReservePlayerFour(int secondButtonXCoordinate,int secondButtonYCoordinate) {
 		
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("Y");
-		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(Color.yellow);
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add("4");
+		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setBackground(colorFour);
 		String textStack = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(textStack);
 		((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setForeground(Color.black);
@@ -1808,11 +1822,12 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	            if (panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]!=panelArray[7][7] ) {	            
 	            	
 		            if (panelArray[firstButtonXCoordinate][firstButtonYCoordinate]!=panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]) {
-		            	if (selected == this.playerOnePanel) {
+		            	if (selected == this.playerOnePanel && selected2!=this.playerTwoPanel && selected2!=this.playerThreePanel && selected2!=this.playerFourPanel) {
 		            			if (this.playerOneReserveCounter>0) {
 		            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
 		            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
 		            				this.playFromReservePlayerOne(secondButtonXCoordinate, secondButtonYCoordinate);
+		            				this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 		            				
 		            			}
 		            			else {
@@ -1821,11 +1836,12 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 		            			}
 		            	}
 		            	
-		            	else if (selected == this.playerTwoPanel) {
+		            	else if (selected == this.playerTwoPanel && selected2!=this.playerOnePanel && selected2!=this.playerThreePanel && selected2!=this.playerFourPanel) {
 	            			if (this.playerTwoReserveCounter>0) {
 	            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
 	            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
 	            				this.playFromReservePlayerTwo(secondButtonXCoordinate, secondButtonYCoordinate);
+	            				this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 	            			}
 	            			else {
 	            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
@@ -1833,11 +1849,12 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	            			}
 		            	}
 		            	
-		            	else if (selected == this.playerThreePanel) {
+		            	else if (selected == this.playerThreePanel && selected2!=this.playerTwoPanel && selected2!=this.playerOnePanel && selected2!=this.playerFourPanel) {
 	            			if (this.playerThreeReserveCounter>0) {
 	            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
 	            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
 	            				this.playFromReservePlayerThree(secondButtonXCoordinate, secondButtonYCoordinate);
+	            				this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 	            			}
 	            			else {
 	            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
@@ -1845,7 +1862,7 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	            			}
 		            	}
 		            	
-		            	else if (selected == this.playerFourPanel) {
+		            	else if (selected == this.playerFourPanel && selected2!=this.playerTwoPanel && selected2!=this.playerThreePanel && selected2!=this.playerOnePanel) {
 	            			if (this.playerFourReserveCounter>0) {
 	            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
 	            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
@@ -1896,25 +1913,25 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 				                	
 				                }
 				                else {
-					                if (((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="B"){
+					                if (((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="1"){
 					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
-					                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.blue);
+					                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(colorOne);
 					                	
 					                	 
 					                }
-					                else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="R"){
+					                else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="2"){
 					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
-					                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.red);
+					                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(colorTwo);
 					                	
 					                }
-					                else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="G"){
+					                else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="3"){
 					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
-					                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.green);
+					                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(colorThree);
 					                	 
 					                }
-					                else if (((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="Y"){
+					                else if (((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="4"){
 					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
-					                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.yellow);
+					                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(colorFour);
 					                	 
 					                }
 				                }
@@ -1969,24 +1986,24 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 		        else if (selected== playerFourPanel && this.currentTurn==4) {
 		           	}
 	            else if (this.currentTurn ==1 ) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.blue) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorOne) {
 	            		selected=null;
 	            	}
 	            }
 	            else if (this.currentTurn==2) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.red) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorTwo) {
 	            		
 	            		selected=null;
 	            	}
 	            }
 	            else if (this.currentTurn ==3 ) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.green) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorThree) {
 	            		
 	            		selected=null;
 	            	}
 	            }
 	            else if (this.currentTurn==4) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.yellow) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorFour) {
 	            		
 	            		selected=null;
 	            	}
