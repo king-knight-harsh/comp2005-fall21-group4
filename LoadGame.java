@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class LoadGame extends JFrame implements ActionListener {
 	private JLabel informationLabel;
-	private JButton slotOne, slotTwo, slotThree, slotFour;
+	private JButton slotYes, slotNo;
 	private Dimension displayDimension;
 	private ImageIcon loadImageIcon;
 	
@@ -30,10 +30,9 @@ public class LoadGame extends JFrame implements ActionListener {
 		getContentPane().setBackground(Color.decode("#337def"));
 		
 		getContentPane().add(this.setInformationLabel());
-		getContentPane().add(this.setLoadSlotOne());
-		getContentPane().add(this.setLoadSlotTwo());
-		getContentPane().add(this.setLoadSlotThree());
-		getContentPane().add(this.setLoadSlotFour());
+		getContentPane().add(this.setLoadSYes());
+		getContentPane().add(this.setLoadNo());
+
 		
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
@@ -91,7 +90,7 @@ public class LoadGame extends JFrame implements ActionListener {
 		Object selected = aevt.getSource();
 		if(selected == this.slotYes) {
 			this.dispose();
-			MainGameNormalMode.readFromFile();
+			MainGameNormalMode.loadFile();
 		}
 		if(selected == this.slotNo) {
 			this.dispose();
