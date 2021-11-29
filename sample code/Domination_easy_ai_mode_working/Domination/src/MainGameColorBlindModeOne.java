@@ -195,6 +195,7 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
 	private void checkBotButtonColor(int currentTurn) {
 		if (currentTurn ==1) {
 			botButton.setEnabled(false);
+			botButton.setBorder(BorderFactory.createLineBorder(colorOne, 3));
 		}
 		else if (currentTurn==2) {
 			botButton.setEnabled(true);
@@ -467,7 +468,7 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
 	}
 	
 	
-	//Setup the game board using four different coloured pieces.
+	//Setup the game board using four different colored pieces.
 	public void setPiecesOnBoard() {
 		super.panelArray[0][2].setBackground(colorOne);
 		super.panelArray[0][3].setBackground(colorOne);
@@ -746,28 +747,27 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
 	/*
 	 * Moves the pile to one piece distance with a valid move
 	 * and updates the number of pieces in each pile.
-	 * @param selected - Object to store the cordinates of the initial position of the selected piece.
+	 * @param selected - Object to store the coordinates of the initial position of the selected piece.
 	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
 	 */
 	public void moveOnePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 1;
 		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
-    		int stackSize = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size()-1;
+    		int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size()-1;
         	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(stackSize);		            	
             ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
             
         }
 	}
-	
 	/*
-	 * Moves the pile  to two piece distance with a valid move
+	 * Moves the pile to two piece distance with a valid move
 	 * and updates the number of pieces in each pile.
 	 * @param selected - Object to store the coordinates of the initial position of the selected piece.
 	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
 	 */
 	public void moveTwoPiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 2;
-        int stackSize = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size()-1;
+        int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
     	if(stackSize == 2) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
@@ -797,9 +797,8 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
             }
     	}
 	}
-	
 	/*
-	 * Moves the pile  to three piece distance with a valid move
+	 * Moves the pile to three piece distance with a valid move
 	 * and updates the number of pieces in each pile.
 	 * @param selected - Object to store the coordinates of the initial position of the selected piece.
 	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
@@ -807,7 +806,7 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
 	public void moveThreePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
 		
         int moveDistance = 3;
-        int stackSize = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size()-1;
+        int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
     	if(stackSize == 3) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
@@ -830,16 +829,15 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
             }
     	}
 	}
-	
 	/*
-	 * Moves the pile  to four piece distance with a valid move
+	 * Moves the pile to four piece distance with a valid move
 	 * and updates the number of pieces in each pile.
 	 * @param selected - Object to store the coordinates of the initial position of the selected piece.
 	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
 	 */
 	public void moveFourPiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 4;
-        int stackSize = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size()-1;
+        int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
     	if(stackSize == 4) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
@@ -855,9 +853,8 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
             }
     	}
 	}
-	
 	/*
-	 * Moves the pile  to five piece distance with a valid move
+	 * Moves the pile to five piece distance with a valid move
 	 * and updates the number of pieces in each pile.
 	 * @param selected - Object to store the coordinates of the initial position of the selected piece.
 	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
@@ -866,7 +863,7 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
 		
         int moveDistance = 5;
         for(int stackColor=0;stackColor<moveDistance;stackColor++) {
-        	int stackSize = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size()-1;
+    		int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size()-1;
         	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
             ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
             
@@ -931,6 +928,7 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
 	 * @param y2 - Integer y-coordinate of the second selected piece
 	 */
 	private void botColorChangeLogic(int x, int y, int x2, int y2) {
+		
 		if(pieceColor=="1") {
         	((panelLayout)super.panelArray[x2][y2]).setBackground(colorOne);
         }
@@ -980,7 +978,7 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
 			randomx = new Random();
 			x = randomx.nextInt(7);
 			randomy = new Random();
-			y = randomy.nextInt(7);	
+			y = randomy.nextInt(7);
 			if((x==0 && y==0) || (x==0 && y==1) || (x==0 && y==6) || (x==0 && y==7)) {
 				x+=2;
 			}
@@ -993,6 +991,7 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
 			if((x==6 && y==0) || (x==6 && y==7)) {
 				x-=1;
 			}
+			
 			this.playFromReservePlayerTwo(x, y);
 			this.checkCapturedPiece(x, y);
 			this.checkBotButtonColor(this.currentTurn);
@@ -1030,7 +1029,7 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
 			randomx = new Random();
 			x = randomx.nextInt(7);
 			randomy = new Random();
-			y = randomy.nextInt(7);		
+			y = randomy.nextInt(7);	
 			if((x==0 && y==0) || (x==0 && y==1) || (x==0 && y==6) || (x==0 && y==7)) {
 				x+=2;
 			}
@@ -1126,27 +1125,25 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
 			if ((x == 0 && y ==1)|| x == 0) {
 				x2=x+1;
 				y2=y;
-				this.moveOnePiece(x, y, x2, y2);
+				
 			}
 			else if ((x == 0 && y ==5)||(y == 7)) {
 				x2=x-1;
 				y2=y;
-				this.moveOnePiece(x, y, x2, y2);
 			}
 			else if ((x == 1 && y ==1)||(x == 1 && y ==6)) {
 				x2=x+1;
 				y2=y;
-				this.moveOnePiece(x, y, x2, y2);
+				
 			}
 			else if ((x == 6 && y ==1) || (x == 6 && y ==6) || x==7 ) {
 				x2=x-1;
 				y2=y;
-				this.moveOnePiece(x, y, x2, y2);
 			}
 			else if (y == 0) {
 				x2 = x;
 				y2 = y+1;
-				this.moveOnePiece(x, y, x2, y2);
+				
 			}
 			else {
 				Random randomNumber = new Random();
@@ -1157,7 +1154,7 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
 					if(x2>7) {
 						x2=y-1;
 					}
-					this.moveOnePiece(x, y, x2, y2);
+					
 				}
 				else {
 					x2=x;
@@ -1165,9 +1162,11 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
 					if(y2>7) {
 						y2=y-1;
 					}
-					this.moveOnePiece(x, y, x2, y2);
 				}
 			}
+			int stackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
+        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().remove(stackSize);		            	
+            ((panelLayout)super.panelArray[x2][y2]).getStackForPiece().add(pieceColor);
 
 			this.botColorChangeLogic(x, y, x2, y2);
 			this.checkCapturedPiece(x2, y2);
@@ -1206,249 +1205,317 @@ public class MainGameColorBlindModeOne extends GameDisplay implements ActionList
 	 */
 	private void hardAI() {
 		
-		boolean check = false;
-		int moveSize=0;
-		int x=0;
-		int y=0;
-		int x2=0;
-		int y2=0;
-		
-		
-		if (currentTurn == 2) {
-			
-				int currentStackSize=0;
-        		for (int row=0; row<8;row++){
-					for(int column=0; column<8;column++) {
-						if((Color)super.panelArray[row][column].getBackground() == colorTwo && ((panelLayout)super.panelArray[row][column]).getStackForPiece().size()>currentStackSize){
-							moveSize = ((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
-							x=row;
-							y=column;
-							currentStackSize=((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
-						}						
-					}
-        		}
-			
-		}
-		
-		else if(currentTurn == 3){
-			
-				int currentStackSize=0;
-        		for (int row=0; row<8;row++){
-					for(int column=0; column<8;column++) {
-						if((Color)super.panelArray[row][column].getBackground() == colorThree && ((panelLayout)super.panelArray[row][column]).getStackForPiece().size()>currentStackSize){	
-							moveSize = ((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
-							x=row;
-							y=column;
-							currentStackSize=((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
-						}						
-					}
-        		}
-			
-		}
-		else if (currentTurn==4){
-			
-				int currentStackSize=0;
-        		for (int row=0; row<8;row++){
-					for(int column=0; column<8;column++) {
-						if((Color)super.panelArray[row][column].getBackground() == colorFour && ((panelLayout)super.panelArray[row][column]).getStackForPiece().size()>currentStackSize){
-							moveSize = ((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
-							x=row;
-							y=column;
-							currentStackSize=((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
-						}						
-					}
-        		}
-			
-		}
-		
-		
-		
-		if (moveSize==1) {
-			if ((x == 0 && y ==1) ||(x == 1 && y ==1) || (x == 1 && y ==6) || (x == 0)) {
-				x2 = x + 1;
-				y2 = y;	
-				this.moveOnePiece(x, y, x2, y2);
-			}
-			else if ((x == 0 && y ==5) || (y == 7)) {
-				x2 = x ;
-				y2 = y-1;	
-				this.moveOnePiece(x, y, x2, y2);
-			}
-			else if ((x == 6 && y ==1)||(x == 6 && y ==6) || (x==7)) {
-				x2 = x -1;
-				y2 = y;	
-				this.moveOnePiece(x, y, x2, y2);
-			}
-			else if (y == 0) {
-				x2 = x;
-				y2 = y+1;				
-				this.moveOnePiece(x, y, x2, y2);
-			}
-			else {
-				x2 = x + 1;
-				y2 = y ;
-				this.moveOnePiece(x, y, x2, y2);
-			}
-			
-				
-			
-		}
-		else if(moveSize==2){
-			if ((x == 0 && y ==1)||(x == 1 && y ==1) || (x == 1 && y ==6) || (x == 0)) {
-				x2 = x + 2;
-				y2 = y;	
-				this.moveTwoPiece(x, y, x2, y2);
-			}
-			else if ((x == 0 && y ==5) || (y == 7)) {
-				x2 = x ;
-				y2 = y-2;	
-				this.moveTwoPiece(x, y, x2, y2);
-			}
-			else if ((x == 6 && y ==1)||(x == 6 && y ==6)|| (x==7)) {
-				x2 = x -2;
-				y2 = y;	
-				this.moveTwoPiece(x, y, x2, y2);
-			}
-			else if (y == 0) {
-				x2 = x;
-				y2 = y+2;				
-				this.moveTwoPiece(x, y, x2, y2);
-			}
-			
-			else {
-				x2 = x + 1;
-				y2 = y + 1;
-				this.moveTwoPiece(x, y, x2, y2);
-			}
-		}
-		else if(moveSize==3) {
-			if ((x == 0 && y ==1)|| (x == 1 && y ==1) || (x == 1 && y ==6) || (x == 0)) {
-				x2 = x + 3;
-				y2 = y;	
-				this.moveThreePiece(x, y, x2, y2);
-			}
-			else if ((x == 0 && y ==5) || (y == 7)) {
-				x2 = x ;
-				y2 = y-3;	
-				this.moveThreePiece(x, y, x2, y2);
-			}
-			else if ((x == 6 && y ==1)||(x == 6 && y ==6) || (x==7)) {
-				x2 = x -3;
-				y2 = y;	
-				this.moveThreePiece(x, y, x2, y2);
-			}
-			else if (y == 0) {
-				x2 = x;
-				y2 = y+3;		
-				this.moveThreePiece(x, y, x2, y2);
-			}
-			else {
-				x2 = x + 2;
-				y2 = y + 1;
-				if (x2>=7) {
-					x2=x-2;
+		if(playerTwoReserveCounter>0 && currentTurn == 2) {
+			int x= 0;
+			int y=0;
+			int currentStackSize=0;
+    		for (int row=0; row<8;row++){
+				for(int column=0; column<8;column++) {
+					if((Color)super.panelArray[row][column].getBackground() == colorTwo && ((panelLayout)super.panelArray[row][column]).getStackForPiece().size()>currentStackSize){
+						x=row;
+						y=column;
+						currentStackSize=((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
+					}						
 				}
-				if(y2>=7) {
-					y2=y-1;
-				}
-				this.moveThreePiece(x, y, x2, y2);
-			}
-		}
-		else if(moveSize==4) {
-			if ((x == 0 && y ==1) || (x == 1 && y ==1) || (x == 1 && y ==6) || (x == 0)) {
-				x2 = x + 4;
-				y2 = y;	
-				this.moveFourPiece(x, y, x2, y2);
-			}
-			else if ((x == 0 && y ==5) || (y == 7) ) {
-				x2 = x ;
-				y2 = y-4;	
-				this.moveFourPiece(x, y, x2, y2);
-			}
-			else if ((x == 6 && y ==1) || (x == 6 && y ==6) || (x==7)) {
-				x2 = x -4;
-				y2 = y;	
-				this.moveFourPiece(x, y, x2, y2);
-			}
-			else if (y == 0) {
-				x2 = x;
-				y2 = y+4;	
-				this.moveFourPiece(x, y, x2, y2);
-			}
-			else {
-				x2 = x + 2;
-				y2 = y +2;
-				if (x2>=7) {
-					x2=x-2;
-				}
-				if(y2>=7) {
-					y2=y-2;
-				}
-				this.moveFourPiece(x, y, x2, y2);
-			}		
-		}
-		else if(moveSize==5) {
-			if ((x == 0 && y ==1) || (x == 1 && y ==1) || (x == 1 && y ==6) || (x == 0)) {
-				x2 = x + 5;
-				y2 = y;	
-				this.moveFivePiece(x, y, x2, y2);
-			}
-			else if ((x == 0 && y ==5) || (y == 7)) {
-				x2 = x ;
-				y2 = y-5;
-				this.moveFivePiece(x, y, x2, y2);
-			}
-			else if ((x == 6 && y ==1)||(x == 6 && y ==6) || (x==7)) {
-				x2 = x -5;
-				y2 = y;	
-				this.moveFivePiece(x, y, x2, y2);
-			}
-			else if (y == 0) {
-				x2 = x;
-				y2 = y+5;
-				this.moveFivePiece(x, y, x2, y2);
-			}
-			else {
-				x2 = x + 2;
-				y2 = y +3;
-				if (x2>=7) {
-					x2=x-2;
-				}
-				if(y2>=7) {
-					y2=y-3;
-				}
-				this.moveFivePiece(x, y, x2, y2);
-			}
-		}
-			
-		
-		
-		this.botColorChangeLogic(x, y, x2, y2);
-		this.checkCapturedPiece(x2, y2);
-		this.setStackText(x, y, x2, y2);
-		
-		int firstTurn = currentTurn;
-        
-        if(currentTurn==4) {
-        	currentTurn=1;
-        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
-        }
-        else {
-        	currentTurn++;
-        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
-        }				                
-        
-        this.checkGameWinner(currentTurn);
-        this.checkGameWinner(currentTurn);
-        this.checkGameWinner(currentTurn);
-        if(currentTurn==firstTurn) {
-        	for (int row=0; row<8;row++){
-    			for(int column=0; column<8;column++) {				        	
-    				panelArray[row][column].setEnabled(false);
-    			}
     		}
-        	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
-        }
+			this.playFromReservePlayerTwo(x, y);
+			this.checkCapturedPiece(x, y);
+			this.checkBotButtonColor(this.currentTurn);
+		}
+		else if(playerThreeReserveCounter>0 && currentTurn == 3) {
+			int x= 0;
+			int y=0;
+			int currentStackSize=0;
+    		for (int row=0; row<8;row++){
+				for(int column=0; column<8;column++) {
+					if((Color)super.panelArray[row][column].getBackground() == colorThree && ((panelLayout)super.panelArray[row][column]).getStackForPiece().size()>currentStackSize){
+						x=row;
+						y=column;
+						currentStackSize=((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
+					}						
+				}
+    		}
+			this.playFromReservePlayerThree(x, y);
+			this.checkCapturedPiece(x, y);
+			this.checkBotButtonColor(this.currentTurn);
+		}
+		else if(playerFourReserveCounter>0 && currentTurn == 4) {
+			int x= 0;
+			int y=0;
+			int currentStackSize=0;
+    		for (int row=0; row<8;row++){
+				for(int column=0; column<8;column++) {
+					if((Color)super.panelArray[row][column].getBackground() == colorFour && ((panelLayout)super.panelArray[row][column]).getStackForPiece().size()>currentStackSize){
+						x=row;
+						y=column;
+						currentStackSize=((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
+					}						
+				}
+    		}
+			this.playFromReservePlayerFour(x, y);
+			this.checkCapturedPiece(x, y);
+			this.checkBotButtonColor(this.currentTurn);
+		}
+		else {
+		
+			boolean check = false;
+			int moveSize=0;
+			int x=0;
+			int y=0;
+			int x2=0;
+			int y2=0;
+			
+			
+			if (currentTurn == 2) {
+				
+					int currentStackSize=0;
+	        		for (int row=0; row<8;row++){
+						for(int column=0; column<8;column++) {
+							if((Color)super.panelArray[row][column].getBackground() == colorTwo && ((panelLayout)super.panelArray[row][column]).getStackForPiece().size()>currentStackSize){
+								moveSize = ((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
+								x=row;
+								y=column;
+								currentStackSize=((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
+							}						
+						}
+	        		}
+				
+			}
+			
+			else if(currentTurn == 3){
+				
+					int currentStackSize=0;
+	        		for (int row=0; row<8;row++){
+						for(int column=0; column<8;column++) {
+							if((Color)super.panelArray[row][column].getBackground() == colorThree && ((panelLayout)super.panelArray[row][column]).getStackForPiece().size()>currentStackSize){	
+								moveSize = ((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
+								x=row;
+								y=column;
+								currentStackSize=((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
+							}						
+						}
+	        		}
+				
+			}
+			else if (currentTurn==4){
+				
+					int currentStackSize=0;
+	        		for (int row=0; row<8;row++){
+						for(int column=0; column<8;column++) {
+							if((Color)super.panelArray[row][column].getBackground() == colorFour && ((panelLayout)super.panelArray[row][column]).getStackForPiece().size()>currentStackSize){
+								moveSize = ((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
+								x=row;
+								y=column;
+								currentStackSize=((panelLayout)super.panelArray[row][column]).getStackForPiece().size();
+							}						
+						}
+	        		}
+				
+			}
+			
+			
+			if (moveSize==1) {
+				if ((x == 0 && y ==1) ||(x == 1 && y ==1) || (x == 1 && y ==6) || (x == 0)) {
+					x2 = x + 1;
+					y2 = y;	
+				}
+				else if ((x == 0 && y ==5) || (y == 7)) {
+					x2 = x ;
+					y2 = y-1;
+				}
+				else if ((x == 6 && y ==1)||(x == 6 && y ==6) || (x==7)) {
+					x2 = x -1;
+					y2 = y;
+				}
+				else if (y == 0) {
+					x2 = x;
+					y2 = y+1;				
+				}
+				else {
+					x2 = x + 1;
+					y2 = y ;
+				}
+				
+					
+				
+			}
+			else if(moveSize==2){
+				if ((x == 0 && y ==1)||(x == 1 && y ==1) || (x == 1 && y ==6) || (x == 0)) {
+					x2 = x + 2;
+					y2 = y;	
+				}
+				else if ((x == 0 && y ==5) || (y == 7)) {
+					x2 = x ;
+					y2 = y-2;	
+				}
+				else if ((x == 6 && y ==1)||(x == 6 && y ==6)|| (x==7)) {
+					x2 = x -2;
+					y2 = y;	
+				}
+				else if (y == 0) {
+					x2 = x;
+					y2 = y+2;	
+				}
+				
+				else {
+					x2 = x + 1;
+					y2 = y + 1;
+				}
+			}
+			else if(moveSize==3) {
+				if ((x == 0 && y ==1)|| (x == 1 && y ==1) || (x == 1 && y ==6) || (x == 0)) {
+					x2 = x + 3;
+					y2 = y;	
+				}
+				else if ((x == 0 && y ==5) || (y == 7)) {
+					x2 = x ;
+					y2 = y-3;	
+				}
+				else if ((x == 6 && y ==1)||(x == 6 && y ==6) || (x==7)) {
+					x2 = x -3;
+					y2 = y;	
+				}
+				else if (y == 0) {
+					x2 = x;
+					y2 = y+3;
+				}
+				else {
+					x2 = x + 2;
+					y2 = y + 1;
+					if (x2>=7) {
+						x2=x-2;
+					}
+					if(y2>=7) {
+						y2=y-1;
+					}
+				}
+			}
+			else if(moveSize==4) {
+				if ((x == 0 && y ==1) || (x == 1 && y ==1) || (x == 1 && y ==6) || (x == 0)) {
+					x2 = x + 4;
+					y2 = y;	
+				}
+				else if ((x == 0 && y ==5) || (y == 7) ) {
+					x2 = x ;
+					y2 = y-4;	
+				}
+				else if ((x == 6 && y ==1) || (x == 6 && y ==6) || (x==7)) {
+					x2 = x -4;
+					y2 = y;	
+				}
+				else if (y == 0) {
+					x2 = x;
+					y2 = y+4;	
+				}
+				else {
+					x2 = x + 2;
+					y2 = y +2;
+					if (x2>=7) {
+						x2=x-2;
+					}
+					if(y2>=7) {
+						y2=y-2;
+					}
+				}		
+			}
+			else if(moveSize==5) {
+				if ((x == 0 && y ==1) || (x == 1 && y ==1) || (x == 1 && y ==6) || (x == 0)) {
+					x2 = x + 5;
+					y2 = y;	
+				}
+				else if ((x == 0 && y ==5) || (y == 7)) {
+					x2 = x ;
+					y2 = y-5;
+				}
+				else if ((x == 6 && y ==1)||(x == 6 && y ==6) || (x==7)) {
+					x2 = x -5;
+					y2 = y;
+				}
+				else if (y == 0) {
+					x2 = x;
+					y2 = y+5;
+				}
+				else {
+					x2 = x + 2;
+					y2 = y +3;
+					if (x2>=7) {
+						x2=x-2;
+					}
+					if(y2>=7) {
+						y2=y-3;
+					}
+				}
+			}
+			for(int stackColor=0;stackColor<moveSize;stackColor++) {
+	        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().remove(0);		            	
+	            ((panelLayout)super.panelArray[x2][y2]).getStackForPiece().add(pieceColor);
+	            
+	            
+	            
+	            if(pieceColor=="1") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(colorOne);
+	            }
+	            else if(pieceColor=="2") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(colorTwo);
+	            }
+	            else if(pieceColor=="3") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(colorThree);
+	            }
+	            else if(pieceColor=="4") {
+	            	((panelLayout)super.panelArray[x2][y2]).setBackground(colorFour);
+	            }
+	            
+	            
+	            if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()) {
+	            	((panelLayout)super.panelArray[x][y]).setBackground(Color.white);
+	            }
+	            else if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()==false) {
+	            	int newStackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
+		        	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().get(newStackSize);
+		        	if(pieceColor=="1") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(colorOne);
+		            }
+		            else if(pieceColor=="2") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(colorTwo);
+		            }
+		            else if(pieceColor=="3") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(colorThree);
+		            }
+		            else if(pieceColor=="4") {
+		            	((panelLayout)super.panelArray[x][y]).setBackground(colorFour);
+		            }
+	            }
+	            
+			}
+			
+			this.checkCapturedPiece(x2, y2);
+			this.setStackText(x, y, x2, y2);
+			
+			
+			int firstTurn = currentTurn;
+	        
+	        if(currentTurn==4) {
+	        	currentTurn=1;
+	        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+	        }
+	        else {
+	        	currentTurn++;
+	        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+	        }				                
+	        
+	        this.checkGameWinner(currentTurn);
+	        this.checkGameWinner(currentTurn);
+	        this.checkGameWinner(currentTurn);
+	        if(currentTurn==firstTurn) {
+	        	for (int row=0; row<8;row++){
+	    			for(int column=0; column<8;column++) {				        	
+	    				panelArray[row][column].setEnabled(false);
+	    			}
+	    		}
+	        	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
+	        }
+	        this.checkBotButtonColor(this.currentTurn);
+		}
 	}
 	
 	/*
