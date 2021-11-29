@@ -9,8 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.BorderFactory;
@@ -1358,18 +1357,19 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 			ObjectOutputStream object = new ObjectOutputStream(saveFile);   
 			
 			object.writeObject(this.class);   	
-			object.close();   
-			saveFile.close();   
+			object.close();
+			saveFile.close();
 	
 		} catch (Exception e) {   
-			System.out.printf("ERROR: FILE FAILED TO SAVE");; 
+			System.out.printf("ERROR: FILE FAILED TO SAVE");
 			e.printStackTrace();
+			return;
+
 		}   
-		return;
 	}
 	
 	public static void loadFile() {
-		GameDisplay NG = null;
+		MainGameNormalMode NG = null;
 		try {
 		   FileInputStream fileLoad = new FileInputStream("/save1.ser");
 		   ObjectInputStream Load = new ObjectInputStream(fileLoad);
