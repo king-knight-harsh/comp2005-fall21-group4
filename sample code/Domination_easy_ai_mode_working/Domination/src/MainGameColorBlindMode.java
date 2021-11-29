@@ -57,7 +57,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	private JButton deSelectButton, botButton;
 	
 	private int playerOneCaptureCounter=0,playerTwoCaptureCounter=0,playerThreeCaptureCounter=0,playerFourCaptureCounter=0;
-	private int playerOneReserveCounter=0,playerTwoReserveCounter=0,playerThreeReserveCounter=0,playerFourReserveCounter=0;
+	private int playerOneReserveCounter=1,playerTwoReserveCounter=1,playerThreeReserveCounter=1,playerFourReserveCounter=0;
 	private boolean playerTwoBot, playerThreeBot, playerFourBot;
 	private Color colorOne,colorTwo,colorThree,colorFour;
 	
@@ -118,12 +118,12 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		this.setPiecesOnBoard();
 		
 	}
-	
+
 	//This private method returns the name of first player.
 	private String getPlayerOneName() {
 		return this.playerOneName;
 	}
-	
+
 	//Setting player to AI mode
 	private void setBotPlayer() {
 		//Conditional block for one Human player
@@ -175,7 +175,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		
 		return bottomPanel;
 	}
-	
+
 	/* Gets the specifications required to build the info panel.
 	*  @return infoPanel - JPanel customize panel to string info about the game stats
 	*/
@@ -214,39 +214,39 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		}
 		return currentTurn;
 	}
-	
+
 	/*
 	 * Sets the value of the label as the parameter passed.
 	 * @param text - String to store the value that describes the label. 
 	 */
 	private void setInformationLabel(String text) {
 		this.informationLabel.setText(text);
-		
+
 	}
-	/*
-	 * Method to set the border color of the bot button
-	 * @param currentTurn - Integer contains the present turn in the game	
-	 */
+
 	private void checkBotButtonColor(int currentTurn) {
-		//conditional block for setting the border of the bot button according to the turn
 		if (currentTurn ==1) {
 			botButton.setEnabled(false);
+			botButton.setText("Human Turn");
 			botButton.setBorder(BorderFactory.createLineBorder(colorOne, 3));
 		}
 		else if (currentTurn==2) {
 			botButton.setEnabled(true);
+			botButton.setText("Bot Turn");
 			botButton.setBorder(BorderFactory.createLineBorder(colorTwo, 3));
 		}
 		else if (currentTurn==3) {
 			botButton.setEnabled(true);
+			botButton.setText("Bot Turn");
 			botButton.setBorder(BorderFactory.createLineBorder(colorThree, 3));
 		}
 		else if (currentTurn==4) {
 			botButton.setEnabled(true); 
+			botButton.setText("Bot Turn");
 			botButton.setBorder(BorderFactory.createLineBorder(colorFour, 3));
 		}
 	}
-	
+
 	/*
 	 * Sets the dimensions, coordinates and other properties for the "BOT" button.
 	 * Uses ActionListener so that the an action is performed when user clicks the button.
@@ -264,8 +264,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		botButton.addActionListener(this);
 		return botButton; 
 	}
-	
-	
+
 	/*
 	 * Sets the dimensions, coordinates and other properties for the "Unclick" button.
 	 * Uses ActionListener so that the an action is performed when user clicks the button.
@@ -427,7 +426,6 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	private void setPlayerFourReserveCounter(String text) {
 		this.playerFourReserved.setText(text + Integer.toString(this.playerFourReserveCounter));
 	}
-	
 	/*
 	 * Getter Method to get the player one panel
 	 * @return playerOnePanel - panelLayout button with information related to player one 
@@ -437,26 +435,25 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		playerOnePanel.setLayout(new BoxLayout(playerOnePanel, BoxLayout.Y_AXIS));
 		playerOnePanel.setPreferredSize(new Dimension(150,70));
 		playerOnePanel.setBackground(Color.white);
-		
-		
+
+
 		playerOneInfo = new JLabel();
 		playerOneInfo.setText(String.valueOf(this.playerOneName));
-		
+
 		playerOneInfo.setFont(new Font("TimesRoman", Font.BOLD, 16));
 		playerOneInfo.setForeground(Color.black);
 		playerOneInfo.setVisible(true);
-		
-		
-		
+
+
+
 		playerOnePanel.add(playerOneInfo);
 		playerOnePanel.add(this.getPlayerOneCaptureCounter());
 		playerOnePanel.add(this.getPlayerOneReserveCounter());
 		playerOnePanel.setBorder(BorderFactory.createLineBorder(colorOne, 3));
 		playerOnePanel.addActionListener(this);
-		
+
 		return playerOnePanel;
 	}
-	
 	/*
 	 * Getter Method to get the player two panel
 	 * @return playerTwoPanel - panelLayout button with information related to player two 
@@ -466,22 +463,22 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		playerTwoPanel.setLayout(new BoxLayout(playerTwoPanel, BoxLayout.Y_AXIS));
 		playerTwoPanel.setPreferredSize(new Dimension(150,70));
 		playerTwoPanel.setBackground(Color.white);
-		
+
 		playerTwoInfo = new JLabel();
 		playerTwoInfo.setText(String.valueOf(this.playerTwoName));
 		playerTwoInfo.setFont(new Font("TimesRoman", Font.BOLD, 16));
 		playerTwoInfo.setForeground(Color.black);
-		
-		
+
+
 		playerTwoPanel.add(playerTwoInfo);
 		playerTwoPanel.add(this.getPlayerTwoCaptureCounter());
 		playerTwoPanel.add(this.getPlayerTwoReserveCounter());
 		playerTwoPanel.setBorder(BorderFactory.createLineBorder(colorTwo, 3));
 		playerTwoPanel.addActionListener(this);
-	
+
 		return playerTwoPanel;
 	}
-	
+
 	/*
 	 * Getter Method to get the player three panel
 	 * @return playerThreePanel - panelLayout button with information related to player three 
@@ -491,23 +488,23 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		playerThreePanel.setLayout(new BoxLayout(playerThreePanel, BoxLayout.Y_AXIS));
 		playerThreePanel.setPreferredSize(new Dimension(150,70));
 		playerThreePanel.setBackground(Color.white);
-		
+
 		playerThreeInfo = new JLabel();
 		playerThreeInfo.setText(String.valueOf(this.playerThreeName));
 		playerThreeInfo.setFont(new Font("TimesRoman", Font.BOLD, 16));
 		playerThreeInfo.setForeground(Color.black);
-		
-		
-		
+
+
+
 		playerThreePanel.add(playerThreeInfo);
 		playerThreePanel.add(this.getPlayerThreeCaptureCounter());
 		playerThreePanel.add(this.getPlayerThreeReserveCounter());
 		playerThreePanel.setBorder(BorderFactory.createLineBorder(colorThree, 3));
 		playerThreePanel.addActionListener(this);
-		
+
 		return playerThreePanel;
 	}
-	
+
 	/*
 	 * Getter Method to get the player four panel
 	 * @return playerOnFourPanel - panelLayout button with information related to player four 
@@ -517,23 +514,23 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		playerFourPanel.setLayout(new BoxLayout(playerFourPanel, BoxLayout.Y_AXIS));
 		playerFourPanel.setPreferredSize(new Dimension(150,70));
 		playerFourPanel.setBackground(Color.white);
-		
+
 		playerFourInfo = new JLabel();
 		playerFourInfo.setText(String.valueOf(this.playerFourName));
 		playerFourInfo.setFont(new Font("TimesRoman", Font.BOLD, 16));
 		playerFourInfo.setForeground(Color.black);
-		
-		
+
+
 		playerFourPanel.add(playerFourInfo);
 		playerFourPanel.add(this.getPlayerFourCaptureCounter());
 		playerFourPanel.add(this.getPlayerFourReserveCounter());
 		playerFourPanel.setBorder(BorderFactory.createLineBorder(colorFour, 3));
 		playerFourPanel.addActionListener(this);
-		
+
 		return playerFourPanel;
 	}
-	
-	
+
+
 	//Setup the game board using four different colored pieces.
 	public void setPiecesOnBoard() {
 		super.panelArray[0][2].setBackground(colorOne);
@@ -544,7 +541,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		((panelLayout) super.panelArray[0][3]).getStackForPiece().add("1");
 		((panelLayout) super.panelArray[0][4]).getStackForPiece().add("2");
 		((panelLayout) super.panelArray[0][5]).getStackForPiece().add("4");
-		
+
 		super.panelArray[1][1].setBackground(colorFour);
 		super.panelArray[1][2].setBackground(colorFour);
 		super.panelArray[1][3].setBackground(colorFour);
@@ -557,7 +554,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		((panelLayout) super.panelArray[1][4]).getStackForPiece().add("2");
 		((panelLayout) super.panelArray[1][5]).getStackForPiece().add("4");
 		((panelLayout) super.panelArray[1][6]).getStackForPiece().add("2");
-		
+
 		super.panelArray[2][0].setBackground(colorOne);
 		super.panelArray[2][1].setBackground(colorOne);
 		super.panelArray[2][2].setBackground(colorOne);
@@ -574,9 +571,9 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		((panelLayout) super.panelArray[2][5]).getStackForPiece().add("4");
 		((panelLayout) super.panelArray[2][6]).getStackForPiece().add("2");
 		((panelLayout) super.panelArray[2][7]).getStackForPiece().add("4");
-		
-		
-		
+
+
+
 		super.panelArray[3][0].setBackground(colorFour);
 		super.panelArray[3][1].setBackground(colorFour);
 		super.panelArray[3][2].setBackground(colorFour);
@@ -593,8 +590,8 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		((panelLayout) super.panelArray[3][5]).getStackForPiece().add("4");
 		((panelLayout) super.panelArray[3][6]).getStackForPiece().add("2");
 		((panelLayout) super.panelArray[3][7]).getStackForPiece().add("4");
-		
-		
+
+
 		super.panelArray[4][0].setBackground(colorThree);
 		super.panelArray[4][1].setBackground(colorOne);
 		super.panelArray[4][2].setBackground(colorThree);
@@ -611,7 +608,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		((panelLayout) super.panelArray[4][5]).getStackForPiece().add("3");
 		((panelLayout) super.panelArray[4][6]).getStackForPiece().add("3");
 		((panelLayout) super.panelArray[4][7]).getStackForPiece().add("3");
-		
+
 		super.panelArray[5][0].setBackground(colorThree);
 		super.panelArray[5][1].setBackground(colorOne);
 		super.panelArray[5][2].setBackground(colorThree);
@@ -628,8 +625,8 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		((panelLayout) super.panelArray[5][5]).getStackForPiece().add("2");
 		((panelLayout) super.panelArray[5][6]).getStackForPiece().add("2");
 		((panelLayout) super.panelArray[5][7]).getStackForPiece().add("2");
-		
-		
+
+
 		super.panelArray[6][1].setBackground(colorOne);
 		super.panelArray[6][2].setBackground(colorThree);
 		super.panelArray[6][3].setBackground(colorOne);
@@ -642,9 +639,9 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		((panelLayout) super.panelArray[6][4]).getStackForPiece().add("3");
 		((panelLayout) super.panelArray[6][5]).getStackForPiece().add("3");
 		((panelLayout) super.panelArray[6][6]).getStackForPiece().add("3");
-		
-		
-		
+
+
+
 		super.panelArray[7][2].setBackground(colorThree);
 		super.panelArray[7][3].setBackground(colorOne);
 		super.panelArray[7][4].setBackground(colorTwo);
@@ -653,7 +650,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		((panelLayout) super.panelArray[7][3]).getStackForPiece().add("1");
 		((panelLayout) super.panelArray[7][4]).getStackForPiece().add("2");
 		((panelLayout) super.panelArray[7][5]).getStackForPiece().add("2");	
-		
+
 		// Loop to set the text on the pieces
 		for (int row=0; row<8;row++) {
 			for(int column=0; column<8;column++) {
@@ -673,7 +670,8 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 			}
 		}
 	}
-	
+
+
 	
 	/*
 	 * This private method checks if the move made by the player is valid or not,
@@ -704,8 +702,8 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		
 		
 	}
-	
-	
+
+
 	/*
 	 * This method returns the distance between initial position of the piece
 	 * and the final position of the piece when a move is played.
@@ -720,11 +718,11 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 				int yCordinateDistance = ((panelLayout) selected2).getYCoordinate() - ((panelLayout) selected).getYCoordinate();
 				// Absolute distance as the sum of xCoordinate and yCoordinate.
 				int distanceBetweenBtn = Math.abs(xCordinateDistance) + Math.abs(yCordinateDistance); 
-				
+
 				return distanceBetweenBtn;
 	}
-	
-	
+
+
 	/*
 	 * Checks if the piece that is captured is of the player or other players,
 	 * then it adds the piece to the reserved pile or captured pile respectively.
@@ -733,9 +731,8 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	 */
 	private void checkCapturedPiece(int buttonXCoordinate, int buttonYCoordinate ) {
 		int stackLength =((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().size();
-		//conditional block if the stack is greater than 5 pieces
+
 		if (stackLength>5) {
-				// conditional block if top color is Blue
 				if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="1") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
@@ -747,8 +744,8 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 						else {
 							this.playerOneCaptureCounter+=1;
 							counter++;
-						}	
-					}					
+						}
+					}
 				}
 				// conditional block if top color is Red
 				else if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="2") {
@@ -765,7 +762,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 						}
 					}
 				}
-				// conditional block if top color is Green
+				// conditional block if top color is green
 				else if(((panelLayout)super.panelArray[buttonXCoordinate][buttonYCoordinate]).getStackForPiece().get(stackLength-1)=="3") {
 					int counter=0;
 					while(counter<(stackLength-5)) {
@@ -794,20 +791,20 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 							counter++;
 						}
 					}
-					
+
 				}
-				//setting the capture labels
+
 				this.setPlayerOneCaptureCounter("CAPTURED : ");
 				this.setPlayerTwoCaptureCounter("CAPTURED : ");
 				this.setPlayerThreeCaptureCounter("CAPTURED : ");
 				this.setPlayerFourCaptureCounter("CAPTURED : ");
-				//setting the reserve labels
+
 				this.setPlayerOneReserveCounter("RESERVED : ");
 				this.setPlayerTwoReserveCounter("RESERVED : ");
 				this.setPlayerThreeReserveCounter("RESERVED : ");
 				this.setPlayerFourReserveCounter("RESERVED : ");
 			}
-		
+
 	}
 
 	/*
@@ -822,7 +819,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
     		int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size()-1;
         	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(stackSize);		            	
             ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
-            
+
         }
 	}
 	/*
@@ -834,33 +831,32 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	public void moveTwoPiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 2;
         int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
-        // conditional block if stack size is 2
     	if(stackSize == 2) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
-                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                           
+                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+
             }
     	}
-    	// conditional block if stack size is 3
     	else if(stackSize == 3) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(1);		            	
                 ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+
             }
     	}
-    	// conditional block if stack size is 4
     	else if(stackSize == 4) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(2);		            	
                 ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+
             }
     	}
-    	// conditional block if stack size is 5
     	else if(stackSize == 5) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(3);		            	
                 ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
-                
+
             }
     	}
 	}
@@ -871,30 +867,28 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
 	 */
 	public void moveThreePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
-		
+
         int moveDistance = 3;
         int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
-        // conditional block if stack size is 3
     	if(stackSize == 3) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
-                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                        
+                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+
             }
     	}
-    	// conditional block if stack size is 4
     	else if(stackSize == 4) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(1);		            	
                 ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
-                
+
             }
     	}
-    	// conditional block if stack size is 5
     	else if(stackSize == 5) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(2);		            	
                 ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
-                
+
             }
     	}
 	}
@@ -907,18 +901,18 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	public void moveFourPiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 4;
         int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
-        // conditional block if stack size is 4
-        if(stackSize == 4) {
+    	if(stackSize == 4) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
                 ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+
             }
     	}
-        // conditional block if stack size is 2
     	else if(stackSize == 5) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(1);		            	
-                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                        
+                ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+
             }
     	}
 	}
@@ -928,15 +922,17 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	 * @param selected - Object to store the coordinates of the initial position of the selected piece.
 	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
 	 */
-	public void moveFivePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {		
+	public void moveFivePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
+
         int moveDistance = 5;
         for(int stackColor=0;stackColor<moveDistance;stackColor++) {
     		int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size()-1;
         	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
-            ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                            
+            ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
+
         }
 	}
-	
+
 	/*
 	 * Highlights the pieces selected by the player during their turn.
 	 */
@@ -960,12 +956,12 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 			else if (nameOfTheColor.equals(colorThree)) {
 				panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].setBackground(Color.decode("#90EE90"));
 			}
-			
+
 		}
 	}
-	
+
 	/*
-	 * Removes the highlight from the the pieces selected by the player during their turn.
+	 * Removes the higlight from the the pieces selected by the player during their turn.
 	 */
 	private void removeHighlight(){
 		if (selected == null) {
@@ -986,7 +982,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
             	}
             }
 		}
-	
+
 	/*
 	 * Method to implement the color change logic for the pieces
 	 * @param x - Integer x-coordinate of the first selected piece
@@ -995,7 +991,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	 * @param y2 - Integer y-coordinate of the second selected piece
 	 */
 	private void botColorChangeLogic(int x, int y, int x2, int y2) {
-		
+
 		if(pieceColor=="1") {
         	((panelLayout)super.panelArray[x2][y2]).setBackground(colorOne);
         }
@@ -1008,8 +1004,8 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
         else if(pieceColor=="4") {
         	((panelLayout)super.panelArray[x2][y2]).setBackground(colorFour);
         }
-        
-        
+
+
         if(((panelLayout)super.panelArray[x][y]).getStackForPiece().isEmpty()) {
         	((panelLayout)super.panelArray[x][y]).setBackground(Color.white);
         }
@@ -1030,7 +1026,91 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
             }
         }
 	}
-	
+	/*
+	 * Method to check game winner
+	 * @param currentTurn - Integer present turn in the game
+	 */
+	private void checkWin(int currentTurn) {
+		boolean checkWinnerMode =false;
+		//conditional block to see if the sum of the playerOne's reserve and capture piece>=10
+        if (currentTurn==1) {
+        	if((this.playerOneCaptureCounter+this.playerOneReserveCounter)>=10) {
+        		for (int row=0; row<8;row++){
+        			for(int column=0; column<8;column++) {				        	
+        				panelArray[row][column].setEnabled(false);
+        			}
+        		}
+            	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
+            	checkWinnerMode=true;
+        	}
+        }
+      //conditional block to see if the sum of the playerTwo's reserve and capture piece>=10
+        else if (currentTurn==2) {
+        	if((this.playerTwoCaptureCounter+this.playerTwoReserveCounter)>=10) {
+        		for (int row=0; row<8;row++){
+        			for(int column=0; column<8;column++) {				        	
+        				panelArray[row][column].setEnabled(false);
+        			}
+        		}
+            	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
+            	checkWinnerMode=true;
+        	}
+        }
+      //conditional block to see if the sum of the playerThree's reserve and capture piece>=10
+        else if (currentTurn==3) {
+        	if((this.playerThreeCaptureCounter+this.playerThreeReserveCounter)>=10) {
+        		for (int row=0; row<8;row++){
+        			for(int column=0; column<8;column++) {				        	
+        				panelArray[row][column].setEnabled(false);
+        			}
+        		}
+            	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
+            	checkWinnerMode=true;
+        	}
+        }
+      //conditional block to see if the sum of the playerFour's reserve and capture piece>=10
+        else if(currentTurn==4) {
+        	if((this.playerFourCaptureCounter+this.playerFourReserveCounter)>=10) {
+        		for (int row=0; row<8;row++){
+        			for(int column=0; column<8;column++) {				        	
+        				panelArray[row][column].setEnabled(false);
+        			}
+        		}
+            	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
+            	checkWinnerMode=true;
+        	}
+        }
+        //Normal conditional check the game winner
+        if (checkWinnerMode==false) {
+        	int firstTurn = currentTurn;
+            
+            if(currentTurn==4) {
+            	currentTurn=1;
+            	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+            }
+            else {
+            	currentTurn++;
+            	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+            }				                
+            
+            this.checkTurnStatus(currentTurn);
+            this.checkTurnStatus(currentTurn);
+            this.checkTurnStatus(currentTurn);
+            if(currentTurn==firstTurn) {
+            	for (int row=0; row<8;row++){
+        			for(int column=0; column<8;column++) {				        	
+        				panelArray[row][column].setEnabled(false);
+        			}
+        		}
+            	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
+            }
+            if ((currentTurn - numberOfHumanPlayers) > 0) {
+            	this.botButton.setEnabled(true);
+            	this.checkBotButtonColor(this.currentTurn);
+            }
+        }
+	}
+
 	/*
 	 * Implements the functioning of the Easy AI Difficulty level . 
 	 * Once the turn of the human players is done, the AI players 
@@ -1197,7 +1277,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		            }
 			}
 			
-			System.out.println(x +" "+y);
+			
 			//Moves for the AI Player
 			if ((x == 0 && y ==1)|| x == 0) {
 				x2=x+1;
@@ -1561,7 +1641,6 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	        this.checkBotButtonColor(this.currentTurn);
 		}
 	}
-	
 	/*
 	 * Sets the color and style of the text to display the pieces in a pile on the pieces.
 	 * @param firstButtonXCoordinate - Integer to store x coordinate of the first Button selected.
@@ -1572,20 +1651,20 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	private void setStackText(int firstButtonXCoordinate, int firstButtonYCoordinate,int secondButtonXCoordinate ,int secondButtonYCoordinate ) {
 		String textFirstButton = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().toString();
     	String textSecondButton = ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString();
-    	
+
     	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setText(textFirstButton);
     	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setFocusable(false);
-    	
+
     	if(panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground()==colorTwo || panelArray[firstButtonXCoordinate][firstButtonYCoordinate].getBackground()==colorOne) {
     		panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setForeground(Color.white);
     	}
     	else {
     		panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setForeground(Color.black);
     	}
-    					               
+
     	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setFont(new Font("Arial", Font.BOLD, 10));
-    	
-    	
+
+
     	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setText(textSecondButton);
     	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setFocusable(false);
     	if(panelArray[secondButtonXCoordinate][secondButtonYCoordinate].getBackground()==colorTwo || panelArray[secondButtonXCoordinate][secondButtonYCoordinate].getBackground()==colorOne) {
@@ -1595,30 +1674,29 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
     		panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setForeground(Color.black);
     	}
         panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setFont(new Font("Arial", Font.BOLD, 10));	
-        
+
 	}
-	
+
 	//Method overloading to disable the pop up when player enter's the game
 	public void getPopUp() {
 		//To close the pop for the game
 	}
 	
-	
+
 	/*
 	 * Checks at each turn, if the players have any of their pieces left to make a move.
 	 * @param currentTurn - Integer to store the number corresponding to current turn's player.
 	 */
 	public void checkTurnStatus(int currentTurn) {
-		
+
 		this.currentTurn=currentTurn;
 		boolean colorPieceAvailable = false;
-		//conditional block to see if the player piece exist
 		if (this.currentTurn==1) {			
 			if(playerOneReserveCounter>0) {
 				colorPieceAvailable = true;
 			}
 			else {
-			
+
 				for (int row=0; row<8;row++){
 					for(int column=0; column<8;column++) {
 						if((Color)super.panelArray[row][column].getBackground() == colorOne){
@@ -1631,7 +1709,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 					}
 				}	
 			}
-			//conditional pass the turn to the next player
+
 			if (colorPieceAvailable==false) {
 				if(this.currentTurn==4) {
 		        	this.currentTurn=1;
@@ -1641,15 +1719,15 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		        	this.currentTurn++;
 		        	this.setInformationLabel("TURN : PLAYER "+ this.currentTurn);
 		        }
-			}			
+			}
+
 		}
-		//conditional block to see if the player piece exist
 		else if(this.currentTurn==2) {
 			if(playerTwoReserveCounter>0) {
 				colorPieceAvailable = true;
 			}
 			else {
-			
+
 				for (int row=0; row<8;row++){
 					for(int column=0; column<8;column++) {
 						if((Color)super.panelArray[row][column].getBackground() == colorTwo){
@@ -1662,7 +1740,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 					}
 				}	
 			}
-			//conditional pass the turn to the next player
+
 			if (colorPieceAvailable==false) {
 				if(this.currentTurn==4) {
 		        	this.currentTurn=1;
@@ -1674,13 +1752,12 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		        }
 			}
 		}
-		//conditional block to see if the player piece exist
 		else if(this.currentTurn==3) {
 			if(playerThreeReserveCounter>0) {
 				colorPieceAvailable = true;
 			}
 			else {
-			
+
 				for (int row=0; row<8;row++){
 					for(int column=0; column<8;column++) {
 						if((Color)super.panelArray[row][column].getBackground() == colorThree){
@@ -1693,7 +1770,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 					}
 				}	
 			}
-			//conditional pass the turn to the next player
+
 			if (colorPieceAvailable==false) {
 				if(this.currentTurn==4) {
 		        	this.currentTurn=1;
@@ -1705,13 +1782,12 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		        }
 			}
 		}
-		//conditional block to see if the player piece exist
 		else if(this.currentTurn==4) {
 			if(playerFourReserveCounter>0) {
 				colorPieceAvailable = true;
 			}
 			else {
-			
+
 				for (int row=0; row<8;row++){
 					for(int column=0; column<8;column++) {
 						if((Color)super.panelArray[row][column].getBackground() == colorFour){
@@ -1724,7 +1800,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 					}
 				}	
 			}
-			//conditional pass the turn to the next player
+
 			if (colorPieceAvailable==false) {
 				if(this.currentTurn==4) {
 		        	this.currentTurn=1;
@@ -1738,7 +1814,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		}
 		selected=null;
 	}
-	
+
 	/*
 	 * Enables Player One to use the reserved piece/s again in the game.
 	 * Checks if there are any more possibles moves.If not,declares a winner.
@@ -1834,336 +1910,244 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		this.checkWin(this.currentTurn);
 		selected = null;
 	}
-	
-	/*
-	 * Method to check game winner
-	 * @param currentTurn - Integer present turn in the game
-	 */
-	private void checkWin(int currentTurn) {
-		boolean checkWinnerMode =false;
-		//conditional block to see if the sum of the playerOne's reserve and capture piece>=10
-        if (currentTurn==1) {
-        	if((this.playerOneCaptureCounter+this.playerOneReserveCounter)>=10) {
-        		for (int row=0; row<8;row++){
-        			for(int column=0; column<8;column++) {				        	
-        				panelArray[row][column].setEnabled(false);
-        			}
-        		}
-            	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
-            	checkWinnerMode=true;
-        	}
-        }
-      //conditional block to see if the sum of the playerTwo's reserve and capture piece>=10
-        else if (currentTurn==2) {
-        	if((this.playerTwoCaptureCounter+this.playerTwoReserveCounter)>=10) {
-        		for (int row=0; row<8;row++){
-        			for(int column=0; column<8;column++) {				        	
-        				panelArray[row][column].setEnabled(false);
-        			}
-        		}
-            	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
-            	checkWinnerMode=true;
-        	}
-        }
-      //conditional block to see if the sum of the playerThree's reserve and capture piece>=10
-        else if (currentTurn==3) {
-        	if((this.playerThreeCaptureCounter+this.playerThreeReserveCounter)>=10) {
-        		for (int row=0; row<8;row++){
-        			for(int column=0; column<8;column++) {				        	
-        				panelArray[row][column].setEnabled(false);
-        			}
-        		}
-            	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
-            	checkWinnerMode=true;
-        	}
-        }
-      //conditional block to see if the sum of the playerFour's reserve and capture piece>=10
-        else if(currentTurn==4) {
-        	if((this.playerFourCaptureCounter+this.playerFourReserveCounter)>=10) {
-        		for (int row=0; row<8;row++){
-        			for(int column=0; column<8;column++) {				        	
-        				panelArray[row][column].setEnabled(false);
-        			}
-        		}
-            	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
-            	checkWinnerMode=true;
-        	}
-        }
-        //Normal conditional check the game winner
-        if (checkWinnerMode==false) {
-        	int firstTurn = currentTurn;
-            
-            if(currentTurn==4) {
-            	currentTurn=1;
-            	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
-            }
-            else {
-            	currentTurn++;
-            	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
-            }				                
-            
-            this.checkTurnStatus(currentTurn);
-            this.checkTurnStatus(currentTurn);
-            this.checkTurnStatus(currentTurn);
-            if(currentTurn==firstTurn) {
-            	for (int row=0; row<8;row++){
-        			for(int column=0; column<8;column++) {				        	
-        				panelArray[row][column].setEnabled(false);
-        			}
-        		}
-            	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
-            }
-            if ((currentTurn - numberOfHumanPlayers) > 0) {
-            	this.botButton.setEnabled(true);
-            	this.checkBotButtonColor(this.currentTurn);
-            }
-        }
-	}
-	
+
 	//ActionListeners to respond to the UserInput.
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
+
+
 		Object selected3 = aevt.getSource();
 		Object selected4 = aevt.getSource();
-		//conditional block to see if the selected  button are from the Action menu
-		if (selected3!=ruleBook && selected3!=exitGame && selected3!=newGame && selected3!=saveGame && selected3!=loadGame) {
-			
+		if (selected3!=ruleBook && selected3!=exitGame && selected3!=newGame && selected3!=saveGame && selected3!=loadGame ) {
+
 			if (selected != null) {
-				
+
 	            Object selected2 = aevt.getSource();
-	           //check to see if the button click was "Unclick"
+
 	            if (panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]!=panelArray[7][7] ) {	            
-	            	//conditional block to see if the selected pieces are not the same
+
 		            if (panelArray[firstButtonXCoordinate][firstButtonYCoordinate]!=panelArray[((panelLayout) selected2).getXCoordinate()][((panelLayout) selected2).getYCoordinate()]) {
 		            	if (selected == this.playerOnePanel && selected2!=this.playerTwoPanel && selected2!=this.playerThreePanel && selected2!=this.playerFourPanel) {
-	            			//conditional block to play from the reserve
-		            		if (this.playerOneReserveCounter>0) {
+	            			if (this.playerOneReserveCounter>0) {
 	            				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
 	            				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
 	            				this.playFromReservePlayerOne(secondButtonXCoordinate, secondButtonYCoordinate);
 	            				this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
-	            				this.setStackText(firstButtonXCoordinate, firstButtonYCoordinate, secondButtonXCoordinate, secondButtonYCoordinate);
+	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString());
 	            				
+
 	            			}
-		            		//conditional block to show if no reserve piece available
 	            			else {
 	            				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
 	            				selected = null;
 	            			}
 	            	}
-		            	//conditional block to see if the selected pieces are not the same
+
 	            	else if (selected == this.playerTwoPanel && selected2!=this.playerOnePanel && selected2!=this.playerThreePanel && selected2!=this.playerFourPanel) {
-	            		//conditional block to play from the reserve
-	            		if (this.playerTwoReserveCounter>0) {
+            			if (this.playerTwoReserveCounter>0) {
             				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
             				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
             				this.playFromReservePlayerTwo(secondButtonXCoordinate, secondButtonYCoordinate);
             				this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
-            				this.setStackText(firstButtonXCoordinate, firstButtonYCoordinate, secondButtonXCoordinate, secondButtonYCoordinate);
+            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString());
             			}
-	            		//conditional block to show if no reserve piece available
             			else {
             				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
             				selected = null;
             			}
 	            	}
-		            	//conditional block to see if the selected pieces are not the same
+
 	            	else if (selected == this.playerThreePanel && selected2!=this.playerTwoPanel && selected2!=this.playerOnePanel && selected2!=this.playerFourPanel) {
-	            		//conditional block to play from the reserve
-	            		if (this.playerThreeReserveCounter>0) {
+            			if (this.playerThreeReserveCounter>0) {
             				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
             				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
             				this.playFromReservePlayerThree(secondButtonXCoordinate, secondButtonYCoordinate);
             				this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
-            				 this.setStackText(firstButtonXCoordinate, firstButtonYCoordinate, secondButtonXCoordinate, secondButtonYCoordinate);
+            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString());
             			}
-            			//conditional block to show if no reserve piece available
             			else {
             				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
             				selected = null;
             			}
 	            	}
-		            	//conditional block to see if the selected pieces are not the same
+
 	            	else if (selected == this.playerFourPanel && selected2!=this.playerTwoPanel && selected2!=this.playerThreePanel && selected2!=this.playerOnePanel) {
-	            		//conditional block to play from the reserve
-	            		if (this.playerFourReserveCounter>0) {
+            			if (this.playerFourReserveCounter>0) {
             				int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
             				int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
             				this.playFromReservePlayerFour(secondButtonXCoordinate, secondButtonYCoordinate);
             				this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
-            				 this.setStackText(firstButtonXCoordinate, firstButtonYCoordinate, secondButtonXCoordinate, secondButtonYCoordinate);
+            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString());
             			}
-            			//conditional block to show if no reserve piece available
             			else {
             				JOptionPane.showMessageDialog(null,"NO RESERVE PIECE AVAILABLE","ATTENTION",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
             				selected = null;
             			}
 	            	}
-		            	//conditional block to play in the board
+
 		            	else if(this.checkValidMove(selected2,((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size())==true) {
-		            		//coordinates of the second selected button
+
 		            		int secondButtonXCoordinate = ((panelLayout) selected2).getXCoordinate();
 			                int secondButtonYCoordinate = ((panelLayout) selected2).getYCoordinate();
-				                
-				                //distance between the buttons
+
+
 				                int moveDistance = this.getDistanceBetweenMove(selected2,((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size());
-				                
-				                //Conditional block if the move size is 1
+
 				                if (moveDistance==1){
 				                	this.moveOnePiece(firstButtonXCoordinate, firstButtonYCoordinate,secondButtonXCoordinate,secondButtonYCoordinate);
-				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);				                	
+				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 				                }
-				              //Conditional block if the move size is 2
 				                else if (moveDistance==2){
 				                	this.moveTwoPiece(firstButtonXCoordinate, firstButtonYCoordinate,secondButtonXCoordinate,secondButtonYCoordinate);		                	
 				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 				                }
-				              //Conditional block if the move size is 3
 				                else if (moveDistance==3){
 				                	this.moveThreePiece(firstButtonXCoordinate, firstButtonYCoordinate,secondButtonXCoordinate,secondButtonYCoordinate);
 				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 				                }
-				              //Conditional block if the move size is 4
 				                else if (moveDistance==4){
 				                	this.moveFourPiece(firstButtonXCoordinate, firstButtonYCoordinate,secondButtonXCoordinate,secondButtonYCoordinate);
 				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 				                }
-				              //Conditional block if the move size is 5
 				                else if (moveDistance==5){
 				                	this.moveFivePiece(firstButtonXCoordinate, firstButtonYCoordinate,secondButtonXCoordinate,secondButtonYCoordinate);
 				                	this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 				                }
-				                
-				                                
-				                 //Size of the stack				                
+
+
+
 				                int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
-				                
-				                //Conditional block logic to set the color of the pieces
+
 				                if(stackSize==0) {
 				                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
 				                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(Color.white);
-				                	
+
 				                }
-				                //Conditional block logic to set the color of the pieces
 				                else {
 					                if (((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="1"){
 					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
 					                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(colorOne);
-					                	
-					                	 
+
+
 					                }
 					                else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="2"){
 					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
 					                	panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(colorTwo);
-					                	
+
 					                }
 					                else if(((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="3"){
 					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
 					                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(colorThree);
-					                	 
+
 					                }
 					                else if (((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().get(stackSize-1)=="4"){
 					                	panelArray[secondButtonXCoordinate][secondButtonYCoordinate].setBackground(nameOfTheColor); 
 					                	 panelArray[firstButtonXCoordinate][firstButtonYCoordinate].setBackground(colorFour);
-					                	 
+
 					                }
 				                }
-				                //updating the text of the pile
+
 				                this.setStackText(firstButtonXCoordinate, firstButtonYCoordinate, secondButtonXCoordinate, secondButtonYCoordinate);
 				                selected = null;
-				                //check for win
-				                this.checkWin(this.currentTurn);				                		                
+				                this.checkWin(this.currentTurn);
 			            	}		            	
-		            	}
-	            	}
+		            }
+	            }
 	            else {
 	            	this.removeHighlight();
 	            	selected=null;
 	            }
-	            
+
 	        }
-			else{
+
+
+
+
+	        else{
 	            selected = aevt.getSource();
-	            //Conditional block to see if the selected piece is Blue
-	            if (this.currentTurn ==1 ) {
+	            if (selected== playerOnePanel && this.currentTurn==1 ) {
+		           }
+		        else if (selected== playerTwoPanel && this.currentTurn==2 ) {
+		           	}
+		        else if (selected== playerThreePanel && this.currentTurn==3) {
+		           	}
+		        else if (selected== playerFourPanel && this.currentTurn==4) {
+		           	}
+	            else if (this.currentTurn ==1 ) {
 	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorOne) {
 	            		selected=null;
 	            	}
 	            }
-	          //Conditional block to see if the selected piece is Red
 	            else if (this.currentTurn==2) {
-	            		if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorTwo ) {
-		            		selected=null;
-		            	}	            	
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorTwo) {
+
+	            		selected=null;
+	            	}
 	            }
-	          //Conditional block to see if the selected piece is Green
 	            else if (this.currentTurn ==3 ) {
-		            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorThree) {
-		            		selected=null;
-		            	}
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorThree) {
+
+	            		selected=null;
+	            	}
 	            }
-	          //Conditional block to see if the selected piece is Yellow
-	            else if (this.currentTurn==4) {	
-		            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorFour) {		            		
-		            		selected=null;
-		            	}
+	            else if (this.currentTurn==4) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorFour) {
+
+	            		selected=null;
+	            	}
 	            }
 	            this.setHighlight();
 	        }
-		}
-		//Conditional block for the buttons in the Action menu
+}
+
 		else {
-		  //Conditional block to see if the selected button is ruleBook 
-		  if(selected3==super.ruleBook) {
-			  try {
-					Desktop.getDesktop().open(new java.io.File("ruleBook.pdf"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+
+			  if(selected3==super.ruleBook) {
+				  try {
+						Desktop.getDesktop().open(new java.io.File("ruleBook.pdf"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	 		}
+	
+	         if (selected3==super.exitGame) {
+	 			System.exit(0);
+	 		}
+	
+	        if (selected3== super.newGame) {
+	 			this.dispose();
+	 			PlayerSelector playerSelectorWindow = new PlayerSelector();
+	 			playerSelectorWindow.setLayout();
+	 		}
+	
+	        if(selected3 == super.saveGame) {
+	 			//this.dispose();
+	 			SaveAndExit saveAndExit = new SaveAndExit();			
+	 		}
+	
+	        if(selected3 == super.loadGame) {
+	        	JFileChooser fileChooser = new JFileChooser();
+				// select file to open
+				int response = fileChooser.showOpenDialog(null);
+				
+				if (response == JFileChooser.APPROVE_OPTION) {
+					File file = new File(fileChooser.getSelectedFile().getAbsoluteFile().toString());
 				}
- 		}
-		//Conditional block to see if the selected button is exitGame 
-         else if (selected3==super.exitGame) {
- 			System.exit(0);
- 		}
-		//Conditional block to see if the selected button is newGame 
-         else if (selected3== super.newGame) {
- 			this.dispose();
- 			PlayerSelector playerSelectorWindow = new PlayerSelector();
- 			playerSelectorWindow.setLayout();
- 		}
-		//Conditional block to see if the selected button is saveGame 
-         else if(selected3 == super.saveGame) {
- 			//this.dispose();
- 			SaveAndExit saveAndExit = new SaveAndExit();			
- 		}
-		//Conditional block to see if the selected button is loadGame 
-         else if(selected3 == super.loadGame) {
-        	 //Java API for opening the file in the system
-        	 JFileChooser fileChooser = new JFileChooser();
- 			// select file to open
- 			int response = fileChooser.showOpenDialog(null);
- 			
- 			if (response == JFileChooser.APPROVE_OPTION) {
- 				File file = new File(fileChooser.getSelectedFile().getAbsoluteFile().toString());
- 			}
- 			}         
+			}         
 		}
-		//Conditional block to see if the selected button is ruleBook 
+
+
         if(selected4 == this.botButton) {
        	 if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 0) {
     			easyAI();
-    			
+
     		}
-    		
+
     		if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 1) {
     			hardAI();
-    			
+
     		}
         }
-		
-		
-		
-		
  	}        
 }
