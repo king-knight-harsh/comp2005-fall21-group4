@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class GameDisplay extends JFrame implements ActionListener,MouseMotionListener,MouseListener{
+public class GameDisplay extends JFrame implements ActionListener{
 
 	public JButton[][] panelArray ;	
 	private JMenuBar menuBar;
@@ -80,7 +80,7 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		middlePanel =new JPanel();
 		middlePanel.setLayout(new GridLayout(8,8,4,4));
 		middlePanel.setSize(600,600);
-		// Two demensional array of JButton to store xCoordinate and yCoordinate
+		// Two dimensional array of JButton to store xCoordinate and yCoordinate
 		panelArray = new JButton[8][8];
 
 			//Loop to create the button (numberOfRows * numberOfColumns)
@@ -89,8 +89,6 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 				panelArray[row][column] = new panelLayout(row, column);
 				panelArray[row][column].setBackground(Color.WHITE);
 				panelArray[row][column].addActionListener(this);
-				panelArray[row][column].addMouseListener(this);
-				panelArray[row][column].addMouseMotionListener(this);
 				middlePanel.add(panelArray[row][column]);
 				
 			}
@@ -141,7 +139,7 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		
 	}
 	
-	/*Creates a Menu Bar and adds Mutliple Menu items with Action Listener to it, so that certain
+	/*Creates a Menu Bar and adds Multiple Menu items with Action Listener to it, so that certain
 	 * Actions are performed upon clicking each Menu item. Also, adds the shortcut keys to access 
 	 * Menu Items Without using the Mouse.
 	 */
@@ -190,8 +188,8 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		normalMode.addActionListener(this);
 		colourBlindMode.addActionListener(this);
 		
-		normalMode.setMnemonic(KeyEvent.VK_1); // Press 1 for normal colour palette
-		colourBlindMode.setMnemonic(KeyEvent.VK_2); //Press 2 for colour blind palette
+		normalMode.setMnemonic(KeyEvent.VK_1); // Press 1 for normal color palette
+		colourBlindMode.setMnemonic(KeyEvent.VK_2); //Press 2 for color blind palette
 		
 		normalMode.setIcon(this.getNormalColorPaletteIcon());
 		colourBlindMode.setIcon(this.getColorBlindPaletteIcon());
@@ -204,7 +202,7 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		
 	}
 	
-	//Sets the dimensions correctly so that the GUI is always at the centre.
+	//Sets the dimensions correctly so that the GUI is always at the center.
 	private void setDisplayToCenter() {
 		displayDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(displayDimension.width/2-this.getSize().width/2, displayDimension.height/2-this.getSize().height/2);
@@ -248,7 +246,7 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		return exitIcon;
 	}
 	
-	/*Gets the image to be placed as an icon on the dialogbox that 
+	/*Gets the image to be placed as an icon on the dialog-box that 
 	 * Asks the user if they want Normal Mode or ColorBlind Mode
 	 */
 	public ImageIcon getNormalColorPaletteIcon() {
@@ -264,7 +262,7 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		return colorBlindPaletteIcon;
 	}
 	
-	//Gets the image to be placed as an icon in front of the "Rulebook" Menu Item.
+	//Gets the image to be placed as an icon in front of the "rule book" Menu Item.
 	public ImageIcon getRuleBookIcon() {
 		ruleBookIcon = new ImageIcon(getClass().getResource("images/book.png"));
 		return ruleBookIcon;
@@ -310,51 +308,16 @@ public class GameDisplay extends JFrame implements ActionListener,MouseMotionLis
 		}
 		
 		if(selected == loadGame) {
-			LoadGame loadGame = new LoadGame();
+			JFileChooser fileChooser = new JFileChooser();
+			// select file to open
+			int response = fileChooser.showOpenDialog(null);
+			
+			if (response == JFileChooser.APPROVE_OPTION) {
+				File file = new File(fileChooser.getSelectedFile().getAbsoluteFile().toString());
+			}
 		}
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 
 	

@@ -26,7 +26,7 @@ public class ColorSelect extends JFrame implements ActionListener{
 	private void setLayout() {	
 		
 		
-		this.setSize(650,400);
+		this.setSize(670,400);
 		this.setLayout(null);
 		this.setDisplayToCenter();
 		this.setIconImage(this.getColorModeIcon().getImage());
@@ -110,16 +110,24 @@ public class ColorSelect extends JFrame implements ActionListener{
 		}
 		
 		if(selected == this.colorBlindButtonOne) {
-			this.colorMode = 1;
+			Color colorOne = new Color(1,48,162);
+			Color colorTwo = new Color(98,91,7);
+			Color colorThree = new Color(111,130,206);
+			Color colorFour = new Color(220,201,1);
 			this.dispose();	
-			MainGameColorBlindModeOne mainGameColorBlindModeOne= new MainGameColorBlindModeOne(numberOfHumanPlayers,this.playerOneName,this.playerTwoName,this.playerThreeName,this.playerFourName, this.botDifficultyLevel, this.colorMode);
+			MainGameColorBlindMode mainGameColorBlindModeTwo= new MainGameColorBlindMode(numberOfHumanPlayers,this.playerOneName,this.playerTwoName,
+					this.playerThreeName,this.playerFourName, this.botDifficultyLevel, colorOne, colorTwo, colorThree,colorFour);
 			 
 		}
 		
 		if(selected == this.colorBlindButtonTwo) {
-			this.colorMode = 2;
+			Color colorOne = new Color(19,165,198);
+			Color colorTwo = new Color(181,95,122);
+			Color colorThree = new Color(254,41,107);
+			Color colorFour = new Color(251,170,189);			
 			this.dispose();	
-			MainGameColorBlindModeTwo mainGameColorBlindModeOne= new MainGameColorBlindModeTwo(numberOfHumanPlayers,this.playerOneName,this.playerTwoName,this.playerThreeName,this.playerFourName, this.botDifficultyLevel, this.colorMode);
+			MainGameColorBlindMode mainGameColorBlindModeTwo= new MainGameColorBlindMode(numberOfHumanPlayers,this.playerOneName,this.playerTwoName,
+					this.playerThreeName,this.playerFourName, this.botDifficultyLevel, colorOne, colorTwo, colorThree,colorFour);
 			 
 		}
 	}

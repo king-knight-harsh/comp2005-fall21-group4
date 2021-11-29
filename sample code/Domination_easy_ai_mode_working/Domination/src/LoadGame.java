@@ -25,7 +25,7 @@ public class LoadGame extends JFrame implements ActionListener {
 	
 	
 	/*
-	 * Sets linitial layout of the screen for the Load Game Menu with
+	 * Sets Initial layout of the screen for the Load Game Menu with
 	 * Four slots of saved games.
 	 */
 	private void initialize() {
@@ -42,9 +42,7 @@ public class LoadGame extends JFrame implements ActionListener {
 		
 		getContentPane().add(this.setInformationLabel());
 		getContentPane().add(this.setLoadSlotOne());
-		getContentPane().add(this.setLoadSlotTwo());
-		getContentPane().add(this.setLoadSlotThree());
-		getContentPane().add(this.setLoadSlotFour());
+		
 		
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
@@ -81,43 +79,6 @@ public class LoadGame extends JFrame implements ActionListener {
 		slotOne.setBounds(80, 100, 300, 100);
 		return slotOne;
 	}	
-	
-	//Sets the layout for the Slot Two button.
-	private JButton setLoadSlotTwo(){
-		slotTwo = new JButton("SLOT 2");
-		slotTwo.setFont(new Font("TimesRoman", Font.BOLD, 40));
-		slotTwo.setBackground(Color.decode("#fcc729"));
-		slotTwo.setForeground(Color.decode("#337def"));
-		slotTwo.addActionListener(this);
-		slotTwo.setFocusable(false);		
-		slotTwo.setBounds(80, 220, 300, 100);
-		return slotTwo;
-	}
-	
-	//Sets the layout for the Slot Three button.
-	private JButton setLoadSlotThree(){
-		slotThree = new JButton("SLOT 3");		
-		slotThree.setFont(new Font("TimesRoman", Font.BOLD, 40));
-		slotThree.setBackground(Color.decode("#fcc729"));
-		slotThree.setForeground(Color.decode("#337def"));
-		slotThree.addActionListener(this);
-		slotThree.setFocusable(false);		
-		slotThree.setBounds(80, 340, 300, 100);
-		return slotThree;
-	}
-	
-	//Sets the layout for the Slot Four button.
-	private JButton setLoadSlotFour(){
-		slotFour = new JButton("SLOT 4");
-		slotFour.setFont(new Font("TimesRoman", Font.BOLD, 40));
-		slotFour.setBackground(Color.decode("#fcc729"));
-		slotFour.setForeground(Color.decode("#337def"));
-		slotFour.addActionListener(this);
-		slotFour.setFocusable(false);		
-		slotFour.setBounds(80, 460, 300, 100);
-		return slotFour;
-	}
-	
 
 	//gets the Image Icon for the "LOAD GAME" button.
 	private ImageIcon getLoadImageIcon() {
