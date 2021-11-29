@@ -36,7 +36,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	private int colorMode;
 	private int botDifficultyLevel;
 	
-	private JPanel topPanel,infoPanel;
+	private JPanel topPanel,infoPanel, bottomPanel;
 	private panelLayout playerOnePanel,playerTwoPanel,playerThreePanel, playerFourPanel;
 	private JLabel playerOneInfo,playerTwoInfo,playerThreeInfo,playerFourInfo; 
 	private JLabel playerOneCaptured,playerTwoCaptured,playerThreeCaptured,playerFourCaptured; 
@@ -53,7 +53,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	
 	private Object selected =null;
 	private String pieceColor;
-	private JButton deSelectButton;
+	private JButton deSelectButton, botButton;
 	
 	private int playerOneCaptureCounter=0,playerTwoCaptureCounter=0,playerThreeCaptureCounter=0,playerFourCaptureCounter=0;
 	private int playerOneReserveCounter=1,playerTwoReserveCounter=1,playerThreeReserveCounter=1,playerFourReserveCounter=0;
@@ -109,7 +109,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		this.botDifficultyLevel = botDifficultyLevel;
 		this.colorMode = colorMode;
 		getContentPane().add(this.getTopPanel(),BorderLayout.NORTH);
-		getContentPane().add(this.getInfoPanel(),BorderLayout.SOUTH);
+		getContentPane().add(this.getBottomPanel(),BorderLayout.SOUTH);
 		this.setPiecesOnBoard();
 		
 	}
@@ -123,16 +123,26 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	//Sets the top panel layout.
 	public JPanel getTopPanel() {
 		topPanel =  new JPanel();
-		topPanel.setLayout(new FlowLayout());	
-		
+		topPanel.setLayout(new FlowLayout());		
 		topPanel.add(this.getPlayerOnePanel());
 		topPanel.add(this.getPlayerTwoPanel());
-		topPanel.add(this.getDeSelectButton());
+		topPanel.add(this.getDeSelectButton());		
 		topPanel.add(this.getPlayerThreePanel());
 		topPanel.add(this.getPlayerFourPanel());
 		
 
 		return topPanel;
+	}
+	//Sets the bottom panel layout.
+	public JPanel getBottomPanel() {
+		bottomPanel =  new JPanel();
+		bottomPanel.setLayout(new FlowLayout());
+		bottomPanel.add(this.getInfoPanel());
+		if (numberOfHumanPlayers<4) {
+			bottomPanel.add(this.getBotButton());
+		}
+		
+		return bottomPanel;
 	}
 	
 	//Gets the specifications required to build the info panel.
@@ -178,6 +188,42 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		this.informationLabel.setText(text);
 		
 	}
+	
+	private void checkBotButtonColor(int currentTurn) {
+		if (currentTurn ==1) {
+			botButton.setEnabled(false);
+		}
+		else if (currentTurn==2) {
+			botButton.setEnabled(true);
+			botButton.setBorder(BorderFactory.createLineBorder(Color.red, 3));
+		}
+		else if (currentTurn==3) {
+			botButton.setEnabled(true);
+			botButton.setBorder(BorderFactory.createLineBorder(Color.green, 3));
+		}
+		else if (currentTurn==4) {
+			botButton.setEnabled(true); 
+			botButton.setBorder(BorderFactory.createLineBorder(Color.yellow, 3));
+		}
+	}
+	
+	/*
+	 * Sets the dimensions, coordinates and other properties for the "BOT" button.
+	 * Uses ActionListener so that the an action is performed when user clicks the button.
+	 */
+	private JButton getBotButton() {
+		botButton= new panelLayout(7,7);
+		botButton.setText("BOT TURN");
+		botButton.setFont(new Font("TimesRoman", Font.BOLD, 16));
+		botButton.setPreferredSize(new Dimension(150,50));
+		botButton.setBackground(Color.WHITE);
+		botButton.setForeground(Color.BLACK);		
+		this.checkBotButtonColor(this.currentTurn);
+		botButton.setFocusable(false);
+		botButton.addActionListener(this);
+		return botButton; 
+	}
+	
 	
 	/*
 	 * Sets the dimensions, coordinates and other properties for the "Unclick" button.
@@ -418,7 +464,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	}
 	
 	
-	//Setup the game board using four different coloured pieces.
+	//Setup the game board using four different colored pieces.
 	public void setPiecesOnBoard() {
 		super.panelArray[0][2].setBackground(Color.BLUE);
 		super.panelArray[0][3].setBackground(Color.BLUE);
@@ -473,8 +519,6 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		((panelLayout) super.panelArray[3][1]).getStackForPiece().add("Y");
 		((panelLayout) super.panelArray[3][2]).getStackForPiece().add("Y");
 		((panelLayout) super.panelArray[3][3]).getStackForPiece().add("Y");
-		((panelLayout) super.panelArray[3][4]).getStackForPiece().add("R");
-		((panelLayout) super.panelArray[3][4]).getStackForPiece().add("R");
 		((panelLayout) super.panelArray[3][4]).getStackForPiece().add("R");
 		((panelLayout) super.panelArray[3][5]).getStackForPiece().add("Y");
 		((panelLayout) super.panelArray[3][6]).getStackForPiece().add("R");
@@ -884,6 +928,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	 * @param y2 - Integer y-coordinate of the second selected piece
 	 */
 	private void botColorChangeLogic(int x, int y, int x2, int y2) {
+		
 		if(pieceColor=="B") {
         	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.blue);
         }
@@ -933,11 +978,25 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 			randomx = new Random();
 			x = randomx.nextInt(7);
 			randomy = new Random();
-			y = randomy.nextInt(7);			
+			y = randomy.nextInt(7);
+			if((x==0 && y==0) || (x==0 && y==1) || (x==0 && y==6) || (x==0 && y==7)) {
+				x+=2;
+			}
+			if ((x==7 && y==0) || (x==7 && y==1) || (x==7 && y==6) || (x==7 && y==7)) {
+				x-=2;
+			}
+			if((x==1 && y==0) || (x==1 && y==7)) {
+				x+=1;
+			}
+			if((x==6 && y==0) || (x==6 && y==7)) {
+				x-=1;
+			}
+			
 			this.playFromReservePlayerTwo(x, y);
 			this.checkCapturedPiece(x, y);
+			this.checkBotButtonColor(this.currentTurn);
 		}
-		if(playerThreeReserveCounter>0 && currentTurn == 3) {
+		else if(playerThreeReserveCounter>0 && currentTurn == 3) {
 			int x=0;
 			int y=0;
 			Random randomx;
@@ -945,9 +1004,22 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 			randomx = new Random();
 			x = randomx.nextInt(7);
 			randomy = new Random();
-			y = randomy.nextInt(7);			
+			y = randomy.nextInt(7);	
+			if((x==0 && y==0) || (x==0 && y==1) || (x==0 && y==6) || (x==0 && y==7)) {
+				x+=2;
+			}
+			if ((x==7 && y==0) || (x==7 && y==1) || (x==7 && y==6) || (x==7 && y==7)) {
+				x-=2;
+			}
+			if((x==1 && y==0) || (x==1 && y==7)) {
+				x+=1;
+			}
+			if((x==6 && y==0) || (x==6 && y==7)) {
+				x-=1;
+			}
 			this.playFromReservePlayerThree(x, y);
 			this.checkCapturedPiece(x, y);
+			this.checkBotButtonColor(this.currentTurn);
 		}
 		else if(playerFourReserveCounter>0 && currentTurn == 4) {
 			int x=0;
@@ -957,9 +1029,22 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 			randomx = new Random();
 			x = randomx.nextInt(7);
 			randomy = new Random();
-			y = randomy.nextInt(7);			
+			y = randomy.nextInt(7);	
+			if((x==0 && y==0) || (x==0 && y==1) || (x==0 && y==6) || (x==0 && y==7)) {
+				x+=2;
+			}
+			if ((x==7 && y==0) || (x==7 && y==1) || (x==7 && y==6) || (x==7 && y==7)) {
+				x-=2;
+			}
+			if((x==1 && y==0) || (x==1 && y==7)) {
+				x+=1;
+			}
+			if((x==6 && y==0) || (x==6 && y==7)) {
+				x-=1;
+			}
 			this.playFromReservePlayerFour(x, y);
 			this.checkCapturedPiece(x, y);
+			this.checkBotButtonColor(this.currentTurn);
 		}
 		else {
 			boolean check = false;
@@ -1043,7 +1128,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 				this.moveOnePiece(x, y, x2, y2);
 			}
 			else if ((x == 0 && y ==5)||(y == 7)) {
-				x2=x+1;
+				x2=x-1;
 				y2=y;
 				this.moveOnePiece(x, y, x2, y2);
 			}
@@ -1054,7 +1139,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 			}
 			else if ((x == 6 && y ==1) || (x == 6 && y ==6) || x==7 ) {
 				x2=x-1;
-				y2=y2;
+				y2=y;
 				this.moveOnePiece(x, y, x2, y2);
 			}
 			else if (y == 0) {
@@ -1068,11 +1153,17 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 				if(number==0) {
 					x2=x+1;
 					y2=y;
+					if(x2>7) {
+						x2=y-1;
+					}
 					this.moveOnePiece(x, y, x2, y2);
 				}
 				else {
 					x2=x;
 					y2=y+1;
+					if(y2>7) {
+						y2=y-1;
+					}
 					this.moveOnePiece(x, y, x2, y2);
 				}
 			}
@@ -1103,6 +1194,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
         		}
             	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
             }
+            this.checkBotButtonColor(this.currentTurn);
 			
 		}
 	 			
@@ -1170,209 +1262,201 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		
 		
 		System.out.println(x+ " " +y);
+		System.out.println(moveSize);
 		if (moveSize==1) {
-			if ((x == 0 && y ==1)|| x == 0) {	
-				this.moveOnePiece(x, y, x+1, y);
+			if ((x == 0 && y ==1) ||(x == 1 && y ==1) || (x == 1 && y ==6) || (x == 0)) {
+				x2 = x + 1;
+				y2 = y;	
+				this.moveOnePiece(x, y, x2, y2);
 			}
-			else if ((x == 0 && y ==5)||(y == 7)) {
-				this.moveOnePiece(x, y, x, y-1);
+			else if ((x == 0 && y ==5) || (y == 7)) {
+				x2 = x ;
+				y2 = y-1;	
+				this.moveOnePiece(x, y, x2, y2);
 			}
-			else if ((x == 1 && y ==1)||(x == 1 && y ==6)) {
-				this.moveOnePiece(x, y, x+1, y);
-			}
-			else if ((x == 6 && y ==1) || (x == 6 && y ==6) || x==7 ) {
-				this.moveOnePiece(x, y, x-1, y);
+			else if ((x == 6 && y ==1)||(x == 6 && y ==6) || (x==7)) {
+				x2 = x -1;
+				y2 = y;	
+				this.moveOnePiece(x, y, x2, y2);
 			}
 			else if (y == 0) {
 				x2 = x;
-				y2 = y+1;
-				this.moveOnePiece(x, y, x, y+1);
+				y2 = y+1;				
+				this.moveOnePiece(x, y, x2, y2);
 			}
 			else {
-				Random randomNumber = new Random();
-				int number=randomNumber.nextInt(1);
-				if(number==0) {
-					this.moveOnePiece(x, y, x+1, y);
-				}
-				else {
-					this.moveOnePiece(x, y, x, y+1);
-				}
+				x2 = x + 1;
+				y2 = y ;
+				this.moveOnePiece(x, y, x2, y2);
 			}
+			
+				
+			
 		}
 		else if(moveSize==2){
-			Random number =new Random();
-			int randomNumber = number.nextInt(4);
-			
-			if (randomNumber==0) {
-				x2=x+1;
-				y2=y+1;
-				this.moveTwoPiece(x, y, x+1, y+1);
+			if ((x == 0 && y ==1)||(x == 1 && y ==1) || (x == 1 && y ==6) || (x == 0)) {
+				x2 = x + 2;
+				y2 = y;	
+				this.moveTwoPiece(x, y, x2, y2);
+			}
+			else if ((x == 0 && y ==5) || (y == 7)) {
+				x2 = x ;
+				y2 = y-2;	
+				this.moveTwoPiece(x, y, x2, y2);
+			}
+			else if ((x == 6 && y ==1)||(x == 6 && y ==6)|| (x==7)) {
+				x2 = x -2;
+				y2 = y;	
+				this.moveTwoPiece(x, y, x2, y2);
+			}
+			else if (y == 0) {
+				x2 = x;
+				y2 = y+2;				
+				this.moveTwoPiece(x, y, x2, y2);
 			}
 			
-			else if (randomNumber==1) {
-				x2=x+2;
-				y2=y;
-				this.moveTwoPiece(x, y, x+2, y);
-			}
-			else if (randomNumber==2) {
-				x2=x;
-				y2=y+2;
-				this.moveTwoPiece(x, y, x, y+2);
+			else {
+				x2 = x + 1;
+				y2 = y + 1;
+				this.moveTwoPiece(x, y, x2, y2);
 			}
 		}
 		else if(moveSize==3) {
-			Random number =new Random();
-			int randomNumber = number.nextInt(4);
-			
-			if (randomNumber==0) {
-				x2=x;
-				y2=y+3;
-				this.moveThreePiece(x, y, x, y+3);
+			if ((x == 0 && y ==1)|| (x == 1 && y ==1) || (x == 1 && y ==6) || (x == 0)) {
+				x2 = x + 3;
+				y2 = y;	
+				this.moveThreePiece(x, y, x2, y2);
 			}
-			
-			else if (randomNumber==1) {
-				x2=x+3;
-				y2=y;
-				this.moveThreePiece(x, y, x+3, y);
+			else if ((x == 0 && y ==5) || (y == 7)) {
+				x2 = x ;
+				y2 = y-3;	
+				this.moveThreePiece(x, y, x2, y2);
 			}
-			else if (randomNumber==2) {
-				x2=x+2;
-				y2=y+1;
-				this.moveThreePiece(x, y, x+2, y+1);
+			else if ((x == 6 && y ==1)||(x == 6 && y ==6) || (x==7)) {
+				x2 = x -3;
+				y2 = y;	
+				this.moveThreePiece(x, y, x2, y2);
 			}
-			else if (randomNumber==3) {
-				x2=x+1;
-				y2=y+2;
-				this.moveThreePiece(x, y, x+1, y+2);
+			else if (y == 0) {
+				x2 = x;
+				y2 = y+3;		
+				this.moveThreePiece(x, y, x2, y2);
+			}
+			else {
+				x2 = x + 2;
+				y2 = y + 1;
+				if (x2>=7) {
+					x2=x-2;
+				}
+				if(y2>=7) {
+					y2=y-1;
+				}
+				this.moveThreePiece(x, y, x2, y2);
 			}
 		}
 		else if(moveSize==4) {
-			Random number =new Random();
-			int randomNumber = number.nextInt(4);
-			
-			if (randomNumber==0) {
-				x2=x;
-				y2=y+4;
-				this.moveFourPiece(x, y, x, y+4);
+			if ((x == 0 && y ==1) || (x == 1 && y ==1) || (x == 1 && y ==6) || (x == 0)) {
+				x2 = x + 4;
+				y2 = y;	
+				this.moveFourPiece(x, y, x2, y2);
 			}
-			
-			else if (randomNumber==1) {
-				x2=x+4;
-				y2=y;
-				this.moveFourPiece(x, y, x+4, y);
-				
+			else if ((x == 0 && y ==5) || (y == 7) ) {
+				x2 = x ;
+				y2 = y-4;	
+				this.moveFourPiece(x, y, x2, y2);
 			}
-			else if (randomNumber==2) {
-				x2=x+3;
-				y2=y+1;
-				this.moveFourPiece(x, y, x+3, y+1);
+			else if ((x == 6 && y ==1) || (x == 6 && y ==6) || (x==7)) {
+				x2 = x -4;
+				y2 = y;	
+				this.moveFourPiece(x, y, x2, y2);
 			}
-			else if (randomNumber==3) {
-				x2=x+1;
-				y2=y+3;
-				this.moveFourPiece(x, y, x+1, y+3);
+			else if (y == 0) {
+				x2 = x;
+				y2 = y+4;	
+				this.moveFourPiece(x, y, x2, y2);
 			}
-			else if (randomNumber==4) {
-				x2=x+2;
-				y2=y+2;
-				this.moveFourPiece(x, y, x+2, y+2);
-			}			
+			else {
+				x2 = x + 2;
+				y2 = y +2;
+				if (x2>=7) {
+					x2=x-2;
+				}
+				if(y2>=7) {
+					y2=y-2;
+				}
+				this.moveFourPiece(x, y, x2, y2);
+			}		
 		}
 		else if(moveSize==5) {
-			Random number =new Random();
-			int randomNumber = number.nextInt(4);
-			
-			if (randomNumber==0) {
-				x2=x;
-				y2=y+5;
-				this.moveFivePiece(x, y, x, y+5);
+			if ((x == 0 && y ==1) || (x == 1 && y ==1) || (x == 1 && y ==6) || (x == 0)) {
+				x2 = x + 5;
+				y2 = y;	
+				this.moveFivePiece(x, y, x2, y2);
 			}
-			
-			else if (randomNumber==1) {
-				x2=x+5;
-				y2=y;
-				this.moveFivePiece(x, y, x+5, y);
-				
+			else if ((x == 0 && y ==5) || (y == 7)) {
+				x2 = x ;
+				y2 = y-5;
+				this.moveFivePiece(x, y, x2, y2);
 			}
-			else if (randomNumber==2) {
-				x2=x+1;
-				y2=y+4;
-				this.moveFivePiece(x, y, x+1, y+4);
+			else if ((x == 6 && y ==1)||(x == 6 && y ==6) || (x==7)) {
+				x2 = x -5;
+				y2 = y;	
+				this.moveFivePiece(x, y, x2, y2);
 			}
-			else if (randomNumber==3) {
-				x2=x+4;
-				y2=y+1;
-				this.moveFivePiece(x, y, x+4, y+1);
+			else if (y == 0) {
+				x2 = x;
+				y2 = y+5;
+				this.moveFivePiece(x, y, x2, y2);
 			}
-			else if (randomNumber==4) {
-				x2=x+2;
-				y2=y+3;
-				this.moveFivePiece(x, y, x+2, y+3);
+			else {
+				x2 = x + 2;
+				y2 = y +3;
+				if (x2>=7) {
+					x2=x-2;
+				}
+				if(y2>=7) {
+					y2=y-3;
+				}
+				this.moveFivePiece(x, y, x2, y2);
 			}
-			else if (randomNumber==4) {
-				x2=x+3;
-				y2=y+2;
-				this.moveFivePiece(x, y, x+3, y+2);
-			}
-			
 		}
+			
 		
+		
+		this.botColorChangeLogic(x, y, x2, y2);
 		this.checkCapturedPiece(x2, y2);
-		
-		int stackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size();
-        
-        if(stackSize==0) {
-        	panelArray[x2][y2].setBackground(nameOfTheColor); 
-        	panelArray[x][y].setBackground(Color.white);
-        	
-        }
-        else {
-            if (((panelLayout)super.panelArray[x][y]).getStackForPiece().get(stackSize-1)=="B"){
-            	panelArray[x2][y2].setBackground(nameOfTheColor); 
-            	 panelArray[x][y].setBackground(Color.blue);
-            	
-            	 
-            }
-            else if(((panelLayout)super.panelArray[x][y]).getStackForPiece().get(stackSize-1)=="R"){
-            	panelArray[x2][y2].setBackground(nameOfTheColor); 
-            	panelArray[x][y].setBackground(Color.red);
-            	
-            }
-            else if(((panelLayout)super.panelArray[x][y]).getStackForPiece().get(stackSize-1)=="G"){
-            	panelArray[x2][y2].setBackground(nameOfTheColor); 
-            	 panelArray[x][y].setBackground(Color.green);
-            	 
-            }
-            else if (((panelLayout)super.panelArray[x][y]).getStackForPiece().get(stackSize-1)=="Y"){
-            	panelArray[x2][y2].setBackground(nameOfTheColor); 
-            	 panelArray[x][y].setBackground(Color.yellow);
-            	 
-            }
-        }
-    
-		
 		this.setStackText(x, y, x2, y2);
 		
-		if(currentTurn==4) {
+		int firstTurn = currentTurn;
+        
+        if(currentTurn==4) {
         	currentTurn=1;
-        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
+        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
         }
         else {
         	currentTurn++;
-        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);
+        	this.setInformationLabel("TURN : PLAYER "+ currentTurn);				                	
+        }				                
+        
+        this.checkGameWinner(currentTurn);
+        this.checkGameWinner(currentTurn);
+        this.checkGameWinner(currentTurn);
+        if(currentTurn==firstTurn) {
+        	for (int row=0; row<8;row++){
+    			for(int column=0; column<8;column++) {				        	
+    				panelArray[row][column].setEnabled(false);
+    			}
+    		}
+        	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
         }
-		if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 2) {
-			hardAI();
-			
-		}
 	}
 	
 	/*
 	 * Sets the color and style of the text to display the pieces in a pile on the pieces.
-	 * @param firstButtonXCoordinate - Integer to store x co-ordinate of the first Button selected.
-	 * @param firstButtonYCoordinate - Integer to store y co-ordinate of the first Button selected.
-	 * @param secondButtonXCoordinate - Integer to store x co-ordinate of the second Button selected.
-	 * @param secondButtonYCoordinate - Integer to store y co-ordinate of the second Button selected.
+	 * @param firstButtonXCoordinate - Integer to store x coordinate of the first Button selected.
+	 * @param firstButtonYCoordinate - Integer to store y coordinate of the first Button selected.
+	 * @param secondButtonXCoordinate - Integer to store x coordinate of the second Button selected.
+	 * @param secondButtonYCoordinate - Integer to store y coordinate of the second Button selected.
 	 */
 	private void setStackText(int firstButtonXCoordinate, int firstButtonYCoordinate,int secondButtonXCoordinate ,int secondButtonYCoordinate ) {
 		String textFirstButton = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().toString();
@@ -1544,10 +1628,10 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	/*
 	 * Enables Player One to use the reserved piece/s again in the game.
 	 * Checks if there are any more possibles moves.If not,declares a winner.
-	 * @param secondButtonXCoordinate - Integer to store the x-co-ordinate of the selected position 
+	 * @param secondButtonXCoordinate - Integer to store the x-coordinate of the selected position 
 	 *                                  to move the reserved piece to.
 	 *                                  
-	 * @param secondButtonYCoordinate - Integer to store the y-co-ordinate of the selected position 
+	 * @param secondButtonYCoordinate - Integer to store the y-coordinate of the selected position 
 	 *                                  to move the reserved piece to.
 	 */
 	private void playFromReservePlayerOne(int secondButtonXCoordinate,int secondButtonYCoordinate) {
@@ -1590,10 +1674,10 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	/*
 	 * Enables Player Two to use the reserved piece/s again in the game. 
 	 * Checks if there are any more possibles moves.If not,declares a winner.
-	 * @param secondButtonXCoordinate - Integer to store the x-co-ordinate of the selected position 
+	 * @param secondButtonXCoordinate - Integer to store the x-coordinate of the selected position 
 	 *                                  to move the reserved piece to.
 	 *                                  
-	 * @param secondButtonYCoordinate - Integer to store the y-co-ordinate of the selected position 
+	 * @param secondButtonYCoordinate - Integer to store the y-coordinate of the selected position 
 	 *                                  to move the reserved piece to.
 	 */
 	private void playFromReservePlayerTwo(int secondButtonXCoordinate,int secondButtonYCoordinate) {
@@ -1636,10 +1720,10 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	/*
 	 * Enables Player Three to use the reserved piece/s again in the game. 
 	 * Checks if there are any more possibles moves.If not,declares a winner.
-	 * @param secondButtonXCoordinate - Integer to store the x-co-ordinate of the selected position 
+	 * @param secondButtonXCoordinate - Integer to store the x-coordinate of the selected position 
 	 *                                  to move the reserved piece to.
 	 *                                  
-	 * @param secondButtonYCoordinate - Integer to store the y-co-ordinate of the selected position 
+	 * @param secondButtonYCoordinate - Integer to store the y-coordinate of the selected position 
 	 *                                  to move the reserved piece to.
 	 */
 	private void playFromReservePlayerThree(int secondButtonXCoordinate,int secondButtonYCoordinate) {
@@ -1683,10 +1767,10 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	/*
 	 * Enables Player Four to use the reserved piece/s again in the game. 
 	 * Checks if there are any more possibles moves.If not,declares a winner.
-	 * @param secondButtonXCoordinate - Integer to store the x-co-ordinate of the selected position 
+	 * @param secondButtonXCoordinate - Integer to store the x-coordinate of the selected position 
 	 *                                  to move the reserved piece to.
 	 *                                  
-	 * @param secondButtonYCoordinate - Integer to store the y-co-ordinate of the selected position 
+	 * @param secondButtonYCoordinate - Integer to store the y-coordinate of the selected position 
 	 *                                  to move the reserved piece to.
 	 */
 	private void playFromReservePlayerFour(int secondButtonXCoordinate,int secondButtonYCoordinate) {
@@ -1883,7 +1967,10 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 					        		}
 				                	this.setInformationLabel("PLAYER " + currentTurn + " WON!");
 				                }
-				               				                
+				                if ((currentTurn - numberOfHumanPlayers) > 0) {
+				                	this.botButton.setEnabled(true);
+				                	this.checkBotButtonColor(this.currentTurn);
+				                }		                
 			            	}		            	
 		            }
 	            }
@@ -1964,21 +2051,24 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
  		
          else if(selected3 == super.loadGame) {
  			LoadGame loadGame = new LoadGame();
- 			}
-		  
-         
+ 			}         
 		}
 		
+
+        if(selected4 == this.botButton) {
+       	 if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 0) {
+    			easyAI();
+    			
+    		}
+    		
+    		if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 1) {
+    			hardAI();
+    			
+    		}
+        }
 		
 		
-		if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 0) {
-			easyAI();
-			
-		}
 		
-		if ((currentTurn - numberOfHumanPlayers) > 0 && botDifficultyLevel == 1) {
-			hardAI();
-			
-		}
+		
  	}        
 }
