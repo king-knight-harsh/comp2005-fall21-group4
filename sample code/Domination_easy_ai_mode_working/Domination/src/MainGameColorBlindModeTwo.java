@@ -695,15 +695,15 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	}
 
 	/*
-	 * Moves the plie to one piece distance with a valid move
+	 * Moves the pile to one piece distance with a valid move
 	 * and updates the number of pieces in each pile.
-	 * @param selected - Object to store the co-ordinates of the initial position of the selected piece.
-	 * @param selected2 - object to store the Co-ordinates of the final position of the selected piece.
+	 * @param selected - Object to store the cordinates of the initial position of the selected piece.
+	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
 	 */
 	public void moveOnePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 1;
 		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
-    		int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size()-1;
+    		int stackSize = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size()-1;
         	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(stackSize);		            	
             ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
             
@@ -713,12 +713,12 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	/*
 	 * Moves the pile  to two piece distance with a valid move
 	 * and updates the number of pieces in each pile.
-	 * @param selected - Object to store the co-ordinates of the initial position of the selected piece.
-	 * @param selected2 - object to store the Co-ordinates of the final position of the selected piece.
+	 * @param selected - Object to store the coordinates of the initial position of the selected piece.
+	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
 	 */
 	public void moveTwoPiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 2;
-        int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
+        int stackSize = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size()-1;
     	if(stackSize == 2) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
@@ -752,13 +752,13 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	/*
 	 * Moves the pile  to three piece distance with a valid move
 	 * and updates the number of pieces in each pile.
-	 * @param selected - Object to store the co-ordinates of the initial position of the selected piece.
-	 * @param selected2 - object to store the Co-ordinates of the final position of the selected piece.
+	 * @param selected - Object to store the coordinates of the initial position of the selected piece.
+	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
 	 */
 	public void moveThreePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
 		
         int moveDistance = 3;
-        int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
+        int stackSize = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size()-1;
     	if(stackSize == 3) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
@@ -785,12 +785,12 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	/*
 	 * Moves the pile  to four piece distance with a valid move
 	 * and updates the number of pieces in each pile.
-	 * @param selected - Object to store the co-ordinates of the initial position of the selected piece.
-	 * @param selected2 - object to store the Co-ordinates of the final position of the selected piece.
+	 * @param selected - Object to store the coordinates of the initial position of the selected piece.
+	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
 	 */
 	public void moveFourPiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 4;
-        int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size();
+        int stackSize = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size()-1;
     	if(stackSize == 4) {
     		for(int stackColor=0;stackColor<moveDistance;stackColor++) {
             	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
@@ -810,14 +810,14 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	/*
 	 * Moves the pile  to five piece distance with a valid move
 	 * and updates the number of pieces in each pile.
-	 * @param selected - Object to store the co-ordinates of the initial position of the selected piece.
-	 * @param selected2 - object to store the Co-ordinates of the final position of the selected piece.
+	 * @param selected - Object to store the coordinates of the initial position of the selected piece.
+	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
 	 */
 	public void moveFivePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
 		
         int moveDistance = 5;
         for(int stackColor=0;stackColor<moveDistance;stackColor++) {
-    		int stackSize = ((panelLayout)super.panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()]).getStackForPiece().size()-1;
+        	int stackSize = ((panelLayout)super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().size()-1;
         	pieceColor = ((panelLayout) super.panelArray[firstButtonXCoordinate][firstButtonYCoordinate]).getStackForPiece().remove(0);		            	
             ((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().add(pieceColor);		                
             
@@ -885,16 +885,16 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
 	 
 	private void botColorChangeLogic(int x, int y, int x2, int y2) {
 		if(pieceColor=="B") {
-        	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.blue);
+        	((panelLayout)super.panelArray[x2][y2]).setBackground(colorOne);
         }
         else if(pieceColor=="R") {
-        	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.red);
+        	((panelLayout)super.panelArray[x2][y2]).setBackground(colorTwo);
         }
         else if(pieceColor=="G") {
-        	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.green);
+        	((panelLayout)super.panelArray[x2][y2]).setBackground(colorThree);
         }
         else if(pieceColor=="Y") {
-        	((panelLayout)super.panelArray[x2][y2]).setBackground(Color.yellow);
+        	((panelLayout)super.panelArray[x2][y2]).setBackground(colorFour);
         }
         
         
@@ -905,16 +905,16 @@ public class MainGameColorBlindModeTwo extends GameDisplay implements ActionList
         	int newStackSize = ((panelLayout)super.panelArray[x][y]).getStackForPiece().size()-1;
         	pieceColor = ((panelLayout) super.panelArray[x][y]).getStackForPiece().get(newStackSize);
         	if(pieceColor=="B") {
-            	((panelLayout)super.panelArray[x][y]).setBackground(Color.blue);
+            	((panelLayout)super.panelArray[x][y]).setBackground(colorOne);
             }
             else if(pieceColor=="R") {
-            	((panelLayout)super.panelArray[x][y]).setBackground(Color.red);
+            	((panelLayout)super.panelArray[x][y]).setBackground(colorTwo);
             }
             else if(pieceColor=="G") {
-            	((panelLayout)super.panelArray[x][y]).setBackground(Color.green);
+            	((panelLayout)super.panelArray[x][y]).setBackground(colorThree);
             }
             else if(pieceColor=="Y") {
-            	((panelLayout)super.panelArray[x][y]).setBackground(Color.yellow);
+            	((panelLayout)super.panelArray[x][y]).setBackground(colorFour);
             }
         }
 	}

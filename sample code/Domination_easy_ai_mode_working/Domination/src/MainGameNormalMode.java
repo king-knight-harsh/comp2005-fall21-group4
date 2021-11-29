@@ -180,7 +180,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	}
 	
 	/*
-	 * Sets the dimensions, co-ordinates and other properties for the "Unclick" button.
+	 * Sets the dimensions, coordinates and other properties for the "Unclick" button.
 	 * Uses ActionListener so that the an action is performed when user clicks the button.
 	 */
 	private JButton getDeSelectButton() {
@@ -564,7 +564,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	/*
 	 * This private method checks if the move made by the player is valid or not,
 	 * if not then opens a dialog box asking the player to make a valid move.
-	 * @param selected2 - Object to store the co-ordinates of the selected piece.
+	 * @param selected2 - Object to store the coordinates of the selected piece.
 	 * @param lengthofTheStack - Integer to store the number of pieces in a stack.
 	 */
 	private boolean checkValidMove(Object selected2, int lengthOfTheStack) {
@@ -593,7 +593,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	/*
 	 * This method returns the distance between initial position of the piece
 	 * and the final position of the piece when a move is played.
-	 * @param selected2 - Object to store the co-ordinates of the selected piece.
+	 * @param selected2 - Object to store the coordinates of the selected piece.
 	 * @param lengthoftheStack - Integer to store the number of pieces in a stack.
 	 */
 	private int getDistanceBetweenMove(Object selected2, int lengthOfTheStack) {
@@ -697,10 +697,10 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	}
 
 	/*
-	 * Moves the plie to one piece distance with a valid move
+	 * Moves the pile to one piece distance with a valid move
 	 * and updates the number of pieces in each pile.
-	 * @param selected - Object to store the co-ordinates of the initial position of the selected piece.
-	 * @param selected2 - object to store the Co-ordinates of the final position of the selected piece.
+	 * @param selected - Object to store the cordinates of the initial position of the selected piece.
+	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
 	 */
 	public void moveOnePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 1;
@@ -715,8 +715,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	/*
 	 * Moves the pile  to two piece distance with a valid move
 	 * and updates the number of pieces in each pile.
-	 * @param selected - Object to store the co-ordinates of the initial position of the selected piece.
-	 * @param selected2 - object to store the Co-ordinates of the final position of the selected piece.
+	 * @param selected - Object to store the coordinates of the initial position of the selected piece.
+	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
 	 */
 	public void moveTwoPiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 2;
@@ -754,8 +754,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	/*
 	 * Moves the pile  to three piece distance with a valid move
 	 * and updates the number of pieces in each pile.
-	 * @param selected - Object to store the co-ordinates of the initial position of the selected piece.
-	 * @param selected2 - object to store the Co-ordinates of the final position of the selected piece.
+	 * @param selected - Object to store the coordinates of the initial position of the selected piece.
+	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
 	 */
 	public void moveThreePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
 		
@@ -787,8 +787,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	/*
 	 * Moves the pile  to four piece distance with a valid move
 	 * and updates the number of pieces in each pile.
-	 * @param selected - Object to store the co-ordinates of the initial position of the selected piece.
-	 * @param selected2 - object to store the Co-ordinates of the final position of the selected piece.
+	 * @param selected - Object to store the coordinates of the initial position of the selected piece.
+	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
 	 */
 	public void moveFourPiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
         int moveDistance = 4;
@@ -812,8 +812,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	/*
 	 * Moves the pile  to five piece distance with a valid move
 	 * and updates the number of pieces in each pile.
-	 * @param selected - Object to store the co-ordinates of the initial position of the selected piece.
-	 * @param selected2 - object to store the Co-ordinates of the final position of the selected piece.
+	 * @param selected - Object to store the coordinates of the initial position of the selected piece.
+	 * @param selected2 - object to store the coordinates of the final position of the selected piece.
 	 */
 	public void moveFivePiece(int firstButtonXCoordinate,int firstButtonYCoordinate, int secondButtonXCoordinate, int secondButtonYCoordinate) {
 		
