@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.File;
+import java.io.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -592,9 +592,6 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	            	}
 	            }
 	            
-	           
-	            
-	            
 	        }
 }
 		
@@ -644,12 +641,12 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		} catch (Exception e) {   
 			System.out.printf("ERROR: FILE FAILED TO SAVE");; 
 			e.printStackTrace();
+			return;
 		}   
-		return;
 	}
 	
 	public static void loadFile() {
-		GameDisplay NG = null;
+		MainGameColorBlindMode NG = null;
 		try {
 		   FileInputStream fileLoad = new FileInputStream("/save1.ser");
 		   ObjectInputStream Load = new ObjectInputStream(fileLoad);
@@ -662,7 +659,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		   return;
 		}
 		catch (ClassNotFoundException c) {
-		   System.out.println("No game in progress");
+		   System.out.println("No saved game");
 		   c.printStackTrace();
 		   return;
 		}
@@ -674,7 +671,6 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		
 		// TODO Auto-generated method stub
 		Object newSelection = mevt.getSource();
-		
 		
 	}
 
@@ -714,8 +710,5 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
-	
 	
 }

@@ -1,10 +1,7 @@
 import javax.swing.*;
-
-
-
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
+import java.io.*;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -45,9 +42,9 @@ public class LoadGame extends JFrame implements ActionListener {
 	}
 	
 	private JLabel setInformationLabel() {
-		informationLabel = new JLabel("SELECT SLOT");
+		informationLabel = new JLabel("Are you sure you want to load the last saved game? Any unsaved progress will be deleted.");
 		informationLabel.setFont(new Font("TimesRoman", Font.BOLD, 56));
-		informationLabel.setBounds(40,0,560,100);
+		informationLabel.setBounds(30,40,560,100);
 		informationLabel.setForeground(Color.decode("#fcc729"));
 		return informationLabel;
 	}
@@ -57,46 +54,27 @@ public class LoadGame extends JFrame implements ActionListener {
 		this.setLocation(displayDimension.width/2-this.getSize().width/2, displayDimension.height/2-this.getSize().height/2);
 	}
 	
-	private JButton setLoadSlotOne(){
-		slotOne = new JButton("SLOT 1");
-		slotOne.setFont(new Font("TimesRoman", Font.BOLD, 40));
-		slotOne.setBackground(Color.decode("#fcc729"));
-		slotOne.setForeground(Color.decode("#337def"));
-		slotOne.addActionListener(this);
-		slotOne.setFocusable(false);		
-		slotOne.setBounds(80, 100, 300, 100);
-		return slotOne;
-	}	
+	private JButton setLoadSYes(){
+		slotYes = new JButton("Yes");
+		slotYes.setFont(new Font("TimesRoman", Font.BOLD, 16));
+		slotYes.setBackground(Color.decode("#fcc729"));
+		slotYes.setForeground(Color.decode("#337def"));
+		slotYes.addActionListener(this);
+		slotYes.setFocusable(false);		
+		slotYes.setBounds(80, 100, 300, 100);
+		return slotYes;
+	}
+
 	
-	private JButton setLoadSlotTwo(){
-		slotTwo = new JButton("SLOT 2");
-		slotTwo.setFont(new Font("TimesRoman", Font.BOLD, 40));
-		slotTwo.setBackground(Color.decode("#fcc729"));
-		slotTwo.setForeground(Color.decode("#337def"));
-		slotTwo.addActionListener(this);
-		slotTwo.setFocusable(false);		
-		slotTwo.setBounds(80, 220, 300, 100);
-		return slotTwo;
-	}
-	private JButton setLoadSlotThree(){
-		slotThree = new JButton("SLOT 3");		
-		slotThree.setFont(new Font("TimesRoman", Font.BOLD, 40));
-		slotThree.setBackground(Color.decode("#fcc729"));
-		slotThree.setForeground(Color.decode("#337def"));
-		slotThree.addActionListener(this);
-		slotThree.setFocusable(false);		
-		slotThree.setBounds(80, 340, 300, 100);
-		return slotThree;
-	}
-	private JButton setLoadSlotFour(){
-		slotFour = new JButton("SLOT 4");
-		slotFour.setFont(new Font("TimesRoman", Font.BOLD, 40));
-		slotFour.setBackground(Color.decode("#fcc729"));
-		slotFour.setForeground(Color.decode("#337def"));
-		slotFour.addActionListener(this);
-		slotFour.setFocusable(false);		
-		slotFour.setBounds(80, 460, 300, 100);
-		return slotFour;
+	private JButton setLoadNo(){
+		slotNo = new JButton("No");
+		slotNo.setFont(new Font("TimesRoman", Font.BOLD, 16));
+		slotNo.setBackground(Color.decode("#fcc729"));
+		slotNo.setForeground(Color.decode("#337def"));
+		slotNo.addActionListener(this);
+		slotNo.setFocusable(false);		
+		slotNo.setBounds(80, 220, 300, 100);
+		return slotNo;
 	}
 	
 
@@ -105,41 +83,27 @@ public class LoadGame extends JFrame implements ActionListener {
 		return loadImageIcon;
 	}
 	
-	public static void readFromFile() {
-		File txtFile = new File("save/text.txt");
-		try {
-			Scanner sc = new Scanner(txtFile);
-			
-			while(sc.hasNextLine()) {
-				System.out.println(sc.nextLine());
-			}
-			sc.close();
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
 		// TODO Auto-generated method stub
 		
 		Object selected = aevt.getSource();
-		if(selected == this.slotOne) {
+		if(selected == this.slotYes) {
 			this.dispose();
 			MainGameNormalMode.readFromFile();
 		}
-		if(selected == this.slotTwo) {
+		if(selected == this.slotNo) {
 			this.dispose();
 		}
-		
+		/*
 		if(selected == slotThree) {
 			this.dispose();
 		}
 		if(selected == slotFour) {
 			this.dispose();
 		}
-		
+		*/
 		
 	}
 

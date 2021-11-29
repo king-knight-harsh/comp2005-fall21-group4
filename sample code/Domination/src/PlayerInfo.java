@@ -11,7 +11,7 @@ public class PlayerInfo extends JFrame implements ActionListener{
 	private JTextField playerOneName, playerTwoName, playerThreeName, playerFourName;
 
 	PlayerInfo(int numberOfHumanPlayer, int numberOfBots){
-		this.numberOfHumans= numberOfHumanPlayer;
+		this.numberOfHumans = numberOfHumanPlayer;
 		
 		this.setLayout(null);
 		
