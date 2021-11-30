@@ -61,67 +61,67 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	private static int playerTwoCaptureCounter=0;
 	private static int playerThreeCaptureCounter=0;
 	private static int playerFourCaptureCounter=0;
-	private int playerOneReserveCounter=1,playerTwoReserveCounter=0,playerThreeReserveCounter=0,playerFourReserveCounter=0;
+	private int playerOneReserveCounter=0,playerTwoReserveCounter=0,playerThreeReserveCounter=0,playerFourReserveCounter=0;
 	private boolean playerTwoBot, playerThreeBot, playerFourBot;
-private Color colorOne,colorTwo,colorThree,colorFour;
-    
-    /*
-     * Constructor with public visibility.
-     * @param numberOfHumanPlayers - Integer that stores the number of human players 
-     *             who will play the game.
-     * @param player1 - String that stores the name of the first player.
-     * @param player2 - String that stores the name of the second player.
-     * @param player3 - String that stores the name of the third player.
-     * @param player4 - String that stores the name of the fourth player.
-     * @param botDifficultyLevel - Integer that stores the AI Difficulty level(i.e, "0 for EASY" or "1 for HARD") selected by the user.
-     * @param colorMode - Integer that stores the color Mode selected by the User. (i.e, "Normal" or "ColorBlind")
-     */
-    
-    MainGameColorBlindMode(int numberOfHumanPlayers, String player1,String player2,String player3,String player4, int botDifficultyLevel,Color colorOne,Color colorTwo,Color colorThree, Color colorFour){
-        this.numberOfHumanPlayers = numberOfHumanPlayers;
-        this.colorOne = colorOne;
+	private Color colorOne,colorTwo,colorThree,colorFour;
+
+	/*
+	 * Constructor with public visibility.
+	 * @param numberOfHumanPlayers - Integer that stores the number of human players 
+	 * 			who will play the game.
+	 * @param player1 - String that stores the name of the first player.
+	 * @param player2 - String that stores the name of the second player.
+	 * @param player3 - String that stores the name of the third player.
+	 * @param player4 - String that stores the name of the fourth player.
+	 * @param botDifficultyLevel - Integer that stores the AI Difficulty level(i.e, "EASY" or "HARD") selected by the user.
+	 * @param colorMode - Integer that stores the Color Mode selected by the User. (i.e, "Normal" or "ColorBlind")
+	 */
+
+	MainGameColorBlindMode(int numberOfHumanPlayers, String player1,String player2,String player3,String player4, int botDifficultyLevel, int colorMode, Color colorOne,
+			Color colorTwo,Color colorThree,Color colorFour){
+		this.numberOfHumanPlayers = numberOfHumanPlayers;
+		this.colorOne = colorOne;
         this.colorTwo = colorTwo;
         this.colorThree = colorThree;
         this.colorFour = colorFour;
-        if (player1!=null && player1.isEmpty() ==false) {
-            this.playerOneName=player1.toUpperCase();
-        }
-        
-        else if(player1==null || player1.isEmpty()){
-            this.playerOneName="PLAYER 1";
-        }
-        
-        if (player2!=null && player2.isEmpty() ==false) {
-            this.playerTwoName=player2.toUpperCase();
-        }
-        
-        else if(player2==null || player2.isEmpty()){
-            this.playerTwoName="PLAYER 2";
-        }
-        
-        if (player3!=null && player3.isEmpty() ==false) {
-            this.playerThreeName=player3.toUpperCase();
-        }
-        
-        else if(player3==null || player3.isEmpty()){
-            this.playerThreeName="PLAYER 3";
-        }
-        if (player4!=null&& player4.isEmpty() ==false) {
-            this.playerFourName=player4.toUpperCase();
-        }
-        
-        else if(player4==null || player4.isEmpty()){
-            this.playerFourName="PLAYER 4";
-        }        
-        
-        this.botDifficultyLevel = botDifficultyLevel;
-        this.colorMode = colorMode;
-        getContentPane().add(this.getTopPanel(),BorderLayout.NORTH);
-        getContentPane().add(this.getBottomPanel(),BorderLayout.SOUTH);
-        this.setBotPlayer();
-        this.setPiecesOnBoard();
-        
-    }
+		if (player1!=null && player1.isEmpty() ==false) {
+			this.playerOneName=player1.toUpperCase();
+		}
+
+		else if(player1==null || player1.isEmpty()){
+			this.playerOneName="PLAYER 1";
+		}
+
+		if (player2!=null && player2.isEmpty() ==false) {
+			this.playerTwoName=player2.toUpperCase();
+		}
+
+		else if(player2==null || player2.isEmpty()){
+			this.playerTwoName="PLAYER 2";
+		}
+
+		if (player3!=null && player3.isEmpty() ==false) {
+			this.playerThreeName=player3.toUpperCase();
+		}
+
+		else if(player3==null || player3.isEmpty()){
+			this.playerThreeName="PLAYER 3";
+		}
+		if (player4!=null&& player4.isEmpty() ==false) {
+			this.playerFourName=player4.toUpperCase();
+		}
+
+		else if(player4==null || player4.isEmpty()){
+			this.playerFourName="PLAYER 4";
+		}		
+
+		this.botDifficultyLevel = botDifficultyLevel;
+		this.colorMode = colorMode;
+		getContentPane().add(this.getTopPanel(),BorderLayout.NORTH);
+		getContentPane().add(this.getBottomPanel(),BorderLayout.SOUTH);
+		this.setPiecesOnBoard();
+
+	}
 	
 	public static int getNumberOfHumanPlayer() {
 		return numberOfHumanPlayers;
@@ -2111,24 +2111,24 @@ private Color colorOne,colorTwo,colorThree,colorFour;
 		        else if (selected== playerFourPanel && this.currentTurn==4) {
 		           	}
 	            else if (this.currentTurn ==1 ) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.blue) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorOne) {
 	            		selected=null;
 	            	}
 	            }
 	            else if (this.currentTurn==2) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.red) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorTwo) {
 
 	            		selected=null;
 	            	}
 	            }
 	            else if (this.currentTurn ==3 ) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.green) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorThree) {
 
 	            		selected=null;
 	            	}
 	            }
 	            else if (this.currentTurn==4) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.yellow) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorFour) {
 
 	            		selected=null;
 	            	}

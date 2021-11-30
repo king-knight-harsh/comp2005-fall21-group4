@@ -140,7 +140,7 @@ public class ColorSelect extends JFrame implements ActionListener{
 			Color colorFour = new Color(220,201,1);
 			this.dispose();	
 			MainGameColorBlindMode mainGameColorBlindModeTwo= new MainGameColorBlindMode(numberOfHumanPlayers,this.playerOneName,this.playerTwoName,
-					this.playerThreeName,this.playerFourName, this.botDifficultyLevel, colorOne, colorTwo, colorThree,colorFour);
+					this.playerThreeName,this.playerFourName, this.botDifficultyLevel,1, colorOne, colorTwo, colorThree,colorFour);
 		}
 		//Conditional block for the color blind mode Two button
 		if(selected == this.colorBlindButtonTwo) {
@@ -150,7 +150,7 @@ public class ColorSelect extends JFrame implements ActionListener{
 			Color colorFour = new Color(251,170,189);			
 			this.dispose();	
 			MainGameColorBlindMode mainGameColorBlindModeTwo= new MainGameColorBlindMode(numberOfHumanPlayers,this.playerOneName,this.playerTwoName,
-					this.playerThreeName,this.playerFourName, this.botDifficultyLevel, colorOne, colorTwo, colorThree,colorFour);
+					this.playerThreeName,this.playerFourName, this.botDifficultyLevel,1,colorOne, colorTwo, colorThree,colorFour);
 			 
 		}
 	}

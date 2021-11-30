@@ -223,7 +223,7 @@ public class LoadGame extends GameDisplay implements ActionListener {
 		for (int row=0; row<8;row++) {
 			for(int column=0; column<8;column++) {
 				(super.panelArray[row][column]).setBackground(stack[row][column].getBackground());				
-				panelArray[row][column].addActionListener(this);			
+				((panelLayout)super.panelArray[row][column]).addActionListener(this);	
 				(super.panelArray[row][column]).setText(((panelLayout)stack[row][column]).getStackForPiece().toString());
 				((panelLayout)super.panelArray[row][column]).setForeground(Color.black);
 				((panelLayout)super.panelArray[row][column]).setFocusable(false);
@@ -1700,7 +1700,7 @@ public class LoadGame extends GameDisplay implements ActionListener {
 		Object selected3 = aevt.getSource();
 		Object selected4 = aevt.getSource();
 		if (selected3!=ruleBook && selected3!=exitGame && selected3!=newGame && selected3!=saveGame && selected3!=loadGame ) {
-			System.out.println("hello");
+			
 			if (selected != null) {
 
 	            Object selected2 = aevt.getSource();

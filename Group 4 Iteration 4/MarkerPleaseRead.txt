@@ -1,1 +1,1 @@
-Save and load functionality is partially functional
+Save and load functionality is partially functional, game compilation should be done 909,900 display for complete view
