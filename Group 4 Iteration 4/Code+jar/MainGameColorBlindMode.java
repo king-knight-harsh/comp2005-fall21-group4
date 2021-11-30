@@ -61,7 +61,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	private static int playerTwoCaptureCounter=0;
 	private static int playerThreeCaptureCounter=0;
 	private static int playerFourCaptureCounter=0;
-	private int playerOneReserveCounter=0,playerTwoReserveCounter=0,playerThreeReserveCounter=0,playerFourReserveCounter=0;
+	private int playerOneReserveCounter=1,playerTwoReserveCounter=0,playerThreeReserveCounter=0,playerFourReserveCounter=0;
 	private boolean playerTwoBot, playerThreeBot, playerFourBot;
 private Color colorOne,colorTwo,colorThree,colorFour;
     
@@ -2100,28 +2100,35 @@ private Color colorOne,colorTwo,colorThree,colorFour;
 
 
 
-	        else{
+			else{
 	            selected = aevt.getSource();
-	            
-	            if (this.currentTurn ==1 ) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorOne) {
+	            if (selected== playerOnePanel && this.currentTurn==1 ) {
+		           }
+		        else if (selected== playerTwoPanel && this.currentTurn==2 ) {
+		           	}
+		        else if (selected== playerThreePanel && this.currentTurn==3) {
+		           	}
+		        else if (selected== playerFourPanel && this.currentTurn==4) {
+		           	}
+	            else if (this.currentTurn ==1 ) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.blue) {
 	            		selected=null;
 	            	}
 	            }
 	            else if (this.currentTurn==2) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorTwo) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.red) {
 
 	            		selected=null;
 	            	}
 	            }
 	            else if (this.currentTurn ==3 ) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorThree) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.green) {
 
 	            		selected=null;
 	            	}
 	            }
 	            else if (this.currentTurn==4) {
-	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorFour) {
+	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.yellow) {
 
 	            		selected=null;
 	            	}

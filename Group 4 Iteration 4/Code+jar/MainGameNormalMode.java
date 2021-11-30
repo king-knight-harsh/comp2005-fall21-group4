@@ -2096,10 +2096,17 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener, S
 
 
 
-	        else{
+			else{
 	            selected = aevt.getSource();
-	            
-	            if (this.currentTurn ==1 ) {
+	            if (selected== playerOnePanel && this.currentTurn==1 ) {
+		           }
+		        else if (selected== playerTwoPanel && this.currentTurn==2 ) {
+		           	}
+		        else if (selected== playerThreePanel && this.currentTurn==3) {
+		           	}
+		        else if (selected== playerFourPanel && this.currentTurn==4) {
+		           	}
+	            else if (this.currentTurn ==1 ) {
 	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.blue) {
 	            		selected=null;
 	            	}
