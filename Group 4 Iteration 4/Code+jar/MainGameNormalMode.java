@@ -28,11 +28,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import java.io.Serializable;
 
-public class MainGameNormalMode extends GameDisplay implements ActionListener{
+public class MainGameNormalMode extends GameDisplay implements ActionListener, Serializable{
 
 	private JLabel informationLabel;
-	private int numberOfHumanPlayers;	
+	private static int numberOfHumanPlayers;	
 	private String playerOneName, playerTwoName, playerThreeName, playerFourName;
 	private int colorMode;
 	private int botDifficultyLevel;
@@ -44,7 +45,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	private JLabel playerOneReserved,playerTwoReserved,playerThreeReserved,playerFourReserved;
 
 
-	private int currentTurn;
+	private static int currentTurn;
 	private int firstButtonXCoordinate;
     private int firstButtonYCoordinate;
 
@@ -56,7 +57,10 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	private String pieceColor;
 	private JButton deSelectButton, botButton;
 
-	private int playerOneCaptureCounter=0,playerTwoCaptureCounter=0,playerThreeCaptureCounter=0,playerFourCaptureCounter=0;
+	private static int playerOneCaptureCounter=0;
+	private static int playerTwoCaptureCounter=0;
+	private static int playerThreeCaptureCounter=0;
+	private static int playerFourCaptureCounter=0;
 	private int playerOneReserveCounter=0,playerTwoReserveCounter=0,playerThreeReserveCounter=0,playerFourReserveCounter=0;
 	private boolean playerTwoBot, playerThreeBot, playerFourBot;
 
@@ -114,6 +118,21 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		this.setPiecesOnBoard();
 
 	}
+	
+	public static int getNumberOfHumanPlayer() {
+		return numberOfHumanPlayers;
+	}
+	
+	public static int getCurrentTurn() {
+		return currentTurn;
+	}
+	public static JButton[][] getStackForGame() {
+		return panelArray;
+	}
+	public static void setStackForGame(JButton[][] stack) {
+		panelArray = stack;
+	}
+	
 
 	//This private method returns the name of first player.
 	private String getPlayerOneName() {
@@ -278,7 +297,22 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		return deSelectButton; 
 	}
 	
-
+	/*
+	 * Method to get the counter of the all Methods
+	 * @return captureCount - Arraylist with value of all the counter
+	 * 
+	 */	
+	private static ArrayList<Integer> getTotalCaptureCount() {
+		ArrayList<Integer> captureCount = new ArrayList<Integer>();
+		captureCount.add(playerOneCaptureCounter);
+		captureCount.add(playerTwoCaptureCounter);
+		captureCount.add(playerThreeCaptureCounter);
+		captureCount.add(playerFourCaptureCounter);
+		
+		
+		return captureCount;
+	}
+	
 	/*Sets the layout for the Captured button which tells how any pieces of other players are captured by Player One.
 	 *@return  playerOneCaptured - JLabel containing the value of the player one captured pieces
 	 */
@@ -1858,6 +1892,10 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		selected = null;
 	} 
 
+	private void getPlayerInfo() {
+		
+	}
+	
 	
 	/*
 	 * Enables Player Three to use the reserved piece/s again in the game. 
@@ -2060,15 +2098,8 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 
 	        else{
 	            selected = aevt.getSource();
-	            if (selected== playerOnePanel && this.currentTurn==1 ) {
-		           }
-		        else if (selected== playerTwoPanel && this.currentTurn==2 ) {
-		           	}
-		        else if (selected== playerThreePanel && this.currentTurn==3) {
-		           	}
-		        else if (selected== playerFourPanel && this.currentTurn==4) {
-		           	}
-	            else if (this.currentTurn ==1 ) {
+	            
+	            if (this.currentTurn ==1 ) {
 	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= Color.blue) {
 	            		selected=null;
 	            	}
@@ -2118,17 +2149,22 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 	
 	        if(selected3 == super.saveGame) {
 	 			//this.dispose();
-	 			SaveAndExit saveAndExit = new SaveAndExit();			
+	 			SaveAndExit saveAndExit = new SaveAndExit();
+	 			
 	 		}
 	
 	        if(selected3 == super.loadGame) {
+	        	this.dispose();
 	        	JFileChooser fileChooser = new JFileChooser();
 				// select file to open
 				int response = fileChooser.showOpenDialog(null);
 				
 				if (response == JFileChooser.APPROVE_OPTION) {
-					File file = new File(fileChooser.getSelectedFile().getAbsoluteFile().toString());
+					System.out.println(fileChooser.getSelectedFile().getAbsoluteFile().toString());
+					ResourceManager manager = new ResourceManager();
+					manager.loadGame(fileChooser.getSelectedFile().getAbsoluteFile().toString());
 				}
+				
  			}         
 		}
 

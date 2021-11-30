@@ -13,7 +13,7 @@ import java.util.*;
 
 public class GameDisplay extends JFrame implements ActionListener{
 
-	public JButton[][] panelArray ;	
+	public static JButton[][] panelArray ;	
 	private JMenuBar menuBar;
 	private JButton piece;
 	private JPanel middlePanel;
@@ -40,7 +40,7 @@ public class GameDisplay extends JFrame implements ActionListener{
 		JOptionPane.showMessageDialog(null,"CLICK ON ACTION'S TO BEGIN ","WELCOME TO GAME ",JOptionPane.PLAIN_MESSAGE,this.getWelcomeIcon());
 	}
 	
-	//Sets the layout of the game.
+	//Sets the initial layout of the game with display of 900 by 900
 	public void setLayout() {
 		
  		
@@ -48,17 +48,10 @@ public class GameDisplay extends JFrame implements ActionListener{
 		this.setIconImage(this.getGameIcon().getImage());
 		this.setSize(900,900);
 		this.setDisplayToCenter();
-		
-		
 		this.setMenuBar();
 		
 		getContentPane().add(this.getMiddlePanel(),BorderLayout.CENTER);
-		
 		this.disableButton();
-		
-		 
-		
-		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		
@@ -66,18 +59,23 @@ public class GameDisplay extends JFrame implements ActionListener{
 	
 	}
 	
-	
-	
-	
+	/*
+	 * Method to get the 2d JButton array
+	 * @param panelArray - JButton[][] 2d array for the game
+	 */
 	protected JButton[][] getPanelArray(){
 		return panelArray;
 	}
 	
 	
-	//Sets the layout for the middle panel of the JFrame and add components to it.
+	/*
+	 * Setter Method to setting the layout for the middle panel of the JFrame and add components to it.
+	 * @param middlePanel - JPanel customize panel to build the center part of the game
+	 */
 	public JPanel getMiddlePanel() {
 		
 		middlePanel =new JPanel();
+		//Initializing the gridLayout
 		middlePanel.setLayout(new GridLayout(8,8,4,4));
 		middlePanel.setSize(600,600);
 		// Two dimensional array of JButton to store xCoordinate and yCoordinate
@@ -291,30 +289,34 @@ public class GameDisplay extends JFrame implements ActionListener{
 				e.printStackTrace();
 			}
 		}
-		
+		//Conditional block if selected exitGame Button
 		if (selected==exitGame) {
 			System.exit(0);
 		}
-		
+		//Conditional block if selected newGame Button
 		if (selected == newGame) {
 			this.dispose();
 			PlayerSelector playerSelectorWindow = new PlayerSelector();
 			playerSelectorWindow.setLayout();
 		}
-		
+		//Conditional block if selected saveGame Button
 		if(selected == saveGame) {
 			//this.dispose();
 			SaveAndExit saveAndExit = new SaveAndExit();			
 		}
-		
+		//Conditional block if selected loadGame Button
 		if(selected == loadGame) {
+			this.dispose();
 			JFileChooser fileChooser = new JFileChooser();
 			// select file to open
 			int response = fileChooser.showOpenDialog(null);
 			
 			if (response == JFileChooser.APPROVE_OPTION) {
 				File file = new File(fileChooser.getSelectedFile().getAbsoluteFile().toString());
+				ResourceManager manager = new ResourceManager();
+				manager.loadGame(fileChooser.getSelectedFile().getAbsoluteFile().toString());
 			}
+			
 		}
 	}
 

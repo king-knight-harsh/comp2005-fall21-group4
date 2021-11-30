@@ -1,7 +1,8 @@
+//Importing the required files
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+// GUI for getting the names of the players
 public class PlayerInfo extends JFrame implements ActionListener{
 	private int numberOfHumans;
 	private Dimension displayDimension;
@@ -10,6 +11,11 @@ public class PlayerInfo extends JFrame implements ActionListener{
 	private JButton submitButtonPlayerOne,submitButtonPlayerTwo,submitButtonPlayerThree,submitButtonPlayerFour;
 	private JTextField playerOneName, playerTwoName, playerThreeName, playerFourName;
 
+	/*
+	 * Constructor for the getting the name of the players
+	 * @param numberOfHumanPlayer - Integer number of human players
+	 * @param numberOfBots - Integer bot difficulty level of the game
+	 */
 	PlayerInfo(int numberOfHumanPlayer, int numberOfBots){
 		this.numberOfHumans= numberOfHumanPlayer;
 		
@@ -37,6 +43,10 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		this.setVisible(true);
 	}
 	
+	/*
+	 * Method to get the player's information
+	 * @return playerOneInfo - JLabel containing the information related to playerOne
+	 */
 	private JLabel getPlayerOneInfo() {
 		playerOneInfo = new JLabel("NAME OF PLAYER 1:");
 		playerOneInfo.setFont(new Font("TimesRoman", Font.BOLD, 32));
@@ -44,7 +54,10 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		playerOneInfo.setForeground(Color.decode("#fcc729"));
 		return playerOneInfo;
 	} 
-	
+	/*
+	 * Method to get the player's information
+	 * @return playerTwoInfo - JLabel containing the information related to playerTwo
+	 */
 	private JLabel getPlayerTwoInfo() {
 		playerTwoInfo = new JLabel("NAME OF PLAYER 2:");		
 		playerTwoInfo.setFont(new Font("TimesRoman", Font.BOLD, 32));
@@ -52,6 +65,10 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		playerTwoInfo.setForeground(Color.decode("#fcc729"));
 		return playerTwoInfo;
 	}
+	/*
+	 * Method to get the player's information
+	 * @return playerThreeInfo - JLabel containing the information related to playerOnThree
+	 */
 	private JLabel getPlayerThreeInfo() {
 		playerThreeInfo = new JLabel("NAME OF PLAYER 3:");
 		playerThreeInfo.setFont(new Font("TimesRoman", Font.BOLD, 32));
@@ -59,7 +76,10 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		playerThreeInfo.setForeground(Color.decode("#fcc729"));
 		return playerThreeInfo;
 	}
-	
+	/*
+	 * Method to get the player's information
+	 * @return playerFourInfo - JLabel containing the information related to playerFour
+	 */
 	private JLabel getPlayerFourInfo() {
 		playerFourInfo = new JLabel("NAME OF PLAYER 4:");
 		playerFourInfo.setFont(new Font("TimesRoman", Font.BOLD, 32));
@@ -69,6 +89,11 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		
 	}
 	
+	/*
+	 * Method to set the text for the player
+	 * @return playerOneName - JTextField text for the name of the player
+	 */
+	
 	private JTextField setPlayerOneNameTxt() {
 		playerOneName = new JTextField();
 		playerOneName.setBounds(340,90,130,40);
@@ -77,7 +102,10 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		playerOneName.setFont(new Font("TimesRoman", Font.BOLD, 26));
 		return playerOneName;
 	}
-	
+	/*
+	 * Method to set the text for the player
+	 * @return playerTwoName - JTextField text for the name of the player
+	 */
 	private JTextField setPlayerTwoNameTxt() {
 		playerTwoName = new JTextField();
 		playerTwoName.setBounds(340,150,130,40);
@@ -86,7 +114,10 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		playerTwoName.setFont(new Font("TimesRoman", Font.BOLD, 26));
 		return playerTwoName;
 	}
-	
+	/*
+	 * Method to set the text for the player
+	 * @return playerThreeName - JTextField text for the name of the player
+	 */
 	private JTextField setPlayerThreeNameTxt() {
 		playerThreeName = new JTextField();
 		playerThreeName.setBounds(340,210,130,40);
@@ -95,7 +126,10 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		playerThreeName.setFont(new Font("TimesRoman", Font.BOLD, 26));
 		return playerThreeName;
 	}
-	
+	/*
+	 * Method to set the text for the player
+	 * @return playerFourName - JTextField text for the name of the player
+	 */
 	private JTextField setPlayerFourNameTxt() {
 		playerFourName = new JTextField();
 		playerFourName.setBounds(340,270,130,40);
@@ -104,7 +138,10 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		playerFourName.setFont(new Font("TimesRoman", Font.BOLD, 26));
 		return playerFourName;
 	}
-	
+	/*
+	 * Method to set the information label for the game
+	 * @return informationLabel - JLabel customize label for asking the information from the players
+	 */
 	private JLabel setInformationLabel() {
 		informationLabel = new JLabel("Player Information",SwingConstants.CENTER);
 		informationLabel.setBounds(90,10,300,50);
@@ -114,6 +151,10 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		return informationLabel;
 	}
 	
+	/*
+	 * Method to set the button to submit the details for One human player
+	 * @return submitButtonPlayerOne - JButton for the submit action
+	 */
 	public JButton setSubmitButtonPlayerOne() {
 		submitButtonPlayerOne = new JButton("SUBMIT");
 		submitButtonPlayerOne.setFont(new Font("TimesRoman", Font.BOLD, 20));
@@ -124,7 +165,10 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		submitButtonPlayerOne.setBounds(165, 150, 150, 50);
 		return submitButtonPlayerOne;
 	}
-	
+	/*
+	 * Method to set the button to submit the details for two human player
+	 * @return submitButtonPlayerTwo - JButton for the submit action
+	 */
 	public JButton setSubmitButtonPlayerTwo() {
 		submitButtonPlayerTwo = new JButton("SUBMIT");
 		submitButtonPlayerTwo.setFont(new Font("TimesRoman", Font.BOLD, 20));
@@ -135,7 +179,10 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		submitButtonPlayerTwo.setBounds(165, 220, 150, 50);
 		return submitButtonPlayerTwo;
 	}
-	
+	/*
+	 * Method to set the button to submit the details for three human player
+	 * @return submitButtonPlayerThree - JButton for the submit action
+	 */
 	public JButton setSubmitButtonPlayerThree() {
 		submitButtonPlayerThree = new JButton("SUBMIT");
 		submitButtonPlayerThree.setFont(new Font("TimesRoman", Font.BOLD, 20));
@@ -146,7 +193,10 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		submitButtonPlayerThree.setBounds(165, 270, 150, 50);		
 		return submitButtonPlayerThree;
 	}
-	
+	/*
+	 * Method to set the button to submit the details for four human player
+	 * @return submitButtonPlayerFour - JButton for the submit action
+	 */
 	public JButton setSubmitButtonPlayerFour() {
 		submitButtonPlayerFour = new JButton("SUBMIT");
 		submitButtonPlayerFour.setFont(new Font("TimesRoman", Font.BOLD, 20));
@@ -158,6 +208,7 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		return submitButtonPlayerFour;
 	}
 	
+	// method to set the information related to the player one
 	private void setPlayerOneInfo() {
 		this.setSize(500,250);
 		this.setDisplayToCenter();		
@@ -165,14 +216,11 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		getContentPane().add(this.setInformationLabel());
 		getContentPane().add(this.getPlayerOneInfo());		
 		getContentPane().add(this.setPlayerOneNameTxt());
-		
-			
-		
 		getContentPane().add(playerOneInfo);
 		getContentPane().add(this.setSubmitButtonPlayerOne());		
 		
 	}
-	
+	// method to set the information related to the player two
 	private void setPlayerTwoInfo() {
 		this.setSize(500,350);
 		this.setDisplayToCenter();
@@ -182,16 +230,12 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		getContentPane().add(this.getPlayerTwoInfo());
 		getContentPane().add(this.setPlayerOneNameTxt());
 		getContentPane().add(this.setPlayerTwoNameTxt());
-		
-		
-		
-	
 		getContentPane().add(playerOneInfo);
 		getContentPane().add(playerTwoInfo);
 		getContentPane().add(this.setSubmitButtonPlayerTwo());	
 		
 	}
-	
+	// method to set the information related to the player Three
 	private void setPlayerThreeInfo() {
 		this.setSize(500,390);
 		this.setDisplayToCenter();
@@ -203,17 +247,13 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		getContentPane().add(this.setPlayerOneNameTxt());
 		getContentPane().add(this.setPlayerTwoNameTxt());
 		getContentPane().add(this.setPlayerThreeNameTxt());
-		
-		
-
-		
 		getContentPane().add(playerOneInfo);
 		getContentPane().add(playerTwoInfo);
 		getContentPane().add(playerThreeInfo);
 		getContentPane().add(this.setSubmitButtonPlayerThree());		
 		
 	}
-	
+	// method to set the information related to the player Four
 	private void setPlayerFourInfo() {
 		this.setSize(500,470);
 		this.setDisplayToCenter();
@@ -236,17 +276,19 @@ public class PlayerInfo extends JFrame implements ActionListener{
 		getContentPane().add(this.setSubmitButtonPlayerFour());	
 		
 	}
-	
+	// method to get the image for the frame
 	private ImageIcon getPlayerIcon() {
 		playerIcon = new ImageIcon(getClass().getResource("images/user.png"));
 		return playerIcon;
 		
 	}
+	//Method to set display to the center
 	private void setDisplayToCenter() {
 		displayDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(displayDimension.width/2-this.getSize().width/2, displayDimension.height/2-this.getSize().height/2);
 	}
-
+	
+	//Action performed method 
 	@Override
 	public void actionPerformed(ActionEvent aevt) {
 		// TODO Auto-generated method stub

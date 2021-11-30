@@ -28,96 +28,115 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import java.io.Serializable;
 
-public class MainGameColorBlindMode extends GameDisplay implements ActionListener{
-	
+public class MainGameColorBlindMode extends GameDisplay implements ActionListener, Serializable{
+
 	private JLabel informationLabel;
-	private int numberOfHumanPlayers;	
+	private static int numberOfHumanPlayers;	
 	private String playerOneName, playerTwoName, playerThreeName, playerFourName;
 	private int colorMode;
 	private int botDifficultyLevel;
-	
+
 	private JPanel topPanel,infoPanel, bottomPanel;
 	private panelLayout playerOnePanel,playerTwoPanel,playerThreePanel, playerFourPanel;
 	private JLabel playerOneInfo,playerTwoInfo,playerThreeInfo,playerFourInfo; 
 	private JLabel playerOneCaptured,playerTwoCaptured,playerThreeCaptured,playerFourCaptured; 
 	private JLabel playerOneReserved,playerTwoReserved,playerThreeReserved,playerFourReserved;
 
-	
-	private int currentTurn;
+
+	private static int currentTurn;
 	private int firstButtonXCoordinate;
     private int firstButtonYCoordinate;
-	
+
 	private Color nameOfTheColor;
-	
+
 	private Random randomTurn;
-	
+
 	private Object selected =null;
 	private String pieceColor;
 	private JButton deSelectButton, botButton;
-	
-	private int playerOneCaptureCounter=0,playerTwoCaptureCounter=0,playerThreeCaptureCounter=0,playerFourCaptureCounter=0;
-	private int playerOneReserveCounter=1,playerTwoReserveCounter=0,playerThreeReserveCounter=0,playerFourReserveCounter=0;
+
+	private static int playerOneCaptureCounter=0;
+	private static int playerTwoCaptureCounter=0;
+	private static int playerThreeCaptureCounter=0;
+	private static int playerFourCaptureCounter=0;
+	private int playerOneReserveCounter=0,playerTwoReserveCounter=0,playerThreeReserveCounter=0,playerFourReserveCounter=0;
 	private boolean playerTwoBot, playerThreeBot, playerFourBot;
-	private Color colorOne,colorTwo,colorThree,colorFour;
-	
-	/*
-	 * Constructor with public visibility.
-	 * @param numberOfHumanPlayers - Integer that stores the number of human players 
-	 * 			who will play the game.
-	 * @param player1 - String that stores the name of the first player.
-	 * @param player2 - String that stores the name of the second player.
-	 * @param player3 - String that stores the name of the third player.
-	 * @param player4 - String that stores the name of the fourth player.
-	 * @param botDifficultyLevel - Integer that stores the AI Difficulty level(i.e, "0 for EASY" or "1 for HARD") selected by the user.
-	 * @param colorMode - Integer that stores the color Mode selected by the User. (i.e, "Normal" or "ColorBlind")
-	 */
-	
-	MainGameColorBlindMode(int numberOfHumanPlayers, String player1,String player2,String player3,String player4, int botDifficultyLevel,Color colorOne,Color colorTwo,Color colorThree, Color colorFour){
-		this.numberOfHumanPlayers = numberOfHumanPlayers;
-		this.colorOne = colorOne;
+private Color colorOne,colorTwo,colorThree,colorFour;
+    
+    /*
+     * Constructor with public visibility.
+     * @param numberOfHumanPlayers - Integer that stores the number of human players 
+     *             who will play the game.
+     * @param player1 - String that stores the name of the first player.
+     * @param player2 - String that stores the name of the second player.
+     * @param player3 - String that stores the name of the third player.
+     * @param player4 - String that stores the name of the fourth player.
+     * @param botDifficultyLevel - Integer that stores the AI Difficulty level(i.e, "0 for EASY" or "1 for HARD") selected by the user.
+     * @param colorMode - Integer that stores the color Mode selected by the User. (i.e, "Normal" or "ColorBlind")
+     */
+    
+    MainGameColorBlindMode(int numberOfHumanPlayers, String player1,String player2,String player3,String player4, int botDifficultyLevel,Color colorOne,Color colorTwo,Color colorThree, Color colorFour){
+        this.numberOfHumanPlayers = numberOfHumanPlayers;
+        this.colorOne = colorOne;
         this.colorTwo = colorTwo;
         this.colorThree = colorThree;
         this.colorFour = colorFour;
-		if (player1!=null && player1.isEmpty() ==false) {
-			this.playerOneName=player1.toUpperCase();
-		}
-		
-		else if(player1==null || player1.isEmpty()){
-			this.playerOneName="PLAYER 1";
-		}
-		
-		if (player2!=null && player2.isEmpty() ==false) {
-			this.playerTwoName=player2.toUpperCase();
-		}
-		
-		else if(player2==null || player2.isEmpty()){
-			this.playerTwoName="PLAYER 2";
-		}
-		
-		if (player3!=null && player3.isEmpty() ==false) {
-			this.playerThreeName=player3.toUpperCase();
-		}
-		
-		else if(player3==null || player3.isEmpty()){
-			this.playerThreeName="PLAYER 3";
-		}
-		if (player4!=null&& player4.isEmpty() ==false) {
-			this.playerFourName=player4.toUpperCase();
-		}
-		
-		else if(player4==null || player4.isEmpty()){
-			this.playerFourName="PLAYER 4";
-		}		
-		
-		this.botDifficultyLevel = botDifficultyLevel;
-		this.colorMode = colorMode;
-		getContentPane().add(this.getTopPanel(),BorderLayout.NORTH);
-		getContentPane().add(this.getBottomPanel(),BorderLayout.SOUTH);
-		this.setBotPlayer();
-		this.setPiecesOnBoard();
-		
+        if (player1!=null && player1.isEmpty() ==false) {
+            this.playerOneName=player1.toUpperCase();
+        }
+        
+        else if(player1==null || player1.isEmpty()){
+            this.playerOneName="PLAYER 1";
+        }
+        
+        if (player2!=null && player2.isEmpty() ==false) {
+            this.playerTwoName=player2.toUpperCase();
+        }
+        
+        else if(player2==null || player2.isEmpty()){
+            this.playerTwoName="PLAYER 2";
+        }
+        
+        if (player3!=null && player3.isEmpty() ==false) {
+            this.playerThreeName=player3.toUpperCase();
+        }
+        
+        else if(player3==null || player3.isEmpty()){
+            this.playerThreeName="PLAYER 3";
+        }
+        if (player4!=null&& player4.isEmpty() ==false) {
+            this.playerFourName=player4.toUpperCase();
+        }
+        
+        else if(player4==null || player4.isEmpty()){
+            this.playerFourName="PLAYER 4";
+        }        
+        
+        this.botDifficultyLevel = botDifficultyLevel;
+        this.colorMode = colorMode;
+        getContentPane().add(this.getTopPanel(),BorderLayout.NORTH);
+        getContentPane().add(this.getBottomPanel(),BorderLayout.SOUTH);
+        this.setBotPlayer();
+        this.setPiecesOnBoard();
+        
+    }
+	
+	public static int getNumberOfHumanPlayer() {
+		return numberOfHumanPlayers;
 	}
+	
+	public static int getCurrentTurn() {
+		return currentTurn;
+	}
+	public static JButton[][] getStackForGame() {
+		return panelArray;
+	}
+	public static void setStackForGame(JButton[][] stack) {
+		panelArray = stack;
+	}
+	
 
 	//This private method returns the name of first player.
 	private String getPlayerOneName() {
@@ -282,7 +301,22 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		return deSelectButton; 
 	}
 	
-
+	/*
+	 * Method to get the counter of the all Methods
+	 * @return captureCount - Arraylist with value of all the counter
+	 * 
+	 */	
+	private static ArrayList<Integer> getTotalCaptureCount() {
+		ArrayList<Integer> captureCount = new ArrayList<Integer>();
+		captureCount.add(playerOneCaptureCounter);
+		captureCount.add(playerTwoCaptureCounter);
+		captureCount.add(playerThreeCaptureCounter);
+		captureCount.add(playerFourCaptureCounter);
+		
+		
+		return captureCount;
+	}
+	
 	/*Sets the layout for the Captured button which tells how any pieces of other players are captured by Player One.
 	 *@return  playerOneCaptured - JLabel containing the value of the player one captured pieces
 	 */
@@ -1862,6 +1896,10 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		selected = null;
 	} 
 
+	private void getPlayerInfo() {
+		
+	}
+	
 	
 	/*
 	 * Enables Player Three to use the reserved piece/s again in the game. 
@@ -1934,7 +1972,6 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	            				this.playFromReservePlayerOne(secondButtonXCoordinate, secondButtonYCoordinate);
 	            				this.checkCapturedPiece(secondButtonXCoordinate,secondButtonYCoordinate);
 	            				((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).setText(((panelLayout)super.panelArray[secondButtonXCoordinate][secondButtonYCoordinate]).getStackForPiece().toString());
-	            				
 
 	            			}
 	            			else {
@@ -2049,7 +2086,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 
 				                this.setStackText(firstButtonXCoordinate, firstButtonYCoordinate, secondButtonXCoordinate, secondButtonYCoordinate);
 				                selected = null;
-				                this.checkWin(this.currentTurn);
+				                this.checkWin(this.currentTurn);	                
 			            	}		            	
 		            }
 	            }
@@ -2065,15 +2102,8 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 
 	        else{
 	            selected = aevt.getSource();
-	            if (selected== playerOnePanel && this.currentTurn==1 ) {
-		           }
-		        else if (selected== playerTwoPanel && this.currentTurn==2 ) {
-		           	}
-		        else if (selected== playerThreePanel && this.currentTurn==3) {
-		           	}
-		        else if (selected== playerFourPanel && this.currentTurn==4) {
-		           	}
-	            else if (this.currentTurn ==1 ) {
+	            
+	            if (this.currentTurn ==1 ) {
 	            	if (panelArray[((panelLayout) selected).getXCoordinate()][((panelLayout) selected).getYCoordinate()].getBackground()!= colorOne) {
 	            		selected=null;
 	            	}
@@ -2123,18 +2153,23 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 	
 	        if(selected3 == super.saveGame) {
 	 			//this.dispose();
-	 			SaveAndExit saveAndExit = new SaveAndExit();			
+	 			SaveAndExit saveAndExit = new SaveAndExit();
+	 			
 	 		}
 	
 	        if(selected3 == super.loadGame) {
+	        	this.dispose();
 	        	JFileChooser fileChooser = new JFileChooser();
 				// select file to open
 				int response = fileChooser.showOpenDialog(null);
 				
 				if (response == JFileChooser.APPROVE_OPTION) {
-					File file = new File(fileChooser.getSelectedFile().getAbsoluteFile().toString());
+					System.out.println(fileChooser.getSelectedFile().getAbsoluteFile().toString());
+					ResourceManager manager = new ResourceManager();
+					manager.loadGame(fileChooser.getSelectedFile().getAbsoluteFile().toString());
 				}
-			}         
+				
+ 			}         
 		}
 
 

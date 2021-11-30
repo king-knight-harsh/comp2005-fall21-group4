@@ -1,5 +1,5 @@
 /*
- * A Computerised version of the board game - DOMINATION, called "FOCUS."
+ * A Computerized version of the board game - DOMINATION, called "FOCUS."
  * Here the GameDisplay class extends JFrame.
  */
 

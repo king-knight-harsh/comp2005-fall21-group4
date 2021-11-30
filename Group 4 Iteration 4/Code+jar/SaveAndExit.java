@@ -145,8 +145,6 @@ public class SaveAndExit extends JFrame implements ActionListener,java.io.Serial
 		
 		try {
 			PrintWriter pw = new PrintWriter(txtFile);
-			pw.println("Hello from the other side!");
-			pw.println("I must have called thousand times");
 			pw.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -167,11 +165,17 @@ public class SaveAndExit extends JFrame implements ActionListener,java.io.Serial
 			System.exit(0);
 		}
 		
-		if(selected == saveAndQuitButton) {
-			this.dispose();
+		if(selected == saveAndQuitButton) {			
+			JFileChooser fileChooser = new JFileChooser();
+			// select file to open
+			int response = fileChooser.showSaveDialog(null);
 			
-			//LoadGame savegame = new LoadGame();
-			this.WriteToFile();
+			if (response == JFileChooser.APPROVE_OPTION) {
+				File file = new File(fileChooser.getSelectedFile().getAbsoluteFile().toString());
+				ResourceManager manager = new ResourceManager();
+				manager.saveGame(fileChooser.getSelectedFile().getAbsoluteFile().toString());
+			}							
+			System.exit(0);
 		}
 		
 	}
