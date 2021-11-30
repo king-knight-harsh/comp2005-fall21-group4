@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -618,7 +619,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
  		
          else if(selected3 == super.saveGame) {
  			//this.dispose();
- 			SaveAndExit saveAndExit = new SaveAndExit();			
+ 			SaveGame saveGame = new SaveGame();
  		}
  		
          else if(selected3 == super.loadGame) {
@@ -634,7 +635,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 			FileOutputStream saveFile = new FileOutputStream("/save1.ser");   
 			ObjectOutputStream object = new ObjectOutputStream(saveFile);   
 			
-			object.writeObject(this.class);   	
+			object.writeObject(MainGameColorBlindMode.class);
 			object.close();   
 			saveFile.close();   
 	
@@ -650,7 +651,7 @@ public class MainGameColorBlindMode extends GameDisplay implements ActionListene
 		try {
 		   FileInputStream fileLoad = new FileInputStream("/save1.ser");
 		   ObjectInputStream Load = new ObjectInputStream(fileLoad);
-		   NG = (this) Load.readObject();
+		   NG = (MainGameColorBlindMode) Load.readObject();
 		   Load.close();
 		   fileLoad.close();
 		}

@@ -106,7 +106,7 @@ public class SaveGame extends JFrame implements ActionListener,java.io.Serializa
 		if(selected == saveButton) {
 			this.dispose();
 			
-			MainGameNormalMode.WriteToFile();
+			MainGameNormalMode.createSaveFile();
 		}
 		
 	}

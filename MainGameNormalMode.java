@@ -1317,6 +1317,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		        }
 			}
 		}
+
 		else if(this.currentTurn==4) {
 			if(playerFourReserveCounter>0) {
 				colorPieceAvailable = true;
@@ -1356,7 +1357,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 			FileOutputStream saveFile = new FileOutputStream("/save1.ser");   
 			ObjectOutputStream object = new ObjectOutputStream(saveFile);   
 			
-			object.writeObject(this.class);   	
+			object.writeObject(MainGameNormalMode.class);
 			object.close();
 			saveFile.close();
 	
@@ -1373,7 +1374,7 @@ public class MainGameNormalMode extends GameDisplay implements ActionListener{
 		try {
 		   FileInputStream fileLoad = new FileInputStream("/save1.ser");
 		   ObjectInputStream Load = new ObjectInputStream(fileLoad);
-		   NG = (this) Load.readObject();
+		   NG = (MainGameNormalMode) Load.readObject();
 		   Load.close();
 		   fileLoad.close();
 		}
